@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<schema elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema">
+  <element name="root">
+    <complexType>
+      <sequence>
+        <element minOccurs="0" maxOccurs="unbounded" name="band">
+          <complexType>
+            <sequence>
+              <element maxOccurs="unbounded" minOccurs="1" name="member">
+                <complexType>
+                  <attribute name="name" type="string" use="required" />
+                  <attribute name="instrument" type="string" use="required" />
+                </complexType>
+              </element>
+              <element name="album" minOccurs="1" maxOccurs="unbounded">
+                <complexType>
+                  <sequence>
+                    <element maxOccurs="unbounded" minOccurs="1" name="song">
+                      <complexType>
+                        <all>
+                          <element default="Track1" name="name" type="string" minOccurs="1" maxOccurs="1" />
+                          <element name="trackLength" type="duration" minOccurs="1" maxOccurs="1" />
+                        </all>
+                      </complexType>
+                    </element>
+                    <element minOccurs="0" maxOccurs="unbounded" name="reviewer">
+                      <complexType>
+                        <simpleContent>
+                          <extension base="string">
+                            <attribute name="ref" type="IDREF" use="required" />
+                          </extension>
+                        </simpleContent>
+                      </complexType>
+                    </element>
+                  </sequence>
+                  <attribute name="name" type="string" use="required" />
+                </complexType>
+              </element>
+              <element minOccurs="0" maxOccurs="unbounded" name="show">
+                  <complexType>
+                    <sequence maxOccurs="unbounded">
+                        <element name="date" type="date" minOccurs="1" maxOccurs="1" />
+                        <element name="venue" type="string" minOccurs="1" maxOccurs="1" />
+                    </sequence>
+                  </complexType>
+              </element>
+            </sequence>
+            <attribute name="name" type="string" use="required" />
+            <attribute name="size" type="positiveInteger" use="optional" default="1" />
+          </complexType>
+        </element>
+        <element minOccurs="0" maxOccurs="unbounded" name="reviewer">
+            <complexType>
+              <all>
+                <element minOccurs="1" maxOccurs="1" name="name" type="NCName" />
+                <element minOccurs="0" maxOccurs="1" name="company" type="string" />
+              </all>
+              <attribute name="id" type="ID" use="required" />
+            </complexType>
+        </element>
+      </sequence>
+    </complexType>
+    <unique name="idAndName">
+      <selector xpath="reviewer"/>
+      <field    xpath="name"/>
+    </unique>
+  </element>
+</schema>
