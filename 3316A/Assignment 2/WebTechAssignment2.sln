@@ -5,11 +5,8 @@ VisualStudioVersion = 12.0.20827.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A4EAA19C-7C7C-4AA0-955C-19ACEA0C4E83}"
 	ProjectSection(SolutionItems) = preProject
-		WebTechAssignment2\Normalized_XML_File.xml = WebTechAssignment2\Normalized_XML_File.xml
 		Normalized_XML_File.xml = Normalized_XML_File.xml
-		WebTechAssignment2\Schema.xsd = WebTechAssignment2\Schema.xsd
 		Schema.xsd = Schema.xsd
-		WebTechAssignment2\WebTechAssignment2.xml = WebTechAssignment2\WebTechAssignment2.xml
 		WebTechAssignment2.xml = WebTechAssignment2.xml
 	EndProjectSection
 EndProject
