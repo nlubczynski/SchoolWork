@@ -1,0 +1,55 @@
+body,html,div#mainWindow{
+	width:100%;
+	height:80%;
+	background:#ddd;
+
+}
+div{
+	width: 100%;
+	height: 20px;
+	margin-bottom:5px;
+
+}
+
+div#drawButton{
+	font-size: 11px;
+	padding: 5px 10px 5px 10px;
+	color: #fff;
+	background-color: #2d2d2d;
+	-webkit-transition: all 0.3s ease-out;
+		-moz-transition: all 0.3s ease-out;
+			-ms-transition: all 0.3s ease-out;
+				-o-transition: all 0.3s ease-out;
+
+	transition: all 0.3s ease-out;
+	display: inline-block;
+	border: 0px;
+	cursor: pointer;
+	line-height: 17px;
+	width: auto;
+	font-weight: 300;
+	margin-top:10px;
+}
+div#drawButton:hover{
+	background-color: #006b4e;
+	color: #FFFFFF;
+}
+div.title{
+	background:#ccc;
+	color:#2e2e2e;
+	padding:2px;
+	width:160px;
+
+}
+div.entry{
+	background:white;
+	border: 1px solid #000;
+	width: 40%;
+	-webkit-transition: all 0.3s ease-out;
+		-moz-transition: all 0.3s ease-out;
+			-ms-transition: all 0.3s ease-out;
+				-o-transition: all 0.3s ease-out;
+}
+span{
+	float:right;
+}
