@@ -16,7 +16,7 @@ public class Testy2 {
         // Just put your input file path, and output path
         // The Schema can be recognized by Namespaces in your XML file
         
-            String PATH_NAME="";
+            String PATH_NAME="C:\\Users\\NikLubz\\SkyDrive\\Documents\\Third Year\\Web Technologies\\Assignment 2\\";
             String YOUR_INPUT_XML_FILE_NAME="WebTechAssignment2.xml";
             String YOUR_OUTPUT_NORMALIZED_FILE_NAME="Normalized_XML_File.xml";
             
