@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WebTechAssignment3
 {
-    class Song
+    public class Song
     {
         private string name;
         private string length;

@@ -43,18 +43,29 @@ namespace WebTechAssignment3
         private void validate_click(object sender, EventArgs e)
         {
             string filePath = this.fileTextBox.Text;
-            if (File.Exists(filePath))
-                controller.validate(filePath);
-            else
-                MessageBox.Show("File does not exist");
+            controller.validate(filePath, this);
         }
         private void open_click(object sender, EventArgs e)
         {
             string filePath = this.fileTextBox.Text;
-            if (File.Exists(filePath))
-                controller.openFile(filePath);
-            else
-                MessageBox.Show("File does not exist");
+            controller.openClick(filePath, this);
+        }
+
+        private void create_click(object sender, EventArgs e)
+        {
+            controller.openFile("", this, true);
+        }
+        public bool get_open_state()
+        {
+            return this.open.Enabled;
+        }
+        public void set_open_state(bool state)
+        {
+            this.open.Enabled = state;
+        }
+        private void text_change(object sender, EventArgs e)
+        {
+            controller.mainMenuTextChange(this);
         }
     }
 }

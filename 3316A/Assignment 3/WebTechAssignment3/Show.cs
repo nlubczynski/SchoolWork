@@ -6,7 +6,7 @@ using System.Text;
 
 namespace WebTechAssignment3
 {
-    class Show
+    public class Show
     {
         private ArrayList date;
         private ArrayList venue;

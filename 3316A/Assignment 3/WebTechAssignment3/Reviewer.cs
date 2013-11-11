@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WebTechAssignment3
 {
-    class Reviewer
+    public class Reviewer
     {
         private string id;
         private string name;

@@ -33,6 +33,7 @@
             this.XMLLabel = new System.Windows.Forms.Label();
             this.validate = new System.Windows.Forms.Button();
             this.open = new System.Windows.Forms.Button();
+            this.create = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // select
@@ -48,10 +49,11 @@
             // 
             // fileTextBox
             // 
-            this.fileTextBox.Location = new System.Drawing.Point(37, 39);
+            this.fileTextBox.Location = new System.Drawing.Point(12, 39);
             this.fileTextBox.Name = "fileTextBox";
-            this.fileTextBox.Size = new System.Drawing.Size(361, 20);
+            this.fileTextBox.Size = new System.Drawing.Size(386, 20);
             this.fileTextBox.TabIndex = 1;
+            this.fileTextBox.TextChanged += new System.EventHandler(this.text_change);
             // 
             // XMLLabel
             // 
@@ -64,9 +66,9 @@
             // 
             // validate
             // 
-            this.validate.Location = new System.Drawing.Point(37, 78);
+            this.validate.Location = new System.Drawing.Point(12, 79);
             this.validate.Name = "validate";
-            this.validate.Size = new System.Drawing.Size(170, 22);
+            this.validate.Size = new System.Drawing.Size(150, 22);
             this.validate.TabIndex = 3;
             this.validate.Text = "Validate";
             this.validate.UseVisualStyleBackColor = true;
@@ -74,13 +76,24 @@
             // 
             // open
             // 
-            this.open.Location = new System.Drawing.Point(228, 78);
+            this.open.Enabled = false;
+            this.open.Location = new System.Drawing.Point(168, 79);
             this.open.Name = "open";
-            this.open.Size = new System.Drawing.Size(170, 22);
+            this.open.Size = new System.Drawing.Size(150, 22);
             this.open.TabIndex = 4;
             this.open.Text = "Open File";
             this.open.UseVisualStyleBackColor = true;
             this.open.Click += new System.EventHandler(this.open_click);
+            // 
+            // create
+            // 
+            this.create.Location = new System.Drawing.Point(329, 79);
+            this.create.Name = "create";
+            this.create.Size = new System.Drawing.Size(150, 22);
+            this.create.TabIndex = 5;
+            this.create.Text = "Create New";
+            this.create.UseVisualStyleBackColor = true;
+            this.create.Click += new System.EventHandler(this.create_click);
             // 
             // MainMenu
             // 
@@ -88,6 +101,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(487, 113);
+            this.Controls.Add(this.create);
             this.Controls.Add(this.open);
             this.Controls.Add(this.validate);
             this.Controls.Add(this.XMLLabel);
@@ -108,6 +122,7 @@
         private System.Windows.Forms.Label XMLLabel;
         private System.Windows.Forms.Button validate;
         private System.Windows.Forms.Button open;
+        private System.Windows.Forms.Button create;
     }
 }
 

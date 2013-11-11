@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WebTechAssignment3
 {
-    class Member
+    public class Member
     {
         private string name;
         private string instrument;

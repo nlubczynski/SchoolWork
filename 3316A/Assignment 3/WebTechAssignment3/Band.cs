@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace WebTechAssignment3
 {
-    class Band
+    public class Band
     {
         private string name;
         private string size;
@@ -88,6 +88,10 @@ namespace WebTechAssignment3
         public Show[] getShows()
         {
             return (Show[])shows.ToArray(typeof(Show));
+        }
+        public string getName()
+        {
+            return this.name;
         }
     }
 }

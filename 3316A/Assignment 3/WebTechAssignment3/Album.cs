@@ -6,7 +6,7 @@ using System.Text;
 
 namespace WebTechAssignment3
 {
-    class Album
+    public class Album
     {
         private string name;
         private ArrayList songs;
