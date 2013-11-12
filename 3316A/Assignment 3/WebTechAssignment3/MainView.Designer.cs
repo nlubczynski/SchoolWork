@@ -28,89 +28,93 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.BandsTitle = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Band = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabs = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.addBand = new System.Windows.Forms.Button();
+            this.editBand = new System.Windows.Forms.Button();
+            this.removeBand = new System.Windows.Forms.Button();
+            this.tabs.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // BandsTitle
+            // tabs
             // 
-            this.BandsTitle.AutoSize = true;
-            this.BandsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BandsTitle.Location = new System.Drawing.Point(13, 13);
-            this.BandsTitle.Name = "BandsTitle";
-            this.BandsTitle.Size = new System.Drawing.Size(68, 25);
-            this.BandsTitle.TabIndex = 1;
-            this.BandsTitle.Text = "Bands";
-            this.BandsTitle.UseWaitCursor = true;
+            this.tabs.Controls.Add(this.tabPage1);
+            this.tabs.Controls.Add(this.tabPage2);
+            this.tabs.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.tabs.ItemSize = new System.Drawing.Size(58, 18);
+            this.tabs.Location = new System.Drawing.Point(12, 12);
+            this.tabs.Multiline = true;
+            this.tabs.Name = "tabs";
+            this.tabs.SelectedIndex = 0;
+            this.tabs.Size = new System.Drawing.Size(807, 445);
+            this.tabs.TabIndex = 2;
+            this.tabs.UseWaitCursor = true;
             // 
-            // dataGridView1
+            // tabPage1
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Band,
-            this.Size});
-            this.dataGridView1.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 41);
-            this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.Size = new System.Drawing.Size(807, 416);
-            this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.UseWaitCursor = true;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.tabPage1.Controls.Add(this.removeBand);
+            this.tabPage1.Controls.Add(this.editBand);
+            this.tabPage1.Controls.Add(this.addBand);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(799, 419);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Bands";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.UseWaitCursor = true;
             // 
-            // Band
+            // tabPage2
             // 
-            this.Band.HeaderText = "Band";
-            this.Band.Name = "Band";
-            this.Band.ReadOnly = true;
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(799, 419);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Reviewers";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.UseWaitCursor = true;
             // 
-            // Size
+            // addBand
             // 
-            this.Size.HeaderText = "Size";
-            this.Size.Name = "Size";
-            this.Size.ReadOnly = true;
+            this.addBand.Location = new System.Drawing.Point(671, 6);
+            this.addBand.Name = "addBand";
+            this.addBand.Size = new System.Drawing.Size(122, 38);
+            this.addBand.TabIndex = 0;
+            this.addBand.Text = "Add Band";
+            this.addBand.UseVisualStyleBackColor = true;
+            this.addBand.Click += new System.EventHandler(this.addBand_Click);
+            // 
+            // editBand
+            // 
+            this.editBand.Enabled = false;
+            this.editBand.Location = new System.Drawing.Point(671, 50);
+            this.editBand.Name = "editBand";
+            this.editBand.Size = new System.Drawing.Size(122, 38);
+            this.editBand.TabIndex = 1;
+            this.editBand.Text = "Edit Band";
+            this.editBand.UseVisualStyleBackColor = true;
+            this.editBand.Click += new System.EventHandler(this.editBand_Click);
+            // 
+            // removeBand
+            // 
+            this.removeBand.Enabled = false;
+            this.removeBand.Location = new System.Drawing.Point(671, 94);
+            this.removeBand.Name = "removeBand";
+            this.removeBand.Size = new System.Drawing.Size(122, 38);
+            this.removeBand.TabIndex = 2;
+            this.removeBand.Text = "Remove Band";
+            this.removeBand.UseVisualStyleBackColor = true;
+            this.removeBand.Click += new System.EventHandler(this.removeBand_Click);
             // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(831, 469);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.BandsTitle);
+            this.Controls.Add(this.tabs);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "MainView";
@@ -118,17 +122,20 @@
             this.UseWaitCursor = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.closed);
             this.Load += new System.EventHandler(this.MainView_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabs.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label BandsTitle;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Band;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
+        private System.Windows.Forms.TabControl tabs;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button removeBand;
+        private System.Windows.Forms.Button editBand;
+        private System.Windows.Forms.Button addBand;
+
     }
 }

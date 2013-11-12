@@ -128,6 +128,7 @@ namespace WebTechAssignment3
 
             Member m = new Member(name, instrument);
             reader.Read();
+            reader.Read();
             m.setJoinDate(reader.Value);
 
             return m;
@@ -145,7 +146,9 @@ namespace WebTechAssignment3
                     {
                         Song s = new Song();
                         reader.Read();
+                        reader.Read();
                         s.setName(reader.Value);
+                        reader.Read();
                         reader.Read();
                         s.setLength(reader.Value);
 
@@ -154,6 +157,7 @@ namespace WebTechAssignment3
                     if (reader.Name == "reviewer")
                     {
                         Review r = new Review(reader.GetAttribute("ref"));
+                        reader.Read();
                         reader.Read();
                         r.setReview(reader.Value);
 
@@ -179,6 +183,7 @@ namespace WebTechAssignment3
                     {
                         s.addDate(reader.Value);
                         reader.Read();
+                        reader.Read();
                         s.addVenue(reader.Value);
                     }
                 }
@@ -193,7 +198,9 @@ namespace WebTechAssignment3
         {
             Reviewer r = new Reviewer(reader.GetAttribute("id"));
             reader.Read();
+            reader.Read();
             r.setName(reader.Value);
+            reader.Read();
             reader.Read();
             r.setCompany(reader.Value);
 

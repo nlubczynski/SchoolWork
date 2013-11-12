@@ -93,5 +93,14 @@ namespace WebTechAssignment3
         {
             return this.name;
         }
+
+        internal void setName(string name)
+        {
+            this.name = name;
+        }
+        public void removeMembers()
+        {
+            this.members = new ArrayList();
+        }
     }
 }
