@@ -55,5 +55,10 @@ namespace WebTechAssignment3
             }
             return true;
         }
+
+       internal void setId(string id)
+       {
+           this.id = id;
+       }
     }
 }

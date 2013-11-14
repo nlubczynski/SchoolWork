@@ -16,6 +16,8 @@ namespace WebTechAssignment3
         private Band[] _b;
         private List<BandRow> bandRows;
         private List<ReviewerRow> reviewerRows;
+        public static readonly int BAND_TAB = 0;
+        public static readonly int REVIEWER_TAB = 1;
 
         public MainView(Controller c)
         {
@@ -59,7 +61,7 @@ namespace WebTechAssignment3
             lastControl = null;
             foreach (Reviewer reviewer in reviewersSource)
             {
-                ReviewerRow row = new ReviewerRow(reviewer, _controller, this, false);
+                ReviewerRow row = new ReviewerRow(reviewer, _controller, this);
                 //match parent's width
                 row.Width = bandsTab.Width;
                 //add the row
@@ -78,6 +80,14 @@ namespace WebTechAssignment3
                 //increment placement
                 i++;
             }
+        }
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.tabs.SelectedTab == this.bandTab)
+                if (_controller.canBandtab())
+                    this.tabs.SelectedTab = this.bandTab;
+                else
+                    this.tabs.SelectedTab = this.bandsTab;
         }
 
         private void MainView_Load(object sender, EventArgs e)
@@ -107,32 +117,72 @@ namespace WebTechAssignment3
         {
             _controller.removeBand();
         }
-        public BandRow[] getRows()
+        public BandRow[] getBandRows()
         {
             return this.bandRows.ToArray();
         }
-
-        internal void enableEdit()
+        public ReviewerRow[] getReviewerRows()
         {
-            this.editBand.Enabled = true;
+            return this.reviewerRows.ToArray();
         }
 
-        internal void enableDelete()
+        internal void enableEdit(int tabId)
         {
-            this.removeBand.Enabled = true;
+            if (tabId == BAND_TAB)
+                this.editBand.Enabled = true;
+            else if (tabId == REVIEWER_TAB)
+                this.editReviewer.Enabled = true;
         }
-        public void disableEdit()
+
+        internal void enableDelete(int tabId)
         {
-            this.editBand.Enabled = false;
+            if (tabId == BAND_TAB)
+                this.removeBand.Enabled = true;
+            else if (tabId == REVIEWER_TAB)
+                this.removeReviewer.Enabled = true;
         }
-        public void disableDelete()
+        public void disableEdit(int tabId)
         {
-            this.removeBand.Enabled = false;
+            if (tabId == BAND_TAB)
+                this.editBand.Enabled = false;
+            else if (tabId == REVIEWER_TAB)
+                this.editReviewer.Enabled = false;
         }
-        public void removeAllRowsTab1()
+        public void disableDelete(int tabId)
+        {
+            if (tabId == BAND_TAB)
+                this.removeBand.Enabled = false;
+            else if (tabId == REVIEWER_TAB)
+                this.removeReviewer.Enabled = false;
+        }
+
+        public void removeAllRows()
         {
             foreach (BandRow row in bandRows)
                 this.bandsTab.Controls.Remove(row);
+
+            foreach (ReviewerRow row in reviewerRows)
+                this.reviewersTab.Controls.Remove(row);
+        }
+
+        private void addReviewer_Click(object sender, EventArgs e)
+        {
+            _controller.addReviewer();
+        }
+
+        private void editReviewer_Click(object sender, EventArgs e)
+        {
+            _controller.editReviewer();
+        }
+
+        private void removeReviewer_Click(object sender, EventArgs e)
+        {
+            _controller.removeReviewer();
+        }
+
+        internal void setBandTabName(string p)
+        {
+            this.bandTab.Text = p;
         }
     }
 }

@@ -56,6 +56,12 @@
     <Compile Include="AddMember.Designer.cs">
       <DependentUpon>AddMember.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddReviewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddReviewer.Designer.cs">
+      <DependentUpon>AddReviewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Album.cs" />
     <Compile Include="Band.cs" />
     <Compile Include="BandRow.cs">
@@ -100,6 +106,9 @@
     <EmbeddedResource Include="AddMember.resx">
       <DependentUpon>AddMember.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddReviewer.resx">
+      <DependentUpon>AddReviewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BandRow.resx">
       <DependentUpon>BandRow.cs</DependentUpon>
     </EmbeddedResource>
@@ -121,6 +130,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReviewerRow.resx">
+      <DependentUpon>ReviewerRow.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

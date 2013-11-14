@@ -34,7 +34,8 @@ namespace WebTechAssignment3
             }
 
             //update the height
-            MemberRow temp = new MemberRow(b.getMembers()[0], _controller, _parent, canEditMembers);
+
+            MemberRow temp = new MemberRow(new Member("temp", "temp") , _controller, _parent, canEditMembers);
             this.Height += i * temp.Height;
         }
         public void initialize()

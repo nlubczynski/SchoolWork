@@ -61,7 +61,7 @@
             this.save.Location = new System.Drawing.Point(207, 107);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(95, 26);
-            this.save.TabIndex = 2;
+            this.save.TabIndex = 4;
             this.save.Text = "Save";
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
@@ -72,7 +72,7 @@
             this.cancel.Location = new System.Drawing.Point(309, 107);
             this.cancel.Name = "cancel";
             this.cancel.Size = new System.Drawing.Size(95, 26);
-            this.cancel.TabIndex = 3;
+            this.cancel.TabIndex = 5;
             this.cancel.Text = "Cancel";
             this.cancel.UseVisualStyleBackColor = true;
             this.cancel.Click += new System.EventHandler(this.cancel_Click);
@@ -93,7 +93,7 @@
             this.addMember.Location = new System.Drawing.Point(5, 107);
             this.addMember.Name = "addMember";
             this.addMember.Size = new System.Drawing.Size(95, 26);
-            this.addMember.TabIndex = 5;
+            this.addMember.TabIndex = 2;
             this.addMember.Text = "Add Member";
             this.addMember.UseVisualStyleBackColor = true;
             this.addMember.Click += new System.EventHandler(this.addMember_Click);
@@ -105,7 +105,7 @@
             this.editMember.Location = new System.Drawing.Point(106, 107);
             this.editMember.Name = "editMember";
             this.editMember.Size = new System.Drawing.Size(95, 26);
-            this.editMember.TabIndex = 6;
+            this.editMember.TabIndex = 3;
             this.editMember.Text = "Edit Member";
             this.editMember.UseVisualStyleBackColor = true;
             this.editMember.Click += new System.EventHandler(this.editMember_Click);

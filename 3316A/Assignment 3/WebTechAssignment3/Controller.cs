@@ -20,6 +20,7 @@ namespace WebTechAssignment3
         List<Member> addingMembers;
         Band bandHighlight;
         Member memberHighlight;
+        Reviewer reviewerHighlight;
 
         public Controller()
         {
@@ -166,10 +167,12 @@ namespace WebTechAssignment3
             if (name.Length == 0)
                 {
                     showMessage(true, "Must enter a band name");
+                    return;
                 }
             else if (members.Length == 0)
                 {
                     showMessage(true, "Must add at least one member");
+                    //return;
                 }
 
             if (isEdit)
@@ -187,7 +190,7 @@ namespace WebTechAssignment3
                     bandHighlight.addMember(m);
 
                 //remove all rows
-                ((MainView)_current_view).removeAllRowsTab1();
+                ((MainView)_current_view).removeAllRows();
 
                 //Reintialize the window
                 ((MainView)_current_view).initialize(bands.ToArray(), reviewers.ToArray());
@@ -195,8 +198,8 @@ namespace WebTechAssignment3
                 close(view);
 
                 //disable edit / delete buttons
-                ((MainView)_current_view).disableDelete();
-                ((MainView)_current_view).disableEdit();
+                ((MainView)_current_view).disableDelete(MainView.BAND_TAB);
+                ((MainView)_current_view).disableEdit(MainView.BAND_TAB);
             }
             else
             {
@@ -223,11 +226,20 @@ namespace WebTechAssignment3
         {
             //checks
             if (name.Length == 0)
-                    showMessage(true, "Enter a name");
-                else if (instrument.Length == 0)
-                    showMessage(true, "Enter an instrument");
-                else if (joinDate.Length == 0)
-                    showMessage(true, "Enter a join date");
+            {
+                showMessage(true, "Enter a name");
+                return;
+            }
+            else if (instrument.Length == 0)
+            {
+                showMessage(true, "Enter an instrument");
+                return;
+            }
+            else if (joinDate.Length == 0)
+            {
+                showMessage(true, "Enter a join date");
+                return;
+            }
             
             if (isEdit)
             {
@@ -271,7 +283,7 @@ namespace WebTechAssignment3
             //Set highlighted one green
             row.setGreen();
             //Set all others normal
-            foreach (BandRow r in ((MainView)_current_view).getRows())
+            foreach (BandRow r in ((MainView)_current_view).getBandRows())
                 if (!r.Equals(row))
                     r.setNormal();
 
@@ -279,8 +291,11 @@ namespace WebTechAssignment3
             bandHighlight = row.getModel();
 
             //Set up "Edit" and "Delete" Buttons
-            ((MainView)_current_view).enableEdit();
-            ((MainView)_current_view).enableDelete();
+            ((MainView)_current_view).enableEdit(MainView.BAND_TAB);
+            ((MainView)_current_view).enableDelete(MainView.BAND_TAB);
+
+            //Change the band tab name
+            ((MainView)_current_view).setBandTabName(bandHighlight.getName());
         }
 
         internal void removeBand()
@@ -288,14 +303,17 @@ namespace WebTechAssignment3
             //Remove the band from controller
             bands.Remove(bandHighlight);
             //Remove band from view
-            ((MainView)_current_view).removeAllRowsTab1();
+            ((MainView)_current_view).removeAllRows();
             ((MainView)_current_view).initialize(bands.ToArray(), reviewers.ToArray());
 
             //We have no highighted band now
             bandHighlight = null;
             //Disable edit and delete buttons
-            ((MainView)_current_view).disableEdit();
-            ((MainView)_current_view).disableDelete();
+            ((MainView)_current_view).disableEdit(MainView.BAND_TAB);
+            ((MainView)_current_view).disableDelete(MainView.BAND_TAB);
+
+            //Change the band tab name
+            ((MainView)_current_view).setBandTabName("Select a band");
         }
 
         internal void editBand()
@@ -370,14 +388,107 @@ namespace WebTechAssignment3
 
             //reinitiate the window
             //remove all rows
-            ((MainView)_current_view).removeAllRowsTab1();
+            ((MainView)_current_view).removeAllRows();
 
             //Reintialize the window
             ((MainView)_current_view).initialize(bands.ToArray(), reviewers.ToArray());
 
             //disable edit / delete buttons
-            ((MainView)_current_view).disableDelete();
-            ((MainView)_current_view).disableEdit();
+            ((MainView)_current_view).disableDelete(MainView.BAND_TAB);
+            ((MainView)_current_view).disableEdit(MainView.BAND_TAB);
+        }
+
+        internal void addReviewer()
+        {
+            AddReviewer addReviewerView = new AddReviewer(this);
+            addReviewerView.Show();
+        }
+
+        internal void editReviewer()
+        {
+            AddReviewer addReviewerView = new AddReviewer(this, reviewerHighlight.getName(),
+                reviewerHighlight.getCompany(), reviewerHighlight.getId());
+            addReviewerView.Show();
+        }
+
+        internal void removeReviewer()
+        {
+            //remove reviewer from list
+            reviewers.Remove(reviewerHighlight);
+
+            //remove all the rows
+            ((MainView)_current_view).removeAllRows();
+
+            // reinitiate
+            ((MainView)_current_view).initialize(bands.ToArray(), reviewers.ToArray());
+
+            //disable buttons
+            ((MainView)_current_view).disableDelete(MainView.REVIEWER_TAB);
+            ((MainView)_current_view).disableEdit(MainView.REVIEWER_TAB);
+        }
+
+        internal void selectReviewer(ReviewerRow reviewerRow, Reviewer _model)
+        {
+            //Set them all normal
+            foreach (ReviewerRow row in ((MainView)reviewerRow.getParent()).getReviewerRows())
+                row.setNormal();
+
+            //Set ours green
+            reviewerRow.setGreen();
+
+            //Make it the highlighted one
+            reviewerHighlight = _model;
+
+            //enable the buttons
+            ((MainView)reviewerRow.getParent()).enableDelete(MainView.REVIEWER_TAB);
+            ((MainView)reviewerRow.getParent()).enableEdit(MainView.REVIEWER_TAB);
+
+        }
+
+        internal bool saveReviewer(string name, string company, string id, bool isEdit)
+        {
+            //id must be unique
+            foreach(Reviewer r in reviewers)
+                if(r.getId().Equals(id) && !r.Equals(reviewerHighlight) )
+                {
+                    showMessage(true, "ID must be unique");
+                    return false;
+                }
+
+            if (isEdit)
+            {
+                reviewerHighlight.setName(name);
+                reviewerHighlight.setCompany(company);
+                reviewerHighlight.setId(id);
+            }
+            else
+            {
+                Reviewer r = new Reviewer(id);
+                r.setName(name);
+                r.setCompany(company);
+
+                //Add new reviewer to list
+                reviewers.Add(r);
+            }
+
+            //remove all rows
+            ((MainView)_current_view).removeAllRows();
+
+            //reinitate the window
+            ((MainView)_current_view).initialize(bands.ToArray(), reviewers.ToArray());
+
+            return true;
+        }
+
+        internal bool canBandtab()
+        {
+            if (bandHighlight != null)
+                return true;
+            else
+            {
+                showMessage(true, "You must select a band first");
+                return false;
+            }
         }
     }
 }
