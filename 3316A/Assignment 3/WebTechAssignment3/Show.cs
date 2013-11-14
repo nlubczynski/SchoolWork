@@ -44,7 +44,7 @@ namespace WebTechAssignment3
         }
         public string[] getVenues()
         {
-            return (string[])date.ToArray(typeof(string));
+            return (string[])venue.ToArray(typeof(string));
         }
     }
 }

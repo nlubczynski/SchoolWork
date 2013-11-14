@@ -48,6 +48,7 @@ namespace WebTechAssignment3
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
+            this.nameLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameLabel.Location = new System.Drawing.Point(3, 0);
             this.nameLabel.Name = "nameLabel";
@@ -59,6 +60,7 @@ namespace WebTechAssignment3
             // companyLabel
             // 
             this.companyLabel.AutoSize = true;
+            this.companyLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.companyLabel.Location = new System.Drawing.Point(4, 24);
             this.companyLabel.Name = "companyLabel";
             this.companyLabel.Size = new System.Drawing.Size(50, 13);
@@ -69,6 +71,7 @@ namespace WebTechAssignment3
             // idTitle
             // 
             this.idTitle.AutoSize = true;
+            this.idTitle.Cursor = System.Windows.Forms.Cursors.Hand;
             this.idTitle.Location = new System.Drawing.Point(132, 24);
             this.idTitle.Name = "idTitle";
             this.idTitle.Size = new System.Drawing.Size(24, 13);
@@ -79,6 +82,7 @@ namespace WebTechAssignment3
             // idLabel
             // 
             this.idLabel.AutoSize = true;
+            this.idLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.idLabel.Location = new System.Drawing.Point(163, 24);
             this.idLabel.Name = "idLabel";
             this.idLabel.Size = new System.Drawing.Size(15, 13);

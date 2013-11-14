@@ -49,5 +49,20 @@ namespace WebTechAssignment3
         {
             return (Review[])reviews.ToArray(typeof(Reviewer));
         }
+
+        internal string getName()
+        {
+            return this.name;
+        }
+
+        internal Review[] getReviews()
+        {
+            return (Review[])this.reviews.ToArray(typeof(Review));
+        }
+
+        internal void addReview(Review r)
+        {
+            reviews.Add(r);
+        }
     }
 }

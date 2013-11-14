@@ -31,5 +31,13 @@ namespace WebTechAssignment3
             }
             return true;
         }
+        public string getReviewerId()
+        {
+            return this.reviewerID;
+        }
+        public void setReviewerId(string id)
+        {
+            this.reviewerID = id;
+        }
     }
 }

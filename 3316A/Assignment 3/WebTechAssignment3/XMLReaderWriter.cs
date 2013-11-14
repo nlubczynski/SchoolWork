@@ -150,6 +150,7 @@ namespace WebTechAssignment3
                         s.setName(reader.Value);
                         reader.Read();
                         reader.Read();
+                        reader.Read();
                         s.setLength(reader.Value);
 
                         a.addSong(s);
@@ -158,10 +159,9 @@ namespace WebTechAssignment3
                     {
                         Review r = new Review(reader.GetAttribute("ref"));
                         reader.Read();
-                        reader.Read();
                         r.setReview(reader.Value);
 
-                        a.addReviewer(r);
+                        a.addReview(r);
                     }
                 }
                 else if (reader.NodeType == XmlNodeType.EndElement)
@@ -181,7 +181,9 @@ namespace WebTechAssignment3
                 {
                     if (reader.Name == "date")
                     {
+                        reader.Read();
                         s.addDate(reader.Value);
+                        reader.Read();
                         reader.Read();
                         reader.Read();
                         s.addVenue(reader.Value);
@@ -201,6 +203,9 @@ namespace WebTechAssignment3
             reader.Read();
             r.setName(reader.Value);
             reader.Read();
+            reader.Read(); //name - end tag
+            if (reader.NodeType == XmlNodeType.EndElement)
+                return r;
             reader.Read();
             r.setCompany(reader.Value);
 

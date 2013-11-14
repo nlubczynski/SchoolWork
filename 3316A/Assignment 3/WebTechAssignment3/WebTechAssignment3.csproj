@@ -63,6 +63,12 @@
       <DependentUpon>AddReviewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Album.cs" />
+    <Compile Include="AlbumRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AlbumRow.Designer.cs">
+      <DependentUpon>AlbumRow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Band.cs" />
     <Compile Include="BandRow.cs">
       <SubType>UserControl</SubType>
@@ -97,8 +103,26 @@
     <Compile Include="ReviewerRow.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ReviewRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ReviewRow.Designer.cs">
+      <DependentUpon>ReviewRow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Show.cs" />
+    <Compile Include="ShowRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ShowRow.Designer.cs">
+      <DependentUpon>ShowRow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Song.cs" />
+    <Compile Include="SongRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SongRow.Designer.cs">
+      <DependentUpon>SongRow.cs</DependentUpon>
+    </Compile>
     <Compile Include="XMLReaderWriter.cs" />
     <EmbeddedResource Include="AddBand.resx">
       <DependentUpon>AddBand.cs</DependentUpon>
@@ -108,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddReviewer.resx">
       <DependentUpon>AddReviewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlbumRow.resx">
+      <DependentUpon>AlbumRow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BandRow.resx">
       <DependentUpon>BandRow.cs</DependentUpon>
@@ -132,6 +159,15 @@
     </Compile>
     <EmbeddedResource Include="ReviewerRow.resx">
       <DependentUpon>ReviewerRow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReviewRow.resx">
+      <DependentUpon>ReviewRow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowRow.resx">
+      <DependentUpon>ShowRow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SongRow.resx">
+      <DependentUpon>SongRow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

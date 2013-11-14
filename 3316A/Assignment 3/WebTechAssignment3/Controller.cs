@@ -21,6 +21,9 @@ namespace WebTechAssignment3
         Band bandHighlight;
         Member memberHighlight;
         Reviewer reviewerHighlight;
+        Show showHighlight;
+        Album albumHighlight;
+        Review reviewHighlight;
 
         public Controller()
         {
@@ -172,7 +175,7 @@ namespace WebTechAssignment3
             else if (members.Length == 0)
                 {
                     showMessage(true, "Must add at least one member");
-                    //return;
+                    return;
                 }
 
             if (isEdit)
@@ -198,8 +201,8 @@ namespace WebTechAssignment3
                 close(view);
 
                 //disable edit / delete buttons
-                ((MainView)_current_view).disableDelete(MainView.BAND_TAB);
-                ((MainView)_current_view).disableEdit(MainView.BAND_TAB);
+                ((MainView)_current_view).disableDelete(MainView.BANDS_TAB);
+                ((MainView)_current_view).disableEdit(MainView.BANDS_TAB);
             }
             else
             {
@@ -291,8 +294,8 @@ namespace WebTechAssignment3
             bandHighlight = row.getModel();
 
             //Set up "Edit" and "Delete" Buttons
-            ((MainView)_current_view).enableEdit(MainView.BAND_TAB);
-            ((MainView)_current_view).enableDelete(MainView.BAND_TAB);
+            ((MainView)_current_view).enableEdit(MainView.BANDS_TAB);
+            ((MainView)_current_view).enableDelete(MainView.BANDS_TAB);
 
             //Change the band tab name
             ((MainView)_current_view).setBandTabName(bandHighlight.getName());
@@ -309,8 +312,8 @@ namespace WebTechAssignment3
             //We have no highighted band now
             bandHighlight = null;
             //Disable edit and delete buttons
-            ((MainView)_current_view).disableEdit(MainView.BAND_TAB);
-            ((MainView)_current_view).disableDelete(MainView.BAND_TAB);
+            ((MainView)_current_view).disableEdit(MainView.BANDS_TAB);
+            ((MainView)_current_view).disableDelete(MainView.BANDS_TAB);
 
             //Change the band tab name
             ((MainView)_current_view).setBandTabName("Select a band");
@@ -394,8 +397,8 @@ namespace WebTechAssignment3
             ((MainView)_current_view).initialize(bands.ToArray(), reviewers.ToArray());
 
             //disable edit / delete buttons
-            ((MainView)_current_view).disableDelete(MainView.BAND_TAB);
-            ((MainView)_current_view).disableEdit(MainView.BAND_TAB);
+            ((MainView)_current_view).disableDelete(MainView.BANDS_TAB);
+            ((MainView)_current_view).disableEdit(MainView.BANDS_TAB);
         }
 
         internal void addReviewer()
@@ -483,12 +486,67 @@ namespace WebTechAssignment3
         internal bool canBandtab()
         {
             if (bandHighlight != null)
+            {
+                ((MainView)_current_view).initializeBandTab(bandHighlight);
                 return true;
+            }
             else
             {
                 showMessage(true, "You must select a band first");
                 return false;
             }
+        }
+
+        internal Reviewer getReviewer(string p)
+        {
+            foreach (Reviewer r in reviewers)
+                if (r.getId().Equals(p))
+                    return r;
+
+            return null;
+        }
+        public void albumClick(AlbumRow row, Album album)
+        {
+            foreach (AlbumRow ar in ((MainView)_current_view).getAlbumRows())
+                ar.setNormal();
+            row.setGreen();
+
+            //set highlight
+            albumHighlight = album;
+
+            //enable album buttons
+            ((MainView)_current_view).enableEdit(MainView.BAND_TAB_ALBUM);
+            ((MainView)_current_view).enableDelete(MainView.BAND_TAB_ALBUM);
+
+        }
+        public void songClick(SongRow row, Album a, AlbumRow arow)
+        {
+
+            foreach(SongRow srow in ((MainView)_current_view).getSongRows())
+                srow.setNormal();
+            row.setGreen();
+
+
+            albumClick(arow, a);
+        }
+        public void reviewClick(ReviewRow row, Album a, AlbumRow arow)
+        {
+            foreach (ReviewRow rrow in ((MainView)_current_view).getReviewRows())
+                rrow.setNormal();
+
+            row.setGreen();
+
+            albumClick(arow, a);
+
+            //enable review buttons
+            ((MainView)_current_view).enableEdit(MainView.BAND_TAB_REVIEW);
+            ((MainView)_current_view).enableDelete(MainView.BAND_TAB_REVIEW);
+        }
+        public void showClick(ShowRow row)
+        {
+
+
+            //enable show buttons
         }
     }
 }
