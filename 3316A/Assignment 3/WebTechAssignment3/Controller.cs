@@ -96,12 +96,13 @@ namespace WebTechAssignment3
             {
                 if (_ISSET)
                 {
-                    newView.initialize(bands.ToArray());
+                    //initialize the new main view
+                    newView.initialize(bands.ToArray(), reviewers.ToArray());
                     // Run the new window
                     run();
                 }
                 else
-                    showMessage(true, "Cannot create new view");
+                    showMessage(true, "Cannot run new view");
             }
             else
                 showMessage(true, "Cannot create new view");
@@ -180,14 +181,16 @@ namespace WebTechAssignment3
                 //Change the band info
                 bandHighlight.setName(name);
 
-                //insert
-               // bands.Insert(index, bandHighlight);    
-            
+                //remove and re-add members
+                bandHighlight.removeMembers();
+                foreach (Member m in members)
+                    bandHighlight.addMember(m);
+
                 //remove all rows
                 ((MainView)_current_view).removeAllRowsTab1();
 
                 //Reintialize the window
-                ((MainView)_current_view).initialize(bands.ToArray());
+                ((MainView)_current_view).initialize(bands.ToArray(), reviewers.ToArray());
                 //Close the add band view
                 close(view);
 
@@ -205,7 +208,7 @@ namespace WebTechAssignment3
                 //Add Band
                 bands.Add(b);
                 //Reintialize the window
-                ((MainView)_current_view).initialize(bands.ToArray());
+                ((MainView)_current_view).initialize(bands.ToArray(), reviewers.ToArray());
                 //Close the add band view
                 close(view);
             }
@@ -286,7 +289,7 @@ namespace WebTechAssignment3
             bands.Remove(bandHighlight);
             //Remove band from view
             ((MainView)_current_view).removeAllRowsTab1();
-            ((MainView)_current_view).initialize(bands.ToArray());
+            ((MainView)_current_view).initialize(bands.ToArray(), reviewers.ToArray());
 
             //We have no highighted band now
             bandHighlight = null;
@@ -345,18 +348,20 @@ namespace WebTechAssignment3
             parent.removeAllRows();
 
             //Change the real model
-            bandHighlight.removeMembers();
-            foreach (Member m in addingMembers.ToArray())
-                bandHighlight.addMember(m);
+            //bandHighlight.removeMembers();
+            //foreach (Member m in addingMembers.ToArray())
+              //  bandHighlight.addMember(m);
+
             //size
             bandHighlight.setSize(addingMembers.Count.ToString());
 
             //reset addingMembers
-            addingMembers = new List<Member>();
+            //addingMembers = new List<Member>();
 
             //re-add rows
-            foreach (Member m in bandHighlight.getMembers())
+            foreach (Member m in addingMembers.ToArray())
             {
+                addingMembers.Remove(m);
                 addMemeberToAddBandView(m, parent);
             }
 
@@ -368,7 +373,7 @@ namespace WebTechAssignment3
             ((MainView)_current_view).removeAllRowsTab1();
 
             //Reintialize the window
-            ((MainView)_current_view).initialize(bands.ToArray());
+            ((MainView)_current_view).initialize(bands.ToArray(), reviewers.ToArray());
 
             //disable edit / delete buttons
             ((MainView)_current_view).disableDelete();

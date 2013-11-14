@@ -95,8 +95,12 @@ namespace WebTechAssignment3
 
         internal void removeAllRows()
         {
-            foreach(MemberRow r in _rows)
+            foreach (MemberRow r in _rows)
+            { 
                 this.Controls.Remove(r);
+                this.Height -= r.Height;
+            }
+
             _rows = new List<MemberRow>();
         }
     }

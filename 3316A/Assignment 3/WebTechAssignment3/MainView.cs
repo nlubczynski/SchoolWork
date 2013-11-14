@@ -14,7 +14,8 @@ namespace WebTechAssignment3
     {
         private Controller _controller;
         private Band[] _b;
-        private List<BandRow> rows;
+        private List<BandRow> bandRows;
+        private List<ReviewerRow> reviewerRows;
 
         public MainView(Controller c)
         {
@@ -22,20 +23,22 @@ namespace WebTechAssignment3
             this._controller = c;
             this.UseWaitCursor = false;
             this.tabs.Cursor = this.Cursor;
-            this.rows = new List<BandRow>();
+            this.bandRows = new List<BandRow>();
+            this.reviewerRows = new List<ReviewerRow>();
            
         }
-        public void initialize(Band[] bandsSource)
+        public void initialize(Band[] bandsSource, Reviewer[] reviewersSource)
         {
+            //Bands Tab
             int i = 0;
             Control lastControl = null;
             foreach (Band band in bandsSource)
             {
                 BandRow row = new BandRow(band, _controller, this, false);
                 //match parent's width
-                row.Width = tabPage1.Width;
+                row.Width = bandsTab.Width;
                 //add the row
-                this.tabPage1.Controls.Add(row);
+                this.bandsTab.Controls.Add(row);
                 //adjust the height
                 row.initialize();
                 //move it down
@@ -46,10 +49,35 @@ namespace WebTechAssignment3
                 //Store the "last control"
                 lastControl = row;
                 //Add it to the row list
-                rows.Add((BandRow)lastControl);
+                bandRows.Add((BandRow)lastControl);
                 //increment placement
                 i++;
-            }           
+            }
+           
+            //Reviewer Tab
+            i = 0;
+            lastControl = null;
+            foreach (Reviewer reviewer in reviewersSource)
+            {
+                ReviewerRow row = new ReviewerRow(reviewer, _controller, this, false);
+                //match parent's width
+                row.Width = bandsTab.Width;
+                //add the row
+                this.reviewersTab.Controls.Add(row);
+                //adjust the height
+                row.initialize();
+                //move it down
+                if (lastControl != null)
+                    row.Top = lastControl.Top + lastControl.Height;
+                else
+                    row.Top = 0;
+                //Store the "last control"
+                lastControl = row;
+                //Add it to the row list
+                reviewerRows.Add((ReviewerRow)lastControl);
+                //increment placement
+                i++;
+            }
         }
 
         private void MainView_Load(object sender, EventArgs e)
@@ -81,7 +109,7 @@ namespace WebTechAssignment3
         }
         public BandRow[] getRows()
         {
-            return this.rows.ToArray();
+            return this.bandRows.ToArray();
         }
 
         internal void enableEdit()
@@ -103,8 +131,8 @@ namespace WebTechAssignment3
         }
         public void removeAllRowsTab1()
         {
-            foreach (BandRow row in rows)
-                this.tabPage1.Controls.Remove(row);
+            foreach (BandRow row in bandRows)
+                this.bandsTab.Controls.Remove(row);
         }
     }
 }

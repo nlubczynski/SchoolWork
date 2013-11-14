@@ -88,6 +88,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Review.cs" />
     <Compile Include="Reviewer.cs" />
+    <Compile Include="ReviewerRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Show.cs" />
     <Compile Include="Song.cs" />
     <Compile Include="XMLReaderWriter.cs" />
