@@ -95,13 +95,23 @@ namespace WebTechAssignment3
         }
         public void initializeBandTab(Band b)
         {
+
             //remove exist rows
             foreach (AlbumRow row in albumRows)
+            {
                 this.bandTab.Controls.Remove(row);
+                foreach (ShowRow srow in showRows)
+                    row.Controls.Remove(srow);
+            }
             foreach (ShowRow row in showRows)
                 this.bandTab.Controls.Remove(row);
             if (this.showLabel != null)
                 this.bandTab.Controls.Remove(showLabel);
+
+            this.albumRows = new List<AlbumRow>();
+            this.showRows = new List<ShowRow>();
+            this.reviewRows = new List<ReviewRow>();
+            this.songRows = new List<SongRow>();
 
             int i = 0;
             Control lastControl = null;
@@ -116,18 +126,19 @@ namespace WebTechAssignment3
                 row.initialize();
                 //move it down
                 if (lastControl != null)
-                    row.Top = lastControl.Top + lastControl.Height;
+                   row.Top = lastControl.Top + lastControl.Height + 5;
                 else
                     row.Top = 0;
                 //Store the "last control"
                 lastControl = row;
+                lastControl.Show();
                 //Add it to the row list
                 albumRows.Add((AlbumRow)lastControl);
                 //increment placement
                 i++;
 
+
                 Control lastSongControl = null;
-                int j = 0;
                 //Add songs to it
                 foreach (Song s in a.getSongs())
                 {
@@ -135,21 +146,16 @@ namespace WebTechAssignment3
 
                     srow.Width = bandsTab.Width;
                     lastControl.Controls.Add(srow);
+
                     srow.initialize();
-                    if (lastSongControl != null)
-                        srow.Top = lastSongControl.Top + lastSongControl.Height;
-                    else { 
-                        srow.Top = row.Top + row.Height + 5;
-                        row.Height += 5;
-                    }
+                    srow.Top = lastControl.Height;
 
                     lastSongControl = srow;
                     songRows.Add(srow);
-                    row.Height += srow.Height;
-
-                    j++;
-                    
+                    srow.Visible = true;
+                    lastControl.Height += srow.Height;
                 }
+
 
                 Control lastReviewControl = null;
                 int k = 0;
@@ -161,13 +167,8 @@ namespace WebTechAssignment3
                     rrow.Width = bandsTab.Width;
                     lastControl.Controls.Add(rrow);
                     rrow.initialize();
-                    if (lastReviewControl != null)
-                        rrow.Top = lastReviewControl.Top + lastReviewControl.Height;
-                    else
-                    {
-                        rrow.Top = row.Top + row.Height + 5;
-                        row.Height += 5;
-                    }
+
+                    rrow.Top = row.Height ;
 
                     lastReviewControl = rrow;
                     reviewRows.Add(rrow);
@@ -209,9 +210,7 @@ namespace WebTechAssignment3
 
                     l++;
                 }
-
             }
-
         }
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {

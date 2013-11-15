@@ -320,6 +320,8 @@ namespace WebTechAssignment3
 
             //Change the band tab name
             ((MainView)_current_view).setBandTabName("Select a band");
+
+            saveXML();
         }
 
         internal void editBand()
@@ -576,8 +578,9 @@ namespace WebTechAssignment3
         internal bool saveAlbum(AddAlbum addAlbum, bool isEdit, string name)
         {
             albumHighlight.setName(name);
-            foreach (Song s in addingSongs)
-                albumHighlight.addSong(s);
+            if(addingSongs != null)
+                foreach (Song s in addingSongs)
+                    albumHighlight.addSong(s);
 
             if(!isEdit)
                 bandHighlight.addAlbum(albumHighlight);
@@ -606,6 +609,8 @@ namespace WebTechAssignment3
             ((MainView)_current_view).disableEdit(MainView.BAND_TAB_ALBUM);
             ((MainView)_current_view).disableDelete(MainView.BAND_TAB_ALBUM);
             ((MainView)_current_view).disableAddReview();
+
+            saveXML();
 
         }
         internal void editSong(AddAlbum addAlbum)
@@ -713,6 +718,8 @@ namespace WebTechAssignment3
             ((MainView)_current_view).disableDelete(MainView.BAND_TAB_REVIEW);
             ((MainView)_current_view).disableEdit(MainView.BAND_TAB_ALBUM);
             ((MainView)_current_view).disableDelete(MainView.BAND_TAB_ALBUM);
+
+            saveXML();
         }
 
         internal bool saveReviewer(Reviewer reviewer, string review, bool isEdit)
@@ -813,6 +820,8 @@ namespace WebTechAssignment3
             ((MainView)_current_view).initializeBandTab(bandHighlight);
             ((MainView)_current_view).disableEdit(MainView.BAND_TAB_SHOW);
             ((MainView)_current_view).disableDelete(MainView.BAND_TAB_SHOW);
+
+            saveXML();
         }
         private void saveXML()
         {
