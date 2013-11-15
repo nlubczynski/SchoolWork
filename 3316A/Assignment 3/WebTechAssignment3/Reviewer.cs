@@ -29,6 +29,10 @@ namespace WebTechAssignment3
             }
             return true;
         }
+        public override string ToString()
+        {
+            return this.name;
+        }
         public string getName()
         {
             return this.name;

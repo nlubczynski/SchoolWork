@@ -32,12 +32,22 @@ namespace WebTechAssignment3
 
         private void venueLabel_Click(object sender, EventArgs e)
         {
-            _controller.showClick(this);
+            _controller.showClick(this, _model);
         }
 
         private void dateLabel_Click(object sender, EventArgs e)
         {
-            _controller.showClick(this);
+            _controller.showClick(this, _model);
+        }
+        public void setGreen()
+        {
+            this.venueLabel.ForeColor = System.Drawing.Color.Green;
+            this.dateLabel.ForeColor = System.Drawing.Color.Green;
+        }
+        public void setNormal()
+        {
+            this.venueLabel.ForeColor = new System.Drawing.Color();
+            this.dateLabel.ForeColor = new System.Drawing.Color();
         }
     }
 }

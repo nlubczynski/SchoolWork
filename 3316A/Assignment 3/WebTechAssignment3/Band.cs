@@ -26,7 +26,7 @@ namespace WebTechAssignment3
 
         public string getSize()
         {
-            return this.size;
+            return this.members.Count.ToString();
         }
         public bool setSize(string size)
         {
@@ -102,5 +102,15 @@ namespace WebTechAssignment3
         {
             this.members = new ArrayList();
         }
+
+        internal void removeAlbum(Album albumHighlight)
+        {
+            albums.Remove(albumHighlight);
+        }
+        public override string ToString()
+        {
+            return this.name;
+        }
+
     }
 }

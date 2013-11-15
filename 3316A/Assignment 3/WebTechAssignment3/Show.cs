@@ -46,5 +46,23 @@ namespace WebTechAssignment3
         {
             return (string[])venue.ToArray(typeof(string));
         }
+        public void setDate(int index, string date)
+        {
+            this.date.RemoveAt(index);
+            this.date.Insert(index, date);
+        }
+        public void setVenue(int index, string venue)
+        {
+            this.venue.RemoveAt(index);
+            this.venue.Insert(index, venue);
+        }
+        public void removeDate(int index)
+        {
+            this.date.RemoveAt(index);
+        }
+        public void removeVenue(int index)
+        {
+            this.venue.RemoveAt(index);
+        }
     }
 }

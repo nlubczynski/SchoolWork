@@ -35,6 +35,7 @@
             // venueLabel
             // 
             this.venueLabel.AutoSize = true;
+            this.venueLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.venueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.venueLabel.Location = new System.Drawing.Point(3, 0);
             this.venueLabel.Name = "venueLabel";
@@ -47,6 +48,7 @@
             // dateLabel
             // 
             this.dateLabel.AutoSize = true;
+            this.dateLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.dateLabel.Location = new System.Drawing.Point(220, 0);
             this.dateLabel.Name = "dateLabel";

@@ -64,5 +64,24 @@ namespace WebTechAssignment3
         {
             reviews.Add(r);
         }
+
+        internal void setName(string name)
+        {
+            this.name = name;
+        }
+
+        internal void removeSong(Song songHighlight)
+        {
+            this.songs.Remove(songHighlight);
+        }
+
+        internal void removeReview(Review reviewHighlight)
+        {
+            this.reviews.Remove(reviewHighlight);
+        }
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }

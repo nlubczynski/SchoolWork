@@ -46,7 +46,8 @@
             this.addReviewButton = new System.Windows.Forms.Button();
             this.removeAlbumButton = new System.Windows.Forms.Button();
             this.editAlbumButton = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.addAlbum = new System.Windows.Forms.Button();
+            this.openBand = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
             this.bandsTab.SuspendLayout();
             this.reviewersTab.SuspendLayout();
@@ -71,6 +72,7 @@
             // 
             // bandsTab
             // 
+            this.bandsTab.Controls.Add(this.openBand);
             this.bandsTab.Controls.Add(this.removeBand);
             this.bandsTab.Controls.Add(this.editBand);
             this.bandsTab.Controls.Add(this.addBand);
@@ -177,7 +179,7 @@
             this.bandTab.Controls.Add(this.addReviewButton);
             this.bandTab.Controls.Add(this.removeAlbumButton);
             this.bandTab.Controls.Add(this.editAlbumButton);
-            this.bandTab.Controls.Add(this.button3);
+            this.bandTab.Controls.Add(this.addAlbum);
             this.bandTab.Location = new System.Drawing.Point(4, 22);
             this.bandTab.Name = "bandTab";
             this.bandTab.Padding = new System.Windows.Forms.Padding(3);
@@ -197,6 +199,7 @@
             this.removeShowButton.Text = "Remove Show";
             this.removeShowButton.UseVisualStyleBackColor = true;
             this.removeShowButton.UseWaitCursor = true;
+            this.removeShowButton.Click += new System.EventHandler(this.removeShowButton_Click);
             // 
             // editShowButton
             // 
@@ -209,6 +212,7 @@
             this.editShowButton.Text = "Edit Show";
             this.editShowButton.UseVisualStyleBackColor = true;
             this.editShowButton.UseWaitCursor = true;
+            this.editShowButton.Click += new System.EventHandler(this.editShowButton_Click);
             // 
             // addShowButton
             // 
@@ -219,6 +223,7 @@
             this.addShowButton.Text = "Add Show";
             this.addShowButton.UseVisualStyleBackColor = true;
             this.addShowButton.UseWaitCursor = true;
+            this.addShowButton.Click += new System.EventHandler(this.addShowButton_Click);
             // 
             // removeReviewButton
             // 
@@ -230,6 +235,7 @@
             this.removeReviewButton.Text = "Remove Review";
             this.removeReviewButton.UseVisualStyleBackColor = true;
             this.removeReviewButton.UseWaitCursor = true;
+            this.removeReviewButton.Click += new System.EventHandler(this.removeReviewButton_Click);
             // 
             // editReviewButton
             // 
@@ -242,9 +248,11 @@
             this.editReviewButton.Text = "Edit Review";
             this.editReviewButton.UseVisualStyleBackColor = true;
             this.editReviewButton.UseWaitCursor = true;
+            this.editReviewButton.Click += new System.EventHandler(this.editReviewButton_Click);
             // 
             // addReviewButton
             // 
+            this.addReviewButton.Enabled = false;
             this.addReviewButton.Location = new System.Drawing.Point(671, 138);
             this.addReviewButton.Name = "addReviewButton";
             this.addReviewButton.Size = new System.Drawing.Size(122, 38);
@@ -252,6 +260,7 @@
             this.addReviewButton.Text = "Add Review";
             this.addReviewButton.UseVisualStyleBackColor = true;
             this.addReviewButton.UseWaitCursor = true;
+            this.addReviewButton.Click += new System.EventHandler(this.addReviewButton_Click);
             // 
             // removeAlbumButton
             // 
@@ -263,6 +272,7 @@
             this.removeAlbumButton.Text = "Remove Album";
             this.removeAlbumButton.UseVisualStyleBackColor = true;
             this.removeAlbumButton.UseWaitCursor = true;
+            this.removeAlbumButton.Click += new System.EventHandler(this.removeAlbumButton_Click);
             // 
             // editAlbumButton
             // 
@@ -275,18 +285,31 @@
             this.editAlbumButton.Text = "Edit Album";
             this.editAlbumButton.UseVisualStyleBackColor = true;
             this.editAlbumButton.UseWaitCursor = true;
+            this.editAlbumButton.Click += new System.EventHandler(this.editAlbumButton_Click);
             // 
-            // button3
+            // addAlbum
             // 
-            this.button3.Location = new System.Drawing.Point(671, 6);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(122, 38);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Add Album";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.UseWaitCursor = true;
+            this.addAlbum.Location = new System.Drawing.Point(671, 6);
+            this.addAlbum.Name = "addAlbum";
+            this.addAlbum.Size = new System.Drawing.Size(122, 38);
+            this.addAlbum.TabIndex = 3;
+            this.addAlbum.Text = "Add Album";
+            this.addAlbum.UseVisualStyleBackColor = true;
+            this.addAlbum.UseWaitCursor = true;
+            this.addAlbum.Click += new System.EventHandler(this.addAlbum_Click);
             // 
-            // addAlbumButton
+            // openBand
+            // 
+            this.openBand.Location = new System.Drawing.Point(671, 138);
+            this.openBand.Name = "openBand";
+            this.openBand.Size = new System.Drawing.Size(122, 38);
+            this.openBand.TabIndex = 3;
+            this.openBand.Text = "Open Band";
+            this.openBand.UseVisualStyleBackColor = true;
+            this.openBand.UseWaitCursor = true;
+            this.openBand.Click += new System.EventHandler(this.openBand_Click);
+            // 
+            // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -294,7 +317,7 @@
             this.Controls.Add(this.tabs);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Name = "addAlbumButton";
+            this.Name = "MainView";
             this.Text = "XML Band Editor";
             this.UseWaitCursor = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.closed);
@@ -321,13 +344,14 @@
         private System.Windows.Forms.TabPage bandTab;
         private System.Windows.Forms.Button removeAlbumButton;
         private System.Windows.Forms.Button editAlbumButton;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button addAlbum;
         private System.Windows.Forms.Button removeReviewButton;
         private System.Windows.Forms.Button editReviewButton;
         private System.Windows.Forms.Button addReviewButton;
         private System.Windows.Forms.Button removeShowButton;
         private System.Windows.Forms.Button editShowButton;
         private System.Windows.Forms.Button addShowButton;
+        private System.Windows.Forms.Button openBand;
 
     }
 }

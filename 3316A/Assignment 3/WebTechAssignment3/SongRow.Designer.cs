@@ -42,6 +42,7 @@
             this.songName.Size = new System.Drawing.Size(86, 20);
             this.songName.TabIndex = 0;
             this.songName.Text = "songName";
+            this.songName.Click += new System.EventHandler(this.songName_Click_1);
             // 
             // lengthTitleLabel
             // 
@@ -53,6 +54,7 @@
             this.lengthTitleLabel.Size = new System.Drawing.Size(63, 20);
             this.lengthTitleLabel.TabIndex = 1;
             this.lengthTitleLabel.Text = "Length:";
+            this.lengthTitleLabel.Click += new System.EventHandler(this.lengthTitleLabel_Click_1);
             // 
             // lengthLabel
             // 
@@ -63,6 +65,7 @@
             this.lengthLabel.Size = new System.Drawing.Size(53, 20);
             this.lengthLabel.TabIndex = 2;
             this.lengthLabel.Text = "length";
+            this.lengthLabel.Click += new System.EventHandler(this.lengthLabel_Click_1);
             // 
             // SongRow
             // 

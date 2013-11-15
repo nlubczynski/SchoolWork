@@ -24,6 +24,9 @@ namespace WebTechAssignment3
         Show showHighlight;
         Album albumHighlight;
         Review reviewHighlight;
+        Song songHighlight;
+        ShowRow showRowHighlight;
+        List<Song> addingSongs;
 
         public Controller()
         {
@@ -517,22 +520,26 @@ namespace WebTechAssignment3
             //enable album buttons
             ((MainView)_current_view).enableEdit(MainView.BAND_TAB_ALBUM);
             ((MainView)_current_view).enableDelete(MainView.BAND_TAB_ALBUM);
+            ((MainView)_current_view).enableAddReview();
 
         }
-        public void songClick(SongRow row, Album a, AlbumRow arow)
+        public void songClick(SongRow row, Song s, Album a, AddAlbum view)
         {
 
-            foreach(SongRow srow in ((MainView)_current_view).getSongRows())
+            foreach(SongRow srow in view.getSongRows())
                 srow.setNormal();
             row.setGreen();
 
+            songHighlight = s;
 
-            albumClick(arow, a);
+            view.enableEdit();
         }
-        public void reviewClick(ReviewRow row, Album a, AlbumRow arow)
+        public void reviewClick(ReviewRow row, Review r, Album a, AlbumRow arow)
         {
             foreach (ReviewRow rrow in ((MainView)_current_view).getReviewRows())
                 rrow.setNormal();
+
+            reviewHighlight = r;
 
             row.setGreen();
 
@@ -542,11 +549,288 @@ namespace WebTechAssignment3
             ((MainView)_current_view).enableEdit(MainView.BAND_TAB_REVIEW);
             ((MainView)_current_view).enableDelete(MainView.BAND_TAB_REVIEW);
         }
-        public void showClick(ShowRow row)
+        public void showClick(ShowRow row, Show s)
         {
+            //Set them all normal
+            foreach (ShowRow r in ((MainView)_current_view).getShowRows())
+                r.setNormal();
 
+            //set ours green
+            row.setGreen();
+
+            showRowHighlight = row;
+            showHighlight = s;
 
             //enable show buttons
+            ((MainView)_current_view).enableEdit(MainView.BAND_TAB_SHOW);
+            ((MainView)_current_view).enableDelete(MainView.BAND_TAB_SHOW);
+        }
+
+        internal void addAlbum()
+        {
+            albumHighlight = new Album("No Name");
+            AddAlbum addAlbumView = new AddAlbum(this, albumHighlight, null);
+            addAlbumView.Show();      
+        }
+
+        internal bool saveAlbum(AddAlbum addAlbum, bool isEdit, string name)
+        {
+            albumHighlight.setName(name);
+            foreach (Song s in addingSongs)
+                albumHighlight.addSong(s);
+
+            if(!isEdit)
+                bandHighlight.addAlbum(albumHighlight);
+
+            //DISABLE album buttons
+            ((MainView)_current_view).disableEdit(MainView.BAND_TAB_ALBUM);
+            ((MainView)_current_view).disableDelete(MainView.BAND_TAB_ALBUM);
+            ((MainView)_current_view).disableAddReview();
+
+            ((MainView)_current_view).initializeBandTab(bandHighlight);
+
+            saveXML();
+
+            return true;
+        }
+        internal void editAlbum()
+        {
+            AddAlbum addAlbumView = new AddAlbum(this, albumHighlight, null);
+            addAlbumView.Show();
+        }
+        internal void removeAlbum()
+        {
+            bandHighlight.removeAlbum(albumHighlight);
+            ((MainView)_current_view).initializeBandTab(bandHighlight);
+            //DISABLE album buttons
+            ((MainView)_current_view).disableEdit(MainView.BAND_TAB_ALBUM);
+            ((MainView)_current_view).disableDelete(MainView.BAND_TAB_ALBUM);
+            ((MainView)_current_view).disableAddReview();
+
+        }
+        internal void editSong(AddAlbum addAlbum)
+        {
+            AddSong addSongView = new AddSong(this, addAlbum, songHighlight.getName(), songHighlight.getlength());
+            addSongView.Show();
+        }
+
+        internal void addSong(AddAlbum addAlbum)
+        {
+            AddSong addSongView = new AddSong(this, addAlbum);
+            addSongView.Show();
+            addingSongs = new List<Song>();
+        }
+
+        internal bool saveSong(AddSong addSong, string name, string length, bool isEdit, AddAlbum view)
+        {
+            if (name.Length == 0)
+            {
+                showMessage(true, "Song must have a name");
+                return false;
+            }
+            else if (length.Length == 0)
+            {
+                showMessage(true, "Song must have a length");
+                return false;
+            }
+            else if (!length.StartsWith("PT"))
+            {
+                showMessage(true, "Song length must be of format: PT##M##S");
+                return false;
+            }
+
+            if (SongRow.parseTime(length).Equals("ERROR"))
+            {
+                showMessage(true, "Song length must be of format: PT##M##S");
+                return false;
+            }
+            
+
+            if (isEdit)
+            {
+                songHighlight.setName(name);
+                songHighlight.setLength(length);
+            }
+            else
+            {
+                Song s = new Song();
+                s.setName(name);
+                s.setLength(length);
+                addingSongs.Add(s);
+                songHighlight = s;
+            }
+
+            List<Song> temp = new List<Song>();
+            temp.AddRange(albumHighlight.getSongs());
+            if(addingSongs != null)
+                temp.AddRange(addingSongs);
+
+            view.addSongRows(temp.ToArray());
+
+            return true;
+        }
+
+        internal void cancelAddAlbum()
+        {
+            addingSongs = new List<Song>();
+        }
+
+        internal void removeSong(AddAlbum view)
+        {
+            if(addingSongs != null)
+                addingSongs.Remove(songHighlight);
+            albumHighlight.removeSong(songHighlight);
+
+            List<Song> temp = new List<Song>();
+            temp.AddRange(albumHighlight.getSongs());
+            if(addingSongs != null)
+                temp.AddRange(addingSongs);
+
+            view.addSongRows(temp.ToArray());
+
+            //Disable buttons
+            view.disableEdit();
+        }
+
+        internal void addReview()
+        {
+            AddReview addReviewView = new AddReview(this, reviewers.ToArray(), false);
+            addReviewView.Show();
+        }
+
+        internal void editReview()
+        {
+            AddReview addReviewView = new AddReview(this, reviewers.ToArray(), true,  reviewHighlight);
+            addReviewView.Show();
+        }
+
+        internal void removeReview()
+        {
+            albumHighlight.removeReview(reviewHighlight);
+
+            ((MainView)_current_view).initializeBandTab(bandHighlight);
+            ((MainView)_current_view).disableEdit(MainView.BAND_TAB_REVIEW);
+            ((MainView)_current_view).disableDelete(MainView.BAND_TAB_REVIEW);
+            ((MainView)_current_view).disableEdit(MainView.BAND_TAB_ALBUM);
+            ((MainView)_current_view).disableDelete(MainView.BAND_TAB_ALBUM);
+        }
+
+        internal bool saveReviewer(Reviewer reviewer, string review, bool isEdit)
+        {
+            if (reviewer == null)
+            {
+                showMessage(true, "Must select a reviewer");
+                return false;
+            }
+            if (review.Length == 0)
+            {
+                showMessage(true, "Must enter a review");
+                return false;
+            }
+
+            if (isEdit)
+            {
+                reviewHighlight.setReviewerId(reviewer.getId());
+                reviewHighlight.setReview(review);
+            }
+            else
+            {
+                Review r = new Review(reviewer.getId());
+                r.setReview(review);
+                albumHighlight.addReview(r);
+            }
+
+            ((MainView)_current_view).initializeBandTab(bandHighlight);
+            ((MainView)_current_view).disableEdit(MainView.BAND_TAB_REVIEW);
+            ((MainView)_current_view).disableDelete(MainView.BAND_TAB_REVIEW);
+            ((MainView)_current_view).disableEdit(MainView.BAND_TAB_ALBUM);
+            ((MainView)_current_view).disableDelete(MainView.BAND_TAB_ALBUM);
+
+            saveXML();
+
+            return true;
+        }
+
+        internal bool saveShow(string date, string venue, bool _isEdit, int index)
+        {
+            if (_isEdit)
+            {
+                showHighlight.setDate(index, date);
+                showHighlight.setVenue(index, venue);
+            }
+            else
+            {
+                showHighlight.addDate(date);
+                showHighlight.addVenue(venue);
+            }
+
+            ((MainView)_current_view).initializeBandTab(bandHighlight);
+            ((MainView)_current_view).disableEdit(MainView.BAND_TAB_SHOW);
+            ((MainView)_current_view).disableDelete(MainView.BAND_TAB_SHOW);
+
+            saveXML();
+
+            return true;
+        }
+
+        internal void addShow()
+        {
+            if (showHighlight == null)
+            {
+                if (bandHighlight.getShows().Length > 0)
+                    showHighlight = bandHighlight.getShows()[0];
+            }
+            else if (!bandHighlight.getShows().Contains(showHighlight))
+            {
+                if (bandHighlight.getShows().Length > 0)
+                    showHighlight = bandHighlight.getShows()[0];
+            }
+            else
+            {
+                bandHighlight.addShow(new Show());
+                showHighlight = bandHighlight.getShows()[0];
+            }
+                   
+
+            AddShow addShowView = new AddShow(this, false, 0);
+            addShowView.Show();
+        }
+
+        internal void editShow()
+        {
+            int index = ((MainView)_current_view).getIndexOfShowRow(showRowHighlight);
+            AddShow addShowView = new AddShow(this, true, index, showHighlight.getDates()[index], showHighlight.getVenues()[index]);
+            addShowView.Show();
+        }
+
+        internal void removeShow()
+        {
+            int index = ((MainView)_current_view).getIndexOfShowRow(showRowHighlight);
+
+            showHighlight.removeDate(index);
+            showHighlight.removeVenue(index);
+
+            ((MainView)_current_view).initializeBandTab(bandHighlight);
+            ((MainView)_current_view).disableEdit(MainView.BAND_TAB_SHOW);
+            ((MainView)_current_view).disableDelete(MainView.BAND_TAB_SHOW);
+        }
+        private void saveXML()
+        {
+            readerWriter.writeXML(bands.ToArray(), reviewers.ToArray());
+        }
+
+
+        internal void openBand()
+        {
+            OpenBand openBandView = new OpenBand(this, bands.ToArray());
+            openBandView.Show();
+        }
+
+        internal void openBandResult(object p)
+        {
+            bandHighlight = (Band)p;
+            ((MainView)_current_view).setBandTabName(bandHighlight.getName());
+            ((MainView)_current_view).switchToBandtab(bandHighlight);
         }
     }
 }

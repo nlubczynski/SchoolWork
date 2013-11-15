@@ -41,12 +41,12 @@ namespace WebTechAssignment3
 
         private void reviewerNameLabel_Click(object sender, EventArgs e)
         {
-            _controller.reviewClick(this, _parent, _parent_row);
+            _controller.reviewClick(this, _model, _parent, _parent_row);
         }
 
         private void reviewLabel_Click(object sender, EventArgs e)
         {
-            _controller.reviewClick(this, _parent, _parent_row);
+            _controller.reviewClick(this, _model, _parent, _parent_row);
         }
         public void setGreen()
         {

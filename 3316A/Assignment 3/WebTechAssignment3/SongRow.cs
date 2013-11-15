@@ -15,33 +15,40 @@ namespace WebTechAssignment3
         Controller _controller;
         Song _model;
         Album _parent;
-        AlbumRow _parent_row;
+        AddAlbum _view;
 
-        public SongRow(Controller c, Song s, Album a, AlbumRow row)
+        public SongRow(Controller c, Song s, Album a, AddAlbum view)
         {
             _controller = c;
             _model = s;
             _parent = a;
-            _parent_row = row;
+            _view = view;
 
             InitializeComponent();
 
             this.songName.Text = _model.getName();
             this.lengthLabel.Text = parseTime(_model.getlength());
         }
-        private string parseTime(string length)
+        public static string parseTime(string length)
         {
-            string minutes = "";
-            string seconds = "";
+            try
+            {
+                string minutes = "";
+                string seconds = "";
 
-            length = length.Substring(2);
+                length = length.Substring(2);
 
-            minutes = length.Substring(0, length.IndexOf("M"));
-            length = length.Substring(length.IndexOf("M") + 1);
+                minutes = length.Substring(0, length.IndexOf("M"));
+                length = length.Substring(length.IndexOf("M") + 1);
 
-            seconds = length.Substring(0, length.IndexOf("S"));
+                seconds = length.Substring(0, length.IndexOf("S"));
 
-            return minutes + ":" + seconds;
+                return minutes + ":" + seconds;
+            }
+            catch
+            {
+                return "ERROR";
+            }
         }
         internal void initialize()
         {
@@ -51,17 +58,17 @@ namespace WebTechAssignment3
 
         private void songName_Click(object sender, EventArgs e)
         {
-            _controller.songClick(this, _parent, _parent_row);
+            _controller.songClick(this, _model, _parent, _view);
         }
 
         private void lengthTitleLabel_Click(object sender, EventArgs e)
         {
-            _controller.songClick(this, _parent, _parent_row);
+            _controller.songClick(this, _model, _parent, _view);
         }
 
         private void lengthLabel_Click(object sender, EventArgs e)
         {
-            _controller.songClick(this, _parent, _parent_row);
+            _controller.songClick(this, _model, _parent, _view);
         }
         public void setGreen()
         {
@@ -74,6 +81,24 @@ namespace WebTechAssignment3
             this.songName.ForeColor = new System.Drawing.Color();
             this.lengthLabel.ForeColor = new System.Drawing.Color();
             this.lengthTitleLabel.ForeColor = new System.Drawing.Color();
+        }
+
+        private void songName_Click_1(object sender, EventArgs e)
+        {
+            if(_view != null)
+                _controller.songClick(this, _model, _parent, _view);
+        }
+
+        private void lengthTitleLabel_Click_1(object sender, EventArgs e)
+        {
+            if (_view != null)
+                _controller.songClick(this, _model, _parent, _view);
+        }
+
+        private void lengthLabel_Click_1(object sender, EventArgs e)
+        {
+            if (_view != null)
+                _controller.songClick(this, _model, _parent, _view);
         }
     }
 }

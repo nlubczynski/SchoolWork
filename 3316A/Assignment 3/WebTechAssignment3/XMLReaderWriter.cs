@@ -30,38 +30,38 @@ namespace WebTechAssignment3
             xmlDocument.Load(filePath);
 
             //Load the reader
-             XmlNodeReader reader = new XmlNodeReader(xmlDocument);
+            XmlNodeReader reader = new XmlNodeReader(xmlDocument);
 
-             Band lastBand = null;
+            Band lastBand = null;
 
             //Parse the document
-             while (reader.Read())
-             {
+            while (reader.Read())
+            {
 
-                 if (reader.NodeType == XmlNodeType.Element)
-                 {
-                     if (reader.Name == "band") lastBand = bandParser(reader);
-                     else if (reader.Name == "member")
-                     {
-                         lastBand.addMember(memberParser(reader));
-                     }
-                     else if (reader.Name == "album")
-                     {
-                         lastBand.addAlbum(albumParser(reader));
-                     }
-                     else if (reader.Name == "show")
-                     {
-                         lastBand.addShow(showParser(reader));
-                     }
-                     else if (reader.Name == "reviewer")
-                     {
-                         reviewers.Add(reviewerParser(reader));
-                     }
-                 }
-                 else if (reader.NodeType == XmlNodeType.EndElement)
-                     if (reader.Name == "band")
-                         bands.Add(lastBand);
-             }
+                if (reader.NodeType == XmlNodeType.Element)
+                {
+                    if (reader.Name == "band") lastBand = bandParser(reader);
+                    else if (reader.Name == "member")
+                    {
+                        lastBand.addMember(memberParser(reader));
+                    }
+                    else if (reader.Name == "album")
+                    {
+                        lastBand.addAlbum(albumParser(reader));
+                    }
+                    else if (reader.Name == "show")
+                    {
+                        lastBand.addShow(showParser(reader));
+                    }
+                    else if (reader.Name == "reviewer")
+                    {
+                        reviewers.Add(reviewerParser(reader));
+                    }
+                }
+                else if (reader.NodeType == XmlNodeType.EndElement)
+                    if (reader.Name == "band")
+                        bands.Add(lastBand);
+            }
         }
         public static bool validateXml(string filePath)
         {
@@ -86,7 +86,7 @@ namespace WebTechAssignment3
                 // Read the file - if it's not valid it will throw an exception
                 while (reader.Read()) ;
             }
-            catch(NotImplementedException e)
+            catch
             {
                 return false;
             }
@@ -100,14 +100,14 @@ namespace WebTechAssignment3
 
         public Band[] getBands()
         {
-            if(bands.Count > 0)
+            if (bands.Count > 0)
                 return (Band[])this.bands.ToArray(typeof(Band));
             else
                 throw new Exception();
         }
         public Reviewer[] getReviewers()
         {
-            if(reviewers.Count > 0)
+            if (reviewers.Count > 0)
                 return (Reviewer[])this.reviewers.ToArray(typeof(Reviewer));
             else
                 throw new Exception();
@@ -210,6 +210,74 @@ namespace WebTechAssignment3
             r.setCompany(reader.Value);
 
             return r;
+        }
+
+        public void writeXML(Band[] bands, Reviewer[] reviewers)
+        {
+            using (XmlWriter writer = XmlWriter.Create(filePath))
+            {
+                writer.WriteStartDocument(); // start document 
+                writer.WriteStartElement("root", "http://www.w3.org/2001/XMLSchema-instance"); //start root
+                foreach (Band b in bands)
+                {
+                    writer.WriteStartElement("band"); // start band
+                    writer.WriteAttributeString("name", b.getName());
+                    writer.WriteAttributeString("size", b.getSize());
+                    foreach (Member m in b.getMembers())
+                    {
+                        writer.WriteStartElement("member"); //start member
+                        writer.WriteAttributeString("name", m.getName());
+                        writer.WriteAttributeString("instrument", m.getInstrument());
+                        writer.WriteElementString("join-date", m.getJoinDate());
+                        writer.WriteEndElement(); // end memeber
+                    }
+                    foreach (Album a in b.getAlbums())
+                    {
+                        writer.WriteStartElement("album"); //start album
+                        writer.WriteAttributeString("name", a.getName());
+                        foreach (Song s in a.getSongs())
+                        {
+                            writer.WriteStartElement("song"); //start song
+                            writer.WriteElementString("name", s.getName());
+                            writer.WriteElementString("tracklength", s.getlength());
+                            writer.WriteEndElement(); //end song
+                        }
+                        foreach (Review r in a.getReviews())
+                        {
+                            writer.WriteStartElement("reviewer"); // start review
+                            writer.WriteAttributeString("ref", r.getReviewerId());
+                            writer.WriteString(r.getReview());
+                            writer.WriteEndElement(); // end review
+                        }
+                        writer.WriteEndElement(); // end album
+                    }
+                    foreach (Show s in b.getShows())
+                    {
+                        writer.WriteStartElement("show");
+                        for (int i = 0; i < s.getDates().Length; i++)
+                        {
+                            writer.WriteElementString("date", s.getDates()[i]);
+                            writer.WriteElementString("venue", s.getVenues()[i]);
+                        }
+                        writer.WriteEndElement(); //end show
+                    }
+                    writer.WriteEndElement(); //end band
+                }
+
+                foreach (Reviewer r in reviewers)
+                {
+                    writer.WriteStartElement("reviewer"); // start reviewer
+                    writer.WriteAttributeString("id", r.getId());
+                    if (r.getName().Length > 0)
+                        writer.WriteElementString("name", r.getName());
+                    if (r.getCompany().Length > 0)
+                        writer.WriteElementString("company", r.getCompany());
+                    writer.WriteEndElement(); //end reviewer
+                }
+
+                writer.WriteEndElement();   //end root
+                writer.WriteEndDocument(); //end document
+            }
         }
     }
 }

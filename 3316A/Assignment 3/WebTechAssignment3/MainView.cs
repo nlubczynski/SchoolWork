@@ -131,7 +131,7 @@ namespace WebTechAssignment3
                 //Add songs to it
                 foreach (Song s in a.getSongs())
                 {
-                    SongRow srow = new SongRow(_controller, s, a, row);
+                    SongRow srow = new SongRow(_controller, s, a, null);
 
                     srow.Width = bandsTab.Width;
                     lastControl.Controls.Add(srow);
@@ -162,7 +162,7 @@ namespace WebTechAssignment3
                     lastControl.Controls.Add(rrow);
                     rrow.initialize();
                     if (lastReviewControl != null)
-                        rrow.Top = lastSongControl.Top + lastSongControl.Height;
+                        rrow.Top = lastReviewControl.Top + lastReviewControl.Height;
                     else
                     {
                         rrow.Top = row.Top + row.Height + 5;
@@ -180,11 +180,13 @@ namespace WebTechAssignment3
             showLabel = new Label();
             showLabel.Text = "Shows";
             showLabel.Font = new Font(showLabel.Font.FontFamily, 15);
-            showLabel.Top = lastControl.Top + lastControl.Height + 5;
+            if(lastControl != null)
+                showLabel.Top = lastControl.Top + lastControl.Height + 5;
 
             this.bandTab.Controls.Add(showLabel);
 
             Control lastShowControl = null;
+            showRows = new List<ShowRow>();
             int l = 0;
             //Add songs to it
             foreach (Show s in b.getShows())
@@ -218,6 +220,11 @@ namespace WebTechAssignment3
                     this.tabs.SelectedTab = this.bandTab;
                 else
                     this.tabs.SelectedTab = this.bandsTab;
+        }
+        public void switchToBandtab(Band b)
+        {
+            initializeBandTab(b);
+            this.tabs.SelectedTab = this.bandTab;
         }
 
         private void MainView_Load(object sender, EventArgs e)
@@ -341,7 +348,14 @@ namespace WebTechAssignment3
                     break;
             }
         }
-
+        public void enableAddReview()
+        {
+            this.addReviewButton.Enabled = true;
+        }
+        public void disableAddReview()
+        {
+            this.addReviewButton.Enabled = false;
+        }
         public void removeAllRows()
         {
             foreach (BandRow row in bandRows)
@@ -386,6 +400,60 @@ namespace WebTechAssignment3
         internal SongRow[] getSongRows()
         {
             return this.songRows.ToArray();
+        }
+
+        private void addAlbum_Click(object sender, EventArgs e)
+        {
+            _controller.addAlbum();
+        }
+
+        private void editAlbumButton_Click(object sender, EventArgs e)
+        {
+            _controller.editAlbum();
+        }
+
+        private void removeAlbumButton_Click(object sender, EventArgs e)
+        {
+            _controller.removeAlbum();
+        }
+
+        private void addReviewButton_Click(object sender, EventArgs e)
+        {
+            _controller.addReview();
+        }
+
+        private void editReviewButton_Click(object sender, EventArgs e)
+        {
+            _controller.editReview();
+        }
+
+        private void removeReviewButton_Click(object sender, EventArgs e)
+        {
+            _controller.removeReview();
+        }
+
+        private void addShowButton_Click(object sender, EventArgs e)
+        {
+            _controller.addShow();
+        }
+
+        private void editShowButton_Click(object sender, EventArgs e)
+        {
+            _controller.editShow();
+        }
+
+        private void removeShowButton_Click(object sender, EventArgs e)
+        {
+            _controller.removeShow();
+        }
+        public int getIndexOfShowRow(ShowRow r)
+        {
+            return showRows.IndexOf(r);
+        }
+
+        private void openBand_Click(object sender, EventArgs e)
+        {
+            _controller.openBand();
         }
     }
 }
