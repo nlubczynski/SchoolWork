@@ -767,8 +767,18 @@ namespace WebTechAssignment3
             }
             else
             {
+                bool createNew = false;
+                if (showHighlight == null)
+                {
+                    showHighlight = new Show();
+                    createNew = true;
+                }
+
                 showHighlight.addDate(date);
                 showHighlight.addVenue(venue);
+
+                if (createNew)
+                    bandHighlight.addShow(showHighlight);
             }
 
             ((MainView)_current_view).initializeBandTab(bandHighlight);
