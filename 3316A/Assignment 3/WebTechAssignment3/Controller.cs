@@ -86,7 +86,15 @@ namespace WebTechAssignment3
         {
             if (createNew) 
             {
+                if (filePath.Length == 0) { 
+                    showMessage(true, "Must enter a file path");
+                    return;
+                }
+
+                readerWriter = new XMLReaderWriter(filePath);
+
                 this.initialize(new Band[0], new Reviewer[0]);
+                
             }
             else
             {
@@ -221,6 +229,7 @@ namespace WebTechAssignment3
                 //Close the add band view
                 close(view);
             }
+            saveXML();
         }
 
         internal void close(Form f)
@@ -577,10 +586,25 @@ namespace WebTechAssignment3
 
         internal bool saveAlbum(AddAlbum addAlbum, bool isEdit, string name)
         {
-            albumHighlight.setName(name);
-            if(addingSongs != null)
+            if (addingSongs != null)
+            {
+                if (addingSongs.Count == 0)
+                {
+                    showMessage(true, "Must have at least one song");
+                    return false;
+                }
                 foreach (Song s in addingSongs)
                     albumHighlight.addSong(s);
+                addingSongs = new List<Song>();
+            }
+            else
+            {
+                showMessage(true, "Must have at least one song");
+                return false;
+            }
+            
+            albumHighlight.setName(name);
+            
 
             if(!isEdit)
                 bandHighlight.addAlbum(albumHighlight);
@@ -796,6 +820,12 @@ namespace WebTechAssignment3
             {
                 if (bandHighlight.getShows().Length > 0)
                     showHighlight = bandHighlight.getShows()[0];
+                else
+                {
+                    bandHighlight.addShow(new Show());
+                    showHighlight = bandHighlight.getShows()[0];
+                }
+
             }
             else if (!bandHighlight.getShows().Contains(showHighlight))
             {

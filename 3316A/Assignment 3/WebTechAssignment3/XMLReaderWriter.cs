@@ -214,6 +214,9 @@ namespace WebTechAssignment3
 
         public void writeXML(Band[] bands, Reviewer[] reviewers)
         {
+            if (!File.Exists(filePath))
+                using(File.Create(filePath));
+
             using (XmlWriter writer = XmlWriter.Create(filePath))
             {
                 writer.WriteStartDocument(); // start document 
