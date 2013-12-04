@@ -86,7 +86,15 @@ namespace WebTechAssignment3
         {
             if (createNew) 
             {
+                if (filePath.Length == 0) { 
+                    showMessage(true, "Must enter a file path");
+                    return;
+                }
+
+                readerWriter = new XMLReaderWriter(filePath);
+
                 this.initialize(new Band[0], new Reviewer[0]);
+                
             }
             else
             {
@@ -221,6 +229,7 @@ namespace WebTechAssignment3
                 //Close the add band view
                 close(view);
             }
+            saveXML();
         }
 
         internal void close(Form f)
@@ -320,6 +329,8 @@ namespace WebTechAssignment3
 
             //Change the band tab name
             ((MainView)_current_view).setBandTabName("Select a band");
+
+            saveXML();
         }
 
         internal void editBand()
@@ -575,9 +586,25 @@ namespace WebTechAssignment3
 
         internal bool saveAlbum(AddAlbum addAlbum, bool isEdit, string name)
         {
+            if (addingSongs != null)
+            {
+                if (addingSongs.Count == 0)
+                {
+                    showMessage(true, "Must have at least one song");
+                    return false;
+                }
+                foreach (Song s in addingSongs)
+                    albumHighlight.addSong(s);
+                addingSongs = new List<Song>();
+            }
+            else
+            {
+                showMessage(true, "Must have at least one song");
+                return false;
+            }
+            
             albumHighlight.setName(name);
-            foreach (Song s in addingSongs)
-                albumHighlight.addSong(s);
+            
 
             if(!isEdit)
                 bandHighlight.addAlbum(albumHighlight);
@@ -606,6 +633,8 @@ namespace WebTechAssignment3
             ((MainView)_current_view).disableEdit(MainView.BAND_TAB_ALBUM);
             ((MainView)_current_view).disableDelete(MainView.BAND_TAB_ALBUM);
             ((MainView)_current_view).disableAddReview();
+
+            saveXML();
 
         }
         internal void editSong(AddAlbum addAlbum)
@@ -713,6 +742,8 @@ namespace WebTechAssignment3
             ((MainView)_current_view).disableDelete(MainView.BAND_TAB_REVIEW);
             ((MainView)_current_view).disableEdit(MainView.BAND_TAB_ALBUM);
             ((MainView)_current_view).disableDelete(MainView.BAND_TAB_ALBUM);
+
+            saveXML();
         }
 
         internal bool saveReviewer(Reviewer reviewer, string review, bool isEdit)
@@ -760,8 +791,18 @@ namespace WebTechAssignment3
             }
             else
             {
+                bool createNew = false;
+                if (showHighlight == null)
+                {
+                    showHighlight = new Show();
+                    createNew = true;
+                }
+
                 showHighlight.addDate(date);
                 showHighlight.addVenue(venue);
+
+                if (createNew)
+                    bandHighlight.addShow(showHighlight);
             }
 
             ((MainView)_current_view).initializeBandTab(bandHighlight);
@@ -779,6 +820,12 @@ namespace WebTechAssignment3
             {
                 if (bandHighlight.getShows().Length > 0)
                     showHighlight = bandHighlight.getShows()[0];
+                else
+                {
+                    bandHighlight.addShow(new Show());
+                    showHighlight = bandHighlight.getShows()[0];
+                }
+
             }
             else if (!bandHighlight.getShows().Contains(showHighlight))
             {
@@ -813,6 +860,8 @@ namespace WebTechAssignment3
             ((MainView)_current_view).initializeBandTab(bandHighlight);
             ((MainView)_current_view).disableEdit(MainView.BAND_TAB_SHOW);
             ((MainView)_current_view).disableDelete(MainView.BAND_TAB_SHOW);
+
+            saveXML();
         }
         private void saveXML()
         {

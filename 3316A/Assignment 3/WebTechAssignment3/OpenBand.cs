@@ -109,15 +109,16 @@ namespace WebTechAssignment3
         private void albumBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             Album a = (Album)this.albumBox.SelectedItem;
+            string albumName = a.getName();
 
             bool isSingle = true;
             Band b = null;
 
             foreach (Band ba in _bands)
                 foreach (Album al in ba.getAlbums())
-                        if (b == null && a.Equals(al))
+                        if (b == null && albumName.Equals(al.getName()))
                             b = ba;
-                        else if (b != null && a.Equals(al))
+                        else if (b != null && albumName.Equals(al.getName()))
                             isSingle = false;
 
             if (isSingle && b != null)

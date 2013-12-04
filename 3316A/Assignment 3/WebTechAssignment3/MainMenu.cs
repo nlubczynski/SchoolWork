@@ -53,7 +53,8 @@ namespace WebTechAssignment3
 
         private void create_click(object sender, EventArgs e)
         {
-            controller.openFile("", this, true);
+            string filePath = this.fileTextBox.Text;
+            controller.openFile(filePath, this, true);
         }
         public bool get_open_state()
         {
