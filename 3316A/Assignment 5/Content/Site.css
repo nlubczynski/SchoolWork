@@ -32,6 +32,9 @@ input.customInput{
     border: none;
     background: #eee;
 }
+input.title {
+    max-width: 100%;
+}
 input.bandSubmit {
     float: right;
     width:170px;
@@ -42,7 +45,13 @@ input.bandSubmit {
          -o-transition: all 1s ease;
             transition: all 1s ease;
 }
-
+.removeButton {
+    width: 17px;
+    height: 17px;
+}
+input.addBand {
+    margin-left:10px;
+}
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {

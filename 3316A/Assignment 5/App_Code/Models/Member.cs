@@ -43,12 +43,12 @@ namespace WebTechAssignment5
             return this.joinDate;
         }
 
-        internal void setName(string name)
+        public void setName(string name)
         {
             this.name = name;
         }
 
-        internal void setInstrument(string instrument)
+        public void setInstrument(string instrument)
         {
             this.instrument = instrument;
         }

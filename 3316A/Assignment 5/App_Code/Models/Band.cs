@@ -94,7 +94,7 @@ namespace WebTechAssignment5
             return this.name;
         }
 
-        internal void setName(string name)
+        public void setName(string name)
         {
             this.name = name;
         }
@@ -103,7 +103,7 @@ namespace WebTechAssignment5
             this.members = new ArrayList();
         }
 
-        internal void removeAlbum(Album albumHighlight)
+        public void removeAlbum(Album albumHighlight)
         {
             albums.Remove(albumHighlight);
         }
