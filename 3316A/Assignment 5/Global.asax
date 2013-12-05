@@ -1,12 +1,14 @@
-﻿<%@ Application Language="VB" %>
+﻿<%@ Application Language="C#" %>
+<%@ Import Namespace="Assignment_5" %>
 <%@ Import Namespace="System.Web.Optimization" %>
 <%@ Import Namespace="System.Web.Routing" %>
 
 <script runat="server">
 
-    Sub Application_Start(sender As Object, e As EventArgs)
-        RouteConfig.RegisterRoutes(RouteTable.Routes)
-        BundleConfig.RegisterBundles(BundleTable.Bundles)
-    End Sub
+    void Application_Start(object sender, EventArgs e)
+    {
+        RouteConfig.RegisterRoutes(RouteTable.Routes);
+        BundleConfig.RegisterBundles(BundleTable.Bundles);
+    }
 
 </script>

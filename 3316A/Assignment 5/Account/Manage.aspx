@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Manage Account" Language="VB" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Manage.aspx.vb" Inherits="Account_Manage" %>
+﻿<%@ Page Title="Manage Account" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Manage.aspx.cs" Inherits="Account_Manage" %>
 
 <%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
 
@@ -7,12 +7,13 @@
 
     <div>
         <asp:PlaceHolder runat="server" ID="successMessage" Visible="false" ViewStateMode="Disabled">
-            <p class="text-success"><%: SuccessMessageText %></p>
+            <p class="text-success"><%: SuccessMessage %></p>
         </asp:PlaceHolder>
+
     </div>
 
     <div class="row">
-        <div class="span7">
+        <div class="col-md-12">
             <section id="passwordForm">
                 <asp:PlaceHolder runat="server" ID="setPassword" Visible="false">
                     <p>
@@ -24,9 +25,9 @@
                         <hr />
                         <asp:ValidationSummary ID="ValidationSummary" runat="server" ShowModelStateErrors="true" CssClass="text-danger" />
                         <div class="form-group">
-                            <asp:Label runat="server" AssociatedControlID="password" CssClass="col-md-2 control-label">Password</asp:Label>
+                            <asp:Label ID="Label1" runat="server" AssociatedControlID="password" CssClass="col-md-2 control-label">Password</asp:Label>
                             <div class="col-md-10">
-                                <asp:TextBox runat="server" ID="password" TextMode="Password" CssClass="form-control" />
+                                <asp:TextBox runat="server" ID="password" TextMode="Password"  CssClass="form-control"  />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="password"
                                     CssClass="text-danger" ErrorMessage="The password field is required."
                                     Display="Dynamic" ValidationGroup="SetPassword" />
@@ -36,9 +37,9 @@
                         </div>
 
                         <div class="form-group">
-                            <asp:Label runat="server" AssociatedControlID="confirmPassword" CssClass="col-md-2 control-label">Confirm password</asp:Label>
+                            <asp:Label ID="Label2" runat="server" AssociatedControlID="confirmPassword" CssClass="col-md-2 control-label">Confirm password</asp:Label>
                             <div class="col-md-10">
-                                <asp:TextBox runat="server" ID="confirmPassword" TextMode="Password" CssClass="form-control" />
+                                <asp:TextBox runat="server" ID="confirmPassword" TextMode="Password"  CssClass="form-control"  />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="confirmPassword"
                                     CssClass="text-danger" Display="Dynamic" ErrorMessage="The confirm password field is required."
                                     ValidationGroup="SetPassword" />
@@ -47,9 +48,10 @@
                                     ValidationGroup="SetPassword" />
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <asp:Button runat="server" Text="Set Password" ValidationGroup="SetPassword" OnClick="SetPassword_Click" CssClass="btn btn-default" />
+                                <asp:Button ID="Button1" runat="server" Text="Set Password" ValidationGroup="SetPassword" OnClick="SetPassword_Click" CssClass="btn btn-default" />
                             </div>
                         </div>
                     </div>
@@ -59,7 +61,6 @@
                     <p>You're logged in as <strong><%: User.Identity.GetUserName() %></strong>.</p>
                     <div class="form-horizontal">
                         <h4>Change Password Form</h4>
-                        <hr />
                         <asp:ValidationSummary runat="server" ShowModelStateErrors="true" CssClass="text-danger" />
                         <div class="form-group">
                             <asp:Label runat="server" ID="CurrentPasswordLabel" AssociatedControlID="CurrentPassword" CssClass="col-md-2 control-label">Current password</asp:Label>
@@ -101,9 +102,11 @@
             </section>
 
             <section id="externalLoginsForm">
+
                 <asp:ListView ID="ListView1" runat="server"
                     ItemType="Microsoft.AspNet.Identity.UserLoginInfo"
                     SelectMethod="GetLogins" DeleteMethod="RemoveLogin" DataKeyNames="LoginProvider,ProviderKey">
+
                     <LayoutTemplate>
                         <h4>Registered Logins</h4>
                         <table class="table">
@@ -127,6 +130,7 @@
 
                 <uc:openauthproviders runat="server" returnurl="~/Account/Manage" />
             </section>
+
         </div>
     </div>
 

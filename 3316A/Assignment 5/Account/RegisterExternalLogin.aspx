@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="RegisterExternalLogin.aspx.vb" Inherits="Account_RegisterExternalLogin" Async="true" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="RegisterExternalLogin.aspx.cs" Inherits="Account_RegisterExternalLogin" Async="true" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <h3>Register with your <%: ProviderName %> account</h3>
@@ -14,10 +14,10 @@
             </p>
 
             <div class="form-group">
-                <asp:Label runat="server" AssociatedControlID="userName" CssClass="col-md-2 control-label">User name</asp:Label>
+                <asp:Label ID="Label1" runat="server" AssociatedControlID="userName" CssClass="col-md-2 control-label">User name</asp:Label>
                 <div class="col-md-10">
                     <asp:TextBox runat="server" ID="userName" CssClass="form-control" />
-                    <asp:RequiredFieldValidator runat="server" ControlToValidate="userName"
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="userName"
                         Display="Dynamic" CssClass="text-danger" ErrorMessage="User name is required" />
                     <asp:ModelErrorMessage runat="server" ModelStateKey="UserName" CssClass="text-danger" />
                 </div>

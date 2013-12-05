@@ -18,6 +18,32 @@ textarea {
     max-width: 280px;
 }
 
+Table.customTable {
+    border:none;
+}
+Table.customTable td, Table.customTable th{
+    padding: 10px;
+    border: none;
+    -webkit-border-radius: 10px;
+       -moz-border-radius: 10px;
+            border-radius: 10px;
+}
+input.customInput{
+    border: none;
+    background: #eee;
+}
+input.bandSubmit {
+    float: right;
+    width:170px;
+    display:none;
+    -webkit-transition: all 1s ease;
+       -moz-transition: all 1s ease;
+        -ms-transition: all 1s ease;
+         -o-transition: all 1s ease;
+            transition: all 1s ease;
+}
+
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .jumbotron {

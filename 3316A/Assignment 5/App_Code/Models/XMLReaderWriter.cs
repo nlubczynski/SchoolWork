@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace WebTechAssignment3
+namespace WebTechAssignment5
 {
-    class XMLReaderWriter
+    public class XMLReaderWriter
     {
         private string filePath;
         private ArrayList bands;
