@@ -3,26 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Assignment 5(1)", "http://localhost:64062", "{9399E1A1-44E8-48A4-A7BA-A72B4C77C31B}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Assignment 5", "http://localhost", "{875F3CED-B84D-4572-A485-1BD65A5AFF21}"
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_64062"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_64728"
 		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\git\schoolwork\3316A\Assignment 5\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64062\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64728\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_64062"
+		Release.AspNetCompiler.VirtualPath = "/localhost_64728"
 		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\git\schoolwork\3316A\Assignment 5\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64062\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64728\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		SlnRelativePath = "..\..\..\..\git\schoolwork\3316A\Assignment 5\"
-		DefaultWebSiteLanguage = "Visual Basic"
+		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
 Global
@@ -30,8 +30,8 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9399E1A1-44E8-48A4-A7BA-A72B4C77C31B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9399E1A1-44E8-48A4-A7BA-A72B4C77C31B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{875F3CED-B84D-4572-A485-1BD65A5AFF21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{875F3CED-B84D-4572-A485-1BD65A5AFF21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

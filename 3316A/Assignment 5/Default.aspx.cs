@@ -22,7 +22,7 @@ public partial class _Default : Page
         if (ViewState["bands"] == null)
         {
 
-            XMLReaderWriter reader = new XMLReaderWriter("D:\\Users\\NiksDesktop\\SkyDrive\\Documents\\Third Year\\Web Technologies\\Assignment 5\\data.xml");
+            XMLReaderWriter reader = new XMLReaderWriter("C:\\Users\\NikLubz\\SkyDrive\\Documents\\Third Year\\Web Technologies\\Assignment 5\\data.xml");
             reader.readXml();
 
             //Get All bands

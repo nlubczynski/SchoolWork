@@ -20,7 +20,7 @@ public partial class Reviewers : System.Web.UI.Page
         if (ViewState["reviewers"] == null)
         {
 
-            XMLReaderWriter reader = new XMLReaderWriter("D:\\Users\\NiksDesktop\\SkyDrive\\Documents\\Third Year\\Web Technologies\\Assignment 5\\data.xml");
+            XMLReaderWriter reader = new XMLReaderWriter("C:\\Users\\NikLubz\\SkyDrive\\Documents\\Third Year\\Web Technologies\\Assignment 5\\data.xml");
             reader.readXml();
             reviewers = reader.getReviewers();
             ViewState.Add("bands", reviewers);
@@ -129,7 +129,7 @@ public partial class Reviewers : System.Web.UI.Page
     internal void save()
     {
         //Save the xml.
-        XMLReaderWriter reader = new XMLReaderWriter("D:\\Users\\NiksDesktop\\SkyDrive\\Documents\\Third Year\\Web Technologies\\Assignment 5\\data.xml");
+        XMLReaderWriter reader = new XMLReaderWriter("C:\\Users\\NikLubz\\SkyDrive\\Documents\\Third Year\\Web Technologies\\Assignment 5\\data.xml");
         reader.readXml();
         reader.writeXML(reader.getBands(), reviewers);
     }
