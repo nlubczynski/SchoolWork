@@ -60,7 +60,7 @@ namespace WebTechAssignment5
             return true;
         }
 
-       internal void setId(string id)
+       public void setId(string id)
        {
            this.id = id;
        }

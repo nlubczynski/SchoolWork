@@ -50,32 +50,32 @@ namespace WebTechAssignment5
             return (Review[])reviews.ToArray(typeof(Reviewer));
         }
 
-        internal string getName()
+        public string getName()
         {
             return this.name;
         }
 
-        internal Review[] getReviews()
+        public Review[] getReviews()
         {
             return (Review[])this.reviews.ToArray(typeof(Review));
         }
 
-        internal void addReview(Review r)
+        public void addReview(Review r)
         {
             reviews.Add(r);
         }
 
-        internal void setName(string name)
+        public void setName(string name)
         {
             this.name = name;
         }
 
-        internal void removeSong(Song songHighlight)
+        public void removeSong(Song songHighlight)
         {
             this.songs.Remove(songHighlight);
         }
 
-        internal void removeReview(Review reviewHighlight)
+        public void removeReview(Review reviewHighlight)
         {
             this.reviews.Remove(reviewHighlight);
         }

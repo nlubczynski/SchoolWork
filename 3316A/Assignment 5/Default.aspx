@@ -24,7 +24,7 @@
                 We accept nothing but the best of the best, and therefore, see what our critics are saying about our fantasic array of music!
             </p>
             <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301949">Choose reviewer &raquo;</a>
+                <a class="btn btn-default" href="reviewers.aspx">Choose reviewer &raquo;</a>
             </p>
         </div>
         <div class="col-md-4">
@@ -33,7 +33,7 @@
                 For those who know what they want to find, and where to find it, can search our cataglouges by album.
             </p>
             <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301950">Browse albums &raquo;</a>
+                <a class="btn btn-default" href="album.aspx">Browse albums &raquo;</a>
             </p>
         </div>
     </div>
