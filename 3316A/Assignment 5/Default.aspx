@@ -5,7 +5,22 @@
     <div class="jumbotron">
         <h1>Band Viewer</h1>
         <p class="lead">A website for viewing your favourite band's information</p>
-        <p><a href="band.aspx" class="btn btn-primary btn-large">Begin &raquo;</a></p>
+        <p>
+            <asp:DropDownList ID="bandDropDown" 
+                runat="server"/>
+            <asp:DropDownList ID="albumDropDown" 
+                runat="server"
+                onSelectedIndexChanged="albumDropDown_SelectedIndexChanged"
+                autoPostback="true" />
+            <asp:DropDownList ID="memberDropDown" 
+                runat="server"
+                onSelectedIndexChanged="memberDropDown_SelectedIndexChanged"
+                autoPostback="true" />
+            <asp:LinkButton CssClass="btn btn-primary btn-large" 
+                runat ="server" Text="View Band &raquo;"
+                id="beging"
+                onclick="begin_Click"/>
+        </p>
     </div>
 
     <div class="row">
