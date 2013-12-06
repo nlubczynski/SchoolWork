@@ -51,7 +51,7 @@ namespace WebTechAssignment5
                     }
                     else if (reader.Name == "show")
                     {
-                        lastBand.addShow(showParser(reader));
+                        lastBand.addShows(showParser(reader));
                     }
                     else if (reader.Name == "reviewer")
                     {
@@ -171,9 +171,9 @@ namespace WebTechAssignment5
 
             return a;
         }
-        private Show showParser(XmlNodeReader reader)
+        private Show[] showParser(XmlNodeReader reader)
         {
-            Show s = new Show();
+            List<Show> shows = new List<Show>();
 
             while (reader.Read())
             {
@@ -182,11 +182,12 @@ namespace WebTechAssignment5
                     if (reader.Name == "date")
                     {
                         reader.Read();
-                        s.addDate(reader.Value);
+                        string date = reader.Value;
                         reader.Read();
                         reader.Read();
                         reader.Read();
-                        s.addVenue(reader.Value);
+                        string venue = reader.Value;
+                        shows.Add(new Show(date, venue));                        
                     }
                 }
                 else if (reader.NodeType == XmlNodeType.EndElement)
@@ -194,7 +195,7 @@ namespace WebTechAssignment5
                         break;
             }
 
-            return s;
+            return shows.ToArray();
         }
         private Reviewer reviewerParser(XmlNodeReader reader)
         {
@@ -254,13 +255,14 @@ namespace WebTechAssignment5
                         }
                         writer.WriteEndElement(); // end album
                     }
-                    foreach (Show s in b.getShows())
+                    if (b.getShows().Length > 0)
                     {
                         writer.WriteStartElement("show");
-                        for (int i = 0; i < s.getDates().Length; i++)
+                        foreach (Show s in b.getShows())
                         {
-                            writer.WriteElementString("date", s.getDates()[i]);
-                            writer.WriteElementString("venue", s.getVenues()[i]);
+                            writer.WriteElementString("date", s.getDate());
+                            writer.WriteElementString("venue", s.getVenue());
+
                         }
                         writer.WriteEndElement(); //end show
                     }

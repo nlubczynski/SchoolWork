@@ -13,7 +13,7 @@ namespace WebTechAssignment5
         private string size;
         private ArrayList members;
         private ArrayList albums;
-        private ArrayList shows;
+        private List<Show> shows;
 
         public Band(string name, string size)
         {
@@ -21,7 +21,7 @@ namespace WebTechAssignment5
             this.size = size;
             members = new ArrayList();
             albums = new ArrayList();
-            shows = new ArrayList();
+            shows = new List<Show>();
         }
 
         public string getSize()
@@ -87,7 +87,7 @@ namespace WebTechAssignment5
         }
         public Show[] getShows()
         {
-            return (Show[])shows.ToArray(typeof(Show));
+            return shows.ToArray();
         }
         public string getName()
         {
@@ -111,6 +111,14 @@ namespace WebTechAssignment5
         {
             return this.name;
         }
-
+        internal void addShows(Show[] show)
+        {
+            foreach (Show s in show)
+                shows.Add(s);
+        }
+        public void removeShow(Show s)
+        {
+            shows.Remove(s);
+        }
     }
 }

@@ -8,61 +8,35 @@ namespace WebTechAssignment5
 {
     public class Show
     {
-        private ArrayList date;
-        private ArrayList venue;
+        private string date;
+        private string venue;
 
         public Show()
         {
-            this.date = new ArrayList();
-            this.venue = new ArrayList();
+            this.date = "";
+            this.venue = "";
+        }
+        public Show(string date, string venue)
+        {
+            this.date = date;
+            this.venue = venue;
         }
 
-        public bool addDate(string date){
-            try{
-                this.date.Add(date);
-            }
-            catch{
-                return false;
-            }
-            return true;
-        }
-        public string[] getDates()
+        public void setDate(string date)
         {
-            return (string[])date.ToArray(typeof(string));
+            this.date = date;
         }
-        public bool addVenue(string venue)
+        public void setVenue(string venue)
         {
-            try
-            {
-                this.venue.Add(venue);
-            }
-            catch
-            {
-                return false;
-            }
-            return true;
+            this.venue = venue;
         }
-        public string[] getVenues()
+        public string getDate()
         {
-            return (string[])venue.ToArray(typeof(string));
+            return this.date;
         }
-        public void setDate(int index, string date)
+        public string getVenue()
         {
-            this.date.RemoveAt(index);
-            this.date.Insert(index, date);
-        }
-        public void setVenue(int index, string venue)
-        {
-            this.venue.RemoveAt(index);
-            this.venue.Insert(index, venue);
-        }
-        public void removeDate(int index)
-        {
-            this.date.RemoveAt(index);
-        }
-        public void removeVenue(int index)
-        {
-            this.venue.RemoveAt(index);
+            return venue;
         }
     }
 }

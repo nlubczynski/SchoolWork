@@ -47,8 +47,42 @@
                     </asp:ButtonField>
                 </Columns>
             </asp:GridView>
+            <asp:GridView runat="server" ID="showGridView" 
+                CssClass="customTable"
+                autoGenerateColumns="false"
+                onRowCommand="showGridView_RowCommand">
+                <Columns>
+                    <asp:TemplateField HeaderText="Venue">
+                    <ItemTemplate>
+                        <asp:TextBox id="show" runat="server" 
+                            Text='<%# Bind("venue") %>'
+                            cssClass="customInput"
+                            readOnly="false"  />
+                    </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Date">
+                        <ItemTemplate>
+                            <asp:TextBox id="date" runat="server" 
+                                Text='<%# Bind("date") %>'
+                                cssClass="customInput"  TextMode="Date"
+                                readOnly="false" />
+                    </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:ButtonField  
+                        ButtonType="Image"
+                        HeaderText="Remove" 
+                        ImageUrl="~\images\remove.png"
+                        CommandName="removeShow">
+                        <ControlStyle CssClass="removeButton" />
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:ButtonField>
+                </Columns>
+            </asp:GridView>
             <asp:Button runat="server" ID="add" Text="Add member" 
                 CssClass="memberAdd" OnClick="add_Click" 
+                visible="false"/>
+            <asp:Button runat="server" ID="addShow" Text="Add show" 
+                CssClass="memberAdd" OnClick="addShow_Click"
                 visible="false"/>
             <asp:Button runat="server" ID="submit" Text="Save" 
                 CssClass="bandSubmit" OnClick="submit_Click" />

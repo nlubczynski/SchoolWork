@@ -125,6 +125,7 @@ public partial class band : System.Web.UI.Page
 
         //Make the add member button visible
         add.Visible = true;
+        addShow.Visible = true;
                 
         //If postback - we don't want to erase this data
         if (!IsPostBack)
@@ -142,6 +143,14 @@ public partial class band : System.Web.UI.Page
                 Joined = m.getJoinDate()
             }).ToList();
             memberGrid.DataBind();
+
+            //bind show
+            showGridView.DataSource = selectedBand.getShows().Select(s => new
+            {
+                venue = s.getVenue(),
+                date = s.getDate()
+            }).ToList();
+            showGridView.DataBind();
         }
     }
     protected void submit_Click(object sender, EventArgs e)
@@ -162,6 +171,25 @@ public partial class band : System.Web.UI.Page
                 Member temp = new Member(((TextBox)row.Cells[0].Controls[1]).Text, ((TextBox)row.Cells[1].Controls[1]).Text);
                 temp.setJoinDate(((TextBox)row.Cells[2].Controls[1]).Text);
                 selectedBand.addMember(temp);
+            }
+
+            index++;
+        }
+        //Get all the data for shows
+        index = 0;
+        foreach (GridViewRow row in showGridView.Rows)
+        {
+            if (index < selectedBand.getShows().Length)
+            {
+                selectedBand.getShows()[index].setVenue(((TextBox)row.Cells[0].Controls[1]).Text);
+                selectedBand.getShows()[index].setDate(((TextBox)row.Cells[1].Controls[1]).Text);
+            }
+            else
+            {
+                Show temp = new Show();
+                temp.setVenue(((TextBox)row.Cells[0].Controls[1]).Text);
+                temp.setDate(((TextBox)row.Cells[1].Controls[1]).Text);
+                selectedBand.addShow(temp);
             }
 
             index++;
@@ -225,5 +253,37 @@ public partial class band : System.Web.UI.Page
 
         //Reload the page
         Response.Redirect(String.Format("~/band.aspx?b={0}", selectedBand.getName()));
+    }
+    protected void addShow_Click(object sender, EventArgs e)
+    {
+        Show show = new Show();
+        show.setVenue("Enter venue");
+        show.setDate("01-01-2000");
+
+        //Add band
+        selectedBand.addShow(show);
+
+        //save
+        save();
+
+        //Reload the page
+        Response.Redirect(String.Format("~/band.aspx?b={0}", selectedBand.getName()));
+    }
+    protected void showGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName.Equals("removeShow"))
+        {
+            //Get index
+            int index = Convert.ToInt32(e.CommandArgument);
+
+            //remove show
+            selectedBand.removeShow(selectedBand.getShows()[index]);
+
+            //save
+            save();
+
+            //Reload page
+            Response.Redirect(String.Format("~/band.aspx?b={0}", selectedBand.getName()));
+        }
     }
 } 
