@@ -21,7 +21,7 @@ namespace Color
             if(this.ActiveControl.GetType() == typeof(TextBox))
             {
                 this.ActiveControl.BackColor = System.Drawing.Color.Red;
-                this.toolStrip1.Text = "Red";
+                this.toolStripStatusLabel.Text = "Red";
             }
         }
 
@@ -30,7 +30,7 @@ namespace Color
             if (this.ActiveControl.GetType() == typeof(TextBox))
             {
                 this.ActiveControl.BackColor = System.Drawing.Color.Green;
-                this.toolStrip1.Text = "Green";
+                this.toolStripStatusLabel.Text = "Green";
             }
         }
 
@@ -39,14 +39,14 @@ namespace Color
             if (this.ActiveControl.GetType() == typeof(TextBox))
             {
                 this.ActiveControl.BackColor = System.Drawing.Color.Blue;
-                this.toolStrip1.Text = "Blue";
+                this.toolStripStatusLabel.Text = "Blue";
             }
         }
 
         private void resetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.ActiveControl.BackColor = new System.Drawing.Color();
-            this.toolStrip1.Text = "";
+            this.toolStripStatusLabel.Text = "";
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -73,8 +73,23 @@ namespace Color
         {
             textBox1.Text = "";
             textBox2.Text = "";
+            this.toolStripStatusLabel.Text = "";
             textBox1.BackColor = new System.Drawing.Color();
             textBox2.BackColor = new System.Drawing.Color();
+        }
+
+        private void textBox1_Enter(object sender, EventArgs e)
+        {
+            string colour = "";
+            if (this.ActiveControl.BackColor == System.Drawing.Color.Red)
+                colour = "Red";
+            else if (this.ActiveControl.BackColor == System.Drawing.Color.Blue)
+                colour = "Blue";
+            else if (this.ActiveControl.BackColor == System.Drawing.Color.Green)
+                colour = "Green";
+
+            this.toolStripStatusLabel.Text = colour;
+            
         }
 
     }
