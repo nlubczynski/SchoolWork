@@ -163,6 +163,7 @@ namespace Alarm
             this.resetButton.Size = new System.Drawing.Size(64, 23);
             this.resetButton.TabIndex = 5;
             this.resetButton.Text = "Reset";
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
             // clockLabel
             // 

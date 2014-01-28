@@ -43,7 +43,8 @@ namespace Alarm
             {
                 // Attach the AlarmToggle method to the clockTimer.Tick event
                 // ADD YOUR CODE HERE
-
+                if (clockLabel.BackColor != Color.Red)
+                    alarmToggle(sender, e);
                 // End of your code
 
                 // Reset the alarmTime to the default value
@@ -62,7 +63,26 @@ namespace Alarm
             // up/down control values for minutes and seconds
             alarmTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, h, (int)minuteUpDown.Value, (int)secondUpDown.Value);
         }
+        private void alarmToggle(object sender, System.EventArgs e)
+        {
+            if (clockLabel.BackColor == Color.Red)
+                clockLabel.BackColor = new Color();
+            else
+                clockLabel.BackColor = Color.Red;
+        }
 
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            if (clockLabel.BackColor == Color.Red)
+                clockLabel.BackColor = new Color();
+
+            // Reset the alarmTime to the default value
+            alarmTime = DateTime.MinValue;
+            hourUpDown.Value = 1;
+            minuteUpDown.Value = 0;
+            secondUpDown.Value = 0;
+            ampmUpDown.Text = "AM";
+        }
 
     }
 }
