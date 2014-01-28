@@ -43,6 +43,32 @@ namespace Validation
                 errorProvider3.SetError(tbConfirmPassword, "Passwords must match");
         }
 
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            if (errorProvider1.GetError(tbUserName).Length > 0)
+            {
+                MessageBox.Show("Username is invalid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (errorProvider2.GetError(tbNewPassword).Length > 0)
+            {
+                MessageBox.Show("Your password must be 6 characters or longer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (errorProvider3.GetError(tbConfirmPassword).Length > 0)
+            {
+                MessageBox.Show("Passwords must match", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Success", "Valid", MessageBoxButtons.OK, MessageBoxIcon.None);
+                Close();
+            }
+            
+
+        }
+
 
     }
 }
