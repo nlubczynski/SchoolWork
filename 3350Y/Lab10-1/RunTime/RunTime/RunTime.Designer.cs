@@ -86,6 +86,7 @@ namespace RunTime
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 10;
             this.btnClear.Text = "&Clear";
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // lblLocation
             // 
@@ -126,8 +127,8 @@ namespace RunTime
             // 
             // tbxText
             // 
-            this.tbxText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbxText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxText.Location = new System.Drawing.Point(51, 128);
             this.tbxText.Name = "tbxText";
             this.tbxText.Size = new System.Drawing.Size(120, 20);
@@ -141,6 +142,7 @@ namespace RunTime
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 9;
             this.btnAdd.Text = "&Add";
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // cbControl
             // 
