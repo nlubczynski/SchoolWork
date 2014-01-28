@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Xml;
 
 namespace WebTechAssignment5
@@ -25,6 +26,10 @@ namespace WebTechAssignment5
 
         public void readXml()
         {
+            if (!validateXml(filePath))
+                HttpContext.Current.Response.Redirect("NotValid.aspx");
+
+
             //Load the document
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(filePath);
@@ -68,13 +73,16 @@ namespace WebTechAssignment5
             try
             {
                 // Get the Schema
-                string folder = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"\xsd\";
+               /* string folder = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"\xsd\";
                 string filter = "schema.xsd";
-                string[] files = Directory.GetFiles(folder, filter);
+                string[] files = Directory.GetFiles(folder, filter);*/
+
+                string schemaPath = "C:\\Users\\NikLubz\\SkyDrive\\Documents\\Third Year\\Web Technologies\\Assignment 5\\schema.xsd";
+                
 
                 // Create a reader that uses the schema
                 XmlReaderSettings settings = new XmlReaderSettings();
-                settings.Schemas.Add(null, files[0]);
+                settings.Schemas.Add(null, schemaPath);
                 settings.ValidationType = ValidationType.Schema;
                 settings.ValidationEventHandler += new System.Xml.Schema.ValidationEventHandler(settings_ValidationEventHandler);
 
