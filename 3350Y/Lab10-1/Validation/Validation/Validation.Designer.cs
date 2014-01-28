@@ -38,6 +38,7 @@ namespace Validation
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Validation));
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
@@ -47,6 +48,12 @@ namespace Validation
             this.Label2 = new System.Windows.Forms.Label();
             this.tbUserName = new System.Windows.Forms.TextBox();
             this.Label1 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -74,6 +81,7 @@ namespace Validation
             this.tbConfirmPassword.PasswordChar = '*';
             this.tbConfirmPassword.Size = new System.Drawing.Size(240, 20);
             this.tbConfirmPassword.TabIndex = 11;
+            this.tbConfirmPassword.Leave += new System.EventHandler(this.Validation_Load);
             // 
             // Label3
             // 
@@ -94,6 +102,7 @@ namespace Validation
             this.tbNewPassword.PasswordChar = '*';
             this.tbNewPassword.Size = new System.Drawing.Size(240, 20);
             this.tbNewPassword.TabIndex = 9;
+            this.tbNewPassword.Leave += new System.EventHandler(this.Validation_Load);
             // 
             // Label2
             // 
@@ -113,6 +122,7 @@ namespace Validation
             this.tbUserName.Name = "tbUserName";
             this.tbUserName.Size = new System.Drawing.Size(240, 20);
             this.tbUserName.TabIndex = 7;
+            this.tbUserName.Leave += new System.EventHandler(this.Validation_Load);
             // 
             // Label1
             // 
@@ -124,6 +134,18 @@ namespace Validation
             this.Label1.Size = new System.Drawing.Size(71, 13);
             this.Label1.TabIndex = 6;
             this.Label1.Text = "User Name:";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // errorProvider2
+            // 
+            this.errorProvider2.ContainerControl = this;
+            // 
+            // errorProvider3
+            // 
+            this.errorProvider3.ContainerControl = this;
             // 
             // Validation
             // 
@@ -147,12 +169,19 @@ namespace Validation
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Change Password";
             this.Load += new System.EventHandler(this.Validation_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ErrorProvider errorProvider2;
+        private System.Windows.Forms.ErrorProvider errorProvider3;
     }
 }
 
