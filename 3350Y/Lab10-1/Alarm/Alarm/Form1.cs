@@ -43,8 +43,7 @@ namespace Alarm
             {
                 // Attach the AlarmToggle method to the clockTimer.Tick event
                 // ADD YOUR CODE HERE
-                if (clockLabel.BackColor != Color.Red)
-                    alarmToggle(sender, e);
+                this.clockTimer.Tick += new System.EventHandler(this.alarmToggle);
                 // End of your code
 
                 // Reset the alarmTime to the default value
@@ -73,8 +72,12 @@ namespace Alarm
 
         private void resetButton_Click(object sender, EventArgs e)
         {
+            //Reset colour
             if (clockLabel.BackColor == Color.Red)
                 clockLabel.BackColor = new Color();
+
+            //unattach the flashing alarm thing
+            this.clockTimer.Tick -= new System.EventHandler(this.alarmToggle);
 
             // Reset the alarmTime to the default value
             alarmTime = DateTime.MinValue;
