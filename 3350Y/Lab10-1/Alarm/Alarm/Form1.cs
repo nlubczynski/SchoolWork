@@ -72,12 +72,12 @@ namespace Alarm
 
         private void resetButton_Click(object sender, EventArgs e)
         {
+            //unattach the flashing alarm thing
+            this.clockTimer.Tick -= new System.EventHandler(this.alarmToggle);
+
             //Reset colour
             if (clockLabel.BackColor == Color.Red)
                 clockLabel.BackColor = System.Drawing.Color.Transparent;
-
-            //unattach the flashing alarm thing
-            this.clockTimer.Tick -= new System.EventHandler(this.alarmToggle);
 
             // Reset the alarmTime to the default value
             alarmTime = DateTime.MinValue;

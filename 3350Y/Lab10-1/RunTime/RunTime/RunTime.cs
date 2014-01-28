@@ -26,6 +26,9 @@ namespace RunTime
             Label temp = new Label();
             
             temp.Text = tbxText.Text;
+            if (temp.Text.Length == 0)
+                return;
+
             tbxText.Text = "";
             
             temp.Location = new Point((int)nudX.Value, (int)nudY.Value);
