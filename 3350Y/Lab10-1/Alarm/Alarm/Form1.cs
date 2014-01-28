@@ -65,7 +65,7 @@ namespace Alarm
         private void alarmToggle(object sender, System.EventArgs e)
         {
             if (clockLabel.BackColor == Color.Red)
-                clockLabel.BackColor = new Color();
+                clockLabel.BackColor = System.Drawing.Color.Transparent;
             else
                 clockLabel.BackColor = Color.Red;
         }
@@ -74,7 +74,7 @@ namespace Alarm
         {
             //Reset colour
             if (clockLabel.BackColor == Color.Red)
-                clockLabel.BackColor = new Color();
+                clockLabel.BackColor = System.Drawing.Color.Transparent;
 
             //unattach the flashing alarm thing
             this.clockTimer.Tick -= new System.EventHandler(this.alarmToggle);

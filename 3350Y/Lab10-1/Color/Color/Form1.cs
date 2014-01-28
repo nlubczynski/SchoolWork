@@ -21,6 +21,7 @@ namespace Color
             if(this.ActiveControl.GetType() == typeof(TextBox))
             {
                 this.ActiveControl.BackColor = System.Drawing.Color.Red;
+                this.toolStrip1.Text = "Red";
             }
         }
 
@@ -29,6 +30,7 @@ namespace Color
             if (this.ActiveControl.GetType() == typeof(TextBox))
             {
                 this.ActiveControl.BackColor = System.Drawing.Color.Green;
+                this.toolStrip1.Text = "Green";
             }
         }
 
@@ -37,12 +39,14 @@ namespace Color
             if (this.ActiveControl.GetType() == typeof(TextBox))
             {
                 this.ActiveControl.BackColor = System.Drawing.Color.Blue;
+                this.toolStrip1.Text = "Blue";
             }
         }
 
         private void resetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.ActiveControl.BackColor = new System.Drawing.Color();
+            this.toolStrip1.Text = "";
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
