@@ -40,6 +40,8 @@ namespace practice_2_1
             this.SE3350button.TabIndex = 0;
             this.SE3350button.Text = "SE3350";
             this.SE3350button.UseVisualStyleBackColor = true;
+            this.SE3350button.Click += new System.EventHandler(this.SE3350button_Click);
+            this.SE3350button.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SE3350button_MouseMove);
             // 
             // Form1
             // 
