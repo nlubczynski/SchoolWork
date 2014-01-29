@@ -49,6 +49,8 @@ namespace Validation
             {
                 MessageBox.Show("Username is invalid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+
+                
             }
             else if (errorProvider2.GetError(tbNewPassword).Length > 0)
             {
@@ -65,10 +67,6 @@ namespace Validation
                 MessageBox.Show("Success", "Valid", MessageBoxButtons.OK, MessageBoxIcon.None);
                 Close();
             }
-            
-
         }
-
-
     }
 }
