@@ -161,6 +161,10 @@
     <Compile Include="MainModule.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="NorthwindDataSet.cs">
+      <DependentUpon>NorthwindDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="NorthwindDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -189,6 +193,12 @@
     </Compile>
     <None Include="AppSettingsDataSet.xsx">
       <DependentUpon>AppSettingsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="NorthwindDataSet.xsc">
+      <DependentUpon>NorthwindDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="NorthwindDataSet.xss">
+      <DependentUpon>NorthwindDataSet.xsd</DependentUpon>
     </None>
     <None Include="NorthwindDataSet.xsx">
       <DependentUpon>NorthwindDataSet.xsd</DependentUpon>

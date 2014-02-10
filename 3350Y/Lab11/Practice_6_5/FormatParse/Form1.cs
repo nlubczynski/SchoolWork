@@ -55,7 +55,7 @@ namespace FormatParse
 			priceBinding.Format += new ConvertEventHandler(this.FormatDecimalToString);
 			//TODO 2: Create an event deleagte for the Parse event that references the 
 			//ParseStringToDecimal procedure
-			
+            priceBinding.Parse += new ConvertEventHandler(this.ParseStringToDecimal); 
 			//Add the Binding to the DataBindings collection
 			PriceTextBox.DataBindings.Add(priceBinding);
 		}
@@ -67,7 +67,12 @@ namespace FormatParse
 		}
 		//TODO 1: Create a procudure invoked by the Parse event that converts the Value
 		//of ConvertEventArgs from a String with Currency formatting to a Decimal
-		
+        private void ParseStringToDecimal(object sender, ConvertEventArgs convertArgs)
+        {
+            convertArgs.Value =
+            Decimal.Parse(convertArgs.Value.ToString(), NumberStyles.Currency);
+        }
+
 		protected override void Dispose( bool disposing )
 		{
 			if( disposing )
@@ -141,7 +146,8 @@ namespace FormatParse
             // 
             // sqlConnection1
             // 
-            this.sqlConnection1.ConnectionString = "Data Source=KADER-PC\\SQLEXPRESS;Initial Catalog=pubs;Integrated Security=True";
+            this.sqlConnection1.ConnectionString = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=C:\\Users\\NikLubz\\Source\\Repos\\School" +
+    "Work\\3350Y\\Lab11\\Databases\\pubs.mdf;Integrated Security=True;Connect Timeout=30";
             this.sqlConnection1.FireInfoMessageEventOnUserErrors = false;
             // 
             // PriceTextBox

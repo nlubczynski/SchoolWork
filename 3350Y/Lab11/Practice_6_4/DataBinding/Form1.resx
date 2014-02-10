@@ -129,11 +129,11 @@
   <metadata name="sqlSelectCommand1.DesignTimeVisible" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <metadata name="sqlSelectCommand1.CommandDesignTimeVisible" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <metadata name="sqlSelectCommand1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
+  </metadata>
+  <metadata name="sqlSelectCommand1.CommandDesignTimeVisible" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
   </metadata>
   <data name="sqlSelectCommand1.CommandText" xml:space="preserve">
     <value>SELECT sales.stor_id, sales.ord_num, sales.qty, sales.ord_date, sales.payterms, sales.title_id, stores.stor_id AS Expr1, stores.stor_name, stores.city, stores.state FROM sales INNER JOIN stores ON sales.stor_id = stores.stor_id WHERE (sales.stor_id = @stor_id)</value>

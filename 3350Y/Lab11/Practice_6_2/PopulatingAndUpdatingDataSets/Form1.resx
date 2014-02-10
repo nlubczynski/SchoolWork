@@ -126,11 +126,11 @@
   <metadata name="SalesSQLDeleteCommand.DesignTimeVisible" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <metadata name="SalesSQLDeleteCommand.CommandDesignTimeVisible" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <metadata name="SalesSQLDeleteCommand.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
+  </metadata>
+  <metadata name="SalesSQLDeleteCommand.CommandDesignTimeVisible" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
   </metadata>
   <data name="SalesSQLDeleteCommand.CommandText" xml:space="preserve">
     <value>DELETE FROM sales WHERE (ord_num = @Original_ord_num) AND (stor_id = @Original_stor_id) AND (title_id = @Original_title_id) AND (ord_date = @Original_ord_date) AND (payterms = @Original_payterms) AND (qty = @Original_qty)</value>
@@ -141,11 +141,11 @@
   <metadata name="SalesSQLInsertCommand.DesignTimeVisible" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <metadata name="SalesSQLInsertCommand.CommandDesignTimeVisible" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <metadata name="SalesSQLInsertCommand.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
+  </metadata>
+  <metadata name="SalesSQLInsertCommand.CommandDesignTimeVisible" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
   </metadata>
   <data name="SalesSQLInsertCommand.CommandText" xml:space="preserve">
     <value>INSERT INTO sales(stor_id, ord_num, qty, ord_date, payterms, title_id) VALUES (@stor_id, @ord_num, @qty, @ord_date, @payterms, @title_id); SELECT stor_id, ord_num, qty, ord_date, payterms, title_id FROM sales WHERE (ord_num = @ord_num) AND (stor_id = @stor_id) AND (title_id = @title_id)</value>
@@ -153,20 +153,20 @@
   <metadata name="SalesSQLSelectCommand.DesignTimeVisible" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <metadata name="SalesSQLSelectCommand.CommandDesignTimeVisible" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <metadata name="SalesSQLSelectCommand.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
+  </metadata>
+  <metadata name="SalesSQLSelectCommand.CommandDesignTimeVisible" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
   </metadata>
   <metadata name="SalesSQLUpdateCommand.DesignTimeVisible" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <metadata name="SalesSQLUpdateCommand.CommandDesignTimeVisible" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <metadata name="SalesSQLUpdateCommand.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
+  </metadata>
+  <metadata name="SalesSQLUpdateCommand.CommandDesignTimeVisible" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
   </metadata>
   <data name="SalesSQLUpdateCommand.CommandText" xml:space="preserve">
     <value>UPDATE sales SET stor_id = @Param1, ord_num = @ord_num, qty = @qty, ord_date = @ord_date, payterms = @payterms, title_id = @title_id WHERE (ord_num = @Original_ord_num) AND (stor_id = @Original_stor_id) AND (title_id = @Original_title_id) AND (ord_date = @Original_ord_date) AND (payterms = @Original_payterms) AND (qty = @Original_qty); SELECT stor_id, ord_num, qty, ord_date, payterms, title_id FROM sales WHERE (ord_num = @ord_num) AND (stor_id = @stor_id) AND (title_id = @title_id)</value>

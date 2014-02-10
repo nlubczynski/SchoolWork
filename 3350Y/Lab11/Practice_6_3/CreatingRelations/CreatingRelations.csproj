@@ -112,6 +112,14 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SuppliersProductsDataSet.xsc">
+      <DependentUpon>SuppliersProductsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SuppliersProductsDataSet.xss">
+      <DependentUpon>SuppliersProductsDataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

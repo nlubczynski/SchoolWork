@@ -138,7 +138,8 @@ namespace PopulatingAndUpdateingDataSets
             // 
             // sqlConnection1
             // 
-            this.sqlConnection1.ConnectionString = "Data Source=KADER-PC\\SQLEXPRESS;Initial Catalog=pubs;Integrated Security=True";
+            this.sqlConnection1.ConnectionString = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=C:\\Users\\NikLubz\\Source\\Repos\\School" +
+    "Work\\3350Y\\Lab11\\Databases\\pubs.mdf;Integrated Security=True;Connect Timeout=30";
             this.sqlConnection1.FireInfoMessageEventOnUserErrors = false;
             // 
             // groupBox1
@@ -238,7 +239,7 @@ namespace PopulatingAndUpdateingDataSets
 			}
 			//TODO 1: Bind CityLabel to the city column programmatically at run time
 			
-CityLabel.DataBindings.Add("Text",StoreSalesDataSet1.sales,"city");
+        CityLabel.DataBindings.Add("Text",StoreSalesDataSet1.sales,"city");
 
 			//TODO 2: Bind StoresComboBox to the stores table programmatically at run time
 			

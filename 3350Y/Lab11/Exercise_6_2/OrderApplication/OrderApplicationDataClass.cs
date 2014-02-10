@@ -89,7 +89,7 @@ namespace PurchaseOrder
             // cmINSERTOrderDetails
             // 
             this.cmINSERTOrderDetails.CommandText = "INSERT INTO [Order Details] (OrderID, ProductID, UnitPrice, Quantity, Discount) V" +
-                "ALUES (@OrderID, @ProductID, @UnitPrice, @Quantity, @Discount)";
+    "ALUES (@OrderID, @ProductID, @UnitPrice, @Quantity, @Discount)";
             this.cmINSERTOrderDetails.Connection = this.NorthwindConnection;
             this.cmINSERTOrderDetails.Parameters.AddRange(new System.Data.SqlClient.SqlParameter[] {
             new System.Data.SqlClient.SqlParameter("@OrderID", System.Data.SqlDbType.Int, 4, "OrderID"),
@@ -100,8 +100,9 @@ namespace PurchaseOrder
             // 
             // NorthwindConnection
             // 
-            this.NorthwindConnection.ConnectionString = "Data Source=KADER-PC\\SQLEXPRESS;Initial Catalog=Northwind;Integrated Security=Tru" +
-                "e";
+            this.NorthwindConnection.ConnectionString = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=C:\\Users\\NikLubz\\Source\\Repos\\School" +
+    "Work\\3350Y\\Lab11\\Databases\\northwind.mdf;Integrated Security=True;Connect Timeou" +
+    "t=30";
             this.NorthwindConnection.FireInfoMessageEventOnUserErrors = false;
             // 
             // OrderDetailsDataAdapter
@@ -172,7 +173,7 @@ namespace PurchaseOrder
             // cmSELECTCustomers
             // 
             this.cmSELECTCustomers.CommandText = "SELECT CustomerID, CompanyName, Address, City, Region, PostalCode, Country FROM C" +
-                "ustomers ORDER BY CompanyName";
+    "ustomers ORDER BY CompanyName";
             this.cmSELECTCustomers.Connection = this.NorthwindConnection;
             // 
             // OrdersDataAdapter
@@ -260,7 +261,7 @@ namespace PurchaseOrder
             // cmSELECTProducts
             // 
             this.cmSELECTProducts.CommandText = "SELECT ProductID, ProductName, QuantityPerUnit, UnitPrice FROM Products ORDER BY " +
-                "ProductName";
+    "ProductName";
             this.cmSELECTProducts.Connection = this.NorthwindConnection;
             // 
             // CustomersDataAdapter

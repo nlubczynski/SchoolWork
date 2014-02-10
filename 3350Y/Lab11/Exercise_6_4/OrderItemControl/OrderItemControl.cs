@@ -197,8 +197,8 @@ namespace PurchaseOrder
 			//TODO 1: Assign the DataSource of ProductNameComboBox to the DataTable passed
 			//to the GetProductData procedure. Assign the DisplayMember and ValueMember of
 			//ProductNameComboBox to the ProductName and ProductID columns respectively.
-
- 
+            ProductNameComboBox.DataSource = productsTable;
+            //ProductNameComboBox.DisplayMember = productsTable.Columns["productName"];
 
 			//create an explicit binding object for the UnitPrice. This is neccesaary 
 			//to expose the Format event of the Binding object

@@ -90,6 +90,7 @@
     <Content Include="StoreSalesDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>StoreSalesDataSet.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -101,6 +102,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StoreSalesDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -109,6 +111,7 @@
   <ItemGroup>
     <None Include="StoreSalesDataSet.xsc">
       <DependentUpon>StoreSalesDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
