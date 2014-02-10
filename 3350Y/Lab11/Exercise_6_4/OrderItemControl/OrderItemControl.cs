@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace PurchaseOrder
 {
@@ -199,13 +200,14 @@ namespace PurchaseOrder
 			//ProductNameComboBox to the ProductName and ProductID columns respectively.
             ProductNameComboBox.DataSource = productsTable;
             //ProductNameComboBox.DisplayMember = productsTable.Columns["productName"];
-
+            ProductNameComboBox.DisplayMember = productsTable.Columns["productName"].ColumnName;
+            ProductNameComboBox.ValueMember = productsTable.Columns["productID"].ColumnName;
 			//create an explicit binding object for the UnitPrice. This is neccesaary 
 			//to expose the Format event of the Binding object
 			//TODO 2: Declare a Binding object and use it to bind the Text property of  
 			//UnitPriceTextBox to the UnitPrice column of the DataTable passed 
 			//to the GetProductData procedure.			
-
+            Binding obj = new Binding("name", UnitPriceTextBox.Text, "productsTable.UnitPrice");
 
  
 
@@ -213,15 +215,17 @@ namespace PurchaseOrder
 			//to convert the values display to currency
 			//TODO 4: Create an event handler for Format event of the Binding object created in TODO 2. 
 			//Assign it to the DecimalToCurrency procedure.
-
+            obj.Format += this.DecimalToCurrency;
  
 
 			QuantityPerUnitTextBox.DataBindings.Add("Text", productsTable, "QuantityPerUnit");
 		}
 		//TODO 3: Create a event procedure named DecimalToCurrency that converts the ConvertEventArgs
 		//event argument to a Currency format
-
- 
+        private void DecimalToCurrency(object sender, ConvertEventArgs convertArgs)
+        {
+            convertArgs.Value = Decimal.Parse(convertArgs.Value.ToString(), NumberStyles.Currency);
+        }
 
 
 		
