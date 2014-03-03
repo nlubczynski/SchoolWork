@@ -1,6 +1,7 @@
 import java.awt.Button;
 import java.awt.Frame;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,13 +28,24 @@ public class MainForm extends Frame implements ActionListener{
 		//create text field
 		textField = new TextField();
 		
+		GridBagLayout gridBag = new GridBagLayout();
+		GridBagConstraints c = new GridBagConstraints();
+		this.setLayout(gridBag);				
+		c.fill = GridBagConstraints.HORIZONTAL;		
 		
+		//add the textfield
+		c.gridwidth = 4;
+		c.weightx = 1;
+		c.gridx = 0;
+		c.gridy = 0;
+		gridBag.setConstraints(textField, c);
 		add(textField);
-		
-		this.setLayout(new GridLayout(4,4));
 		
 		for(int i=0; i<16; ++i){
 			Button tempButton = new Button();
+			
+			c.gridx = i % 4;
+			c.gridy = i / 4 + 1;
 			
 			switch(i){
 			case 3:
@@ -64,14 +76,16 @@ public class MainForm extends Frame implements ActionListener{
 				tempButton.setLabel(String.valueOf(i-7));
 				break;
 			default:
-				tempButton.setLabel("0");
-				
+				tempButton.setLabel("0");				
 			}
 			
 			//add listener
 			tempButton.addActionListener(this);
 			
 			//add the button
+			c.weightx = 0.33;
+			c.gridwidth = 1;
+			gridBag.setConstraints(tempButton, c);
 			add(tempButton);
 			
 			//add button to our list
