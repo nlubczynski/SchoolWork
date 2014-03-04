@@ -1,5 +1,4 @@
 import java.awt.Button;
-import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.TextField;
@@ -7,8 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
-public class MainForm extends Frame implements ActionListener{
+
+public class MainForm extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -18,9 +20,20 @@ public class MainForm extends Frame implements ActionListener{
 	//Stuff
 	ArrayList<Button> buttons;
 	TextField textField;
+	String[] states = {"numb1", "numb2", "result"};
+	String state;
+	Double numb1;
+	Double numb2;
+	String operand;
 	
 	MainForm(){
 		super();
+		
+		//set default state
+		state = states[0];
+		numb1 = 0.0;
+		numb2 = 0.0;
+		operand = "+";
 		
 		//create button list
 		buttons = new ArrayList<Button>();
@@ -33,7 +46,7 @@ public class MainForm extends Frame implements ActionListener{
 		this.setLayout(gridBag);				
 		c.fill = GridBagConstraints.HORIZONTAL;		
 		
-		//add the textfield
+		//add the text field
 		c.gridwidth = 4;
 		c.weightx = 1;
 		c.gridx = 0;
@@ -93,11 +106,102 @@ public class MainForm extends Frame implements ActionListener{
 		}
 		
 		this.pack();
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg) {
+		String input = ((Button)arg.getSource()).getLabel();
+		
+		//branch off whether it's a number or not
+		try{
+			int number = Integer.valueOf(input);
+			handleNumber(number);
+		}catch(NumberFormatException e){
+			handleOperator(input);
+		}
 		
 	}
-
+	public void handleNumber(int number){
+		if(state == states[0]){
+			//append number, don't change state
+			textField.setText(textField.getText() + String.valueOf(number));			
+		}else if(state == states[1]){
+			//append number, don't change state
+			textField.setText(textField.getText() + String.valueOf(number));				
+		}else if(state == states[2]){
+			//change state to state 0, remove memory, add number
+			state = states[0];
+			numb1 = 0.0;
+			numb2 = 0.0;
+			textField.setText("");
+			textField.setText(textField.getText() + String.valueOf(number));	
+		}
+	}
+	public void handleOperator(String operator){
+		
+		if(operator.equals("=")){ handleEquals(); return; }
+		if(operator.equals(".")){ handleDecimal(); return; }
+		
+		//Handle states
+		if(state == states[0]){
+			//store number as number 1, change state to state 1, store operator
+			numb1 = Double.valueOf(textField.getText());
+			
+			state = states[1];
+			
+			operand = operator;
+		}
+		else if(state == states[1]){
+			//store result as number 1, change state to state 1, store operator
+			numb2 = Double.valueOf(textField.getText());
+			
+			numb1 = doOperation(numb1, numb2, operand);
+			
+			operand = operator;			
+		}
+		else if(state == states[2]){
+			//store result as number 1, change to state 1, store operator
+			numb1 = Double.valueOf(textField.getText());
+			
+			state = states[1];
+			
+			operand = operator;
+		}
+		textField.setText("");
+	}
+	
+	public void handleEquals(){
+		if(state == states[0] || state == states[1]){
+			numb2 = Double.valueOf(textField.getText());
+			textField.setText(String.valueOf(doOperation(numb1, numb2, operand)));
+			state = states[2];
+		}else{
+			numb1 = Double.valueOf(textField.getText());
+			textField.setText(String.valueOf(doOperation(numb1, numb2, operand)));
+			state = states[2];
+		}
+	}
+	public void handleDecimal(){
+		if(textField.getText().contains("."))
+			return;
+		else
+			textField.setText(textField.getText() + ".");
+	}
+	public double doOperation(double numA, double numB, String operator){
+		if(operator.equals("+")){
+			return numA + numB;
+		}
+		else if(operator.equals("-")){
+			return numA - numB;
+		}
+		else if(operator.equals("/")){
+			return numA / numB;
+		}
+		else if(operator.equals("X")){
+			return numA * numB;
+		}
+		
+		return 0.0;
+	}
 }
