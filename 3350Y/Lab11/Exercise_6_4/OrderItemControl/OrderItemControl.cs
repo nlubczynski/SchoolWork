@@ -207,17 +207,16 @@ namespace PurchaseOrder
 			//TODO 2: Declare a Binding object and use it to bind the Text property of  
 			//UnitPriceTextBox to the UnitPrice column of the DataTable passed 
 			//to the GetProductData procedure.			
-            Binding obj = new Binding("name", UnitPriceTextBox.Text, "productsTable.UnitPrice");
-
- 
+            Binding obj = new Binding("Text", productsTable, "UnitPrice");
+            UnitPriceTextBox.DataBindings.Add(obj);
 
 			//add a handler for the Format event so you can call the DecimalToCurrency procedure
 			//to convert the values display to currency
 			//TODO 4: Create an event handler for Format event of the Binding object created in TODO 2. 
 			//Assign it to the DecimalToCurrency procedure.
-            obj.Format += this.DecimalToCurrency;
- 
+            obj.Format += new ConvertEventHandler(this.DecimalToCurrency);
 
+            
 			QuantityPerUnitTextBox.DataBindings.Add("Text", productsTable, "QuantityPerUnit");
 		}
 		//TODO 3: Create a event procedure named DecimalToCurrency that converts the ConvertEventArgs

@@ -191,6 +191,12 @@
     <None Include="AppSettingsDataSet.xsx">
       <DependentUpon>AppSettingsDataSet.xsd</DependentUpon>
     </None>
+    <None Include="NorthwindDataSet.xsc">
+      <DependentUpon>NorthwindDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="NorthwindDataSet.xss">
+      <DependentUpon>NorthwindDataSet.xsd</DependentUpon>
+    </None>
     <None Include="NorthwindDataSet.xsx">
       <DependentUpon>NorthwindDataSet.xsd</DependentUpon>
     </None>
