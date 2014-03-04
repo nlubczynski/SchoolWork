@@ -5,6 +5,7 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Stack;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -18,13 +19,18 @@ public class MainForm extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	
 	//Stuff
-	ArrayList<Button> buttons;
+	static ArrayList<Button> buttons;
 	TextField textField;
 	String[] states = {"numb1", "numb2", "result"};
 	String state;
 	Double numb1;
 	Double numb2;
 	String operand;
+	//RPN Mode
+	Boolean mode;
+	
+	//RPN Stack
+	Stack<String> stack;
 	
 	MainForm(){
 		super();
@@ -34,6 +40,8 @@ public class MainForm extends JFrame implements ActionListener{
 		numb1 = 0.0;
 		numb2 = 0.0;
 		operand = "+";
+		mode = false;
+		stack = new Stack<String>();
 		
 		//create button list
 		buttons = new ArrayList<Button>();
@@ -54,7 +62,7 @@ public class MainForm extends JFrame implements ActionListener{
 		gridBag.setConstraints(textField, c);
 		add(textField);
 		
-		for(int i=0; i<16; ++i){
+		for(int i=0; i<17; ++i){
 			Button tempButton = new Button();
 			
 			c.gridx = i % 4;
@@ -88,16 +96,34 @@ public class MainForm extends JFrame implements ActionListener{
 			case 8: case 9: case 10:
 				tempButton.setLabel(String.valueOf(i-7));
 				break;
+			case 13:
+				tempButton.setLabel("0");
+				break;
 			default:
-				tempButton.setLabel("0");				
+				tempButton.setLabel("RPN");
+				
 			}
 			
-			//add listener
-			tempButton.addActionListener(this);
+
 			
-			//add the button
-			c.weightx = 0.33;
-			c.gridwidth = 1;
+			//RPN Button
+			if(tempButton.getLabel() == "RPN")
+			{
+				tempButton.addActionListener(new RPNAction());
+				
+				c.weightx = 0.33;
+				c.gridwidth = 4 ;
+			}
+			else
+			{
+				//add listener
+				tempButton.addActionListener(this);
+				
+				//add the button
+				c.weightx = 0.33;
+				c.gridwidth = 1;
+			}
+			
 			gridBag.setConstraints(tempButton, c);
 			add(tempButton);
 			
@@ -122,53 +148,95 @@ public class MainForm extends JFrame implements ActionListener{
 		}
 		
 	}
+	public class RPNAction implements ActionListener{
+		public void actionPerformed(ActionEvent arg){
+			if(mode)
+			{
+				mode=false;
+				MainForm.buttons.get(16).setLabel("RPN");
+				MainForm.buttons.get(14).setEnabled(true);
+			}
+			else
+			{
+				mode=true;
+				MainForm.buttons.get(16).setLabel("INFIX");
+				MainForm.buttons.get(14).setEnabled(false);
+			}
+		}
+	}
 	public void handleNumber(int number){
-		if(state == states[0]){
-			//append number, don't change state
-			textField.setText(textField.getText() + String.valueOf(number));			
-		}else if(state == states[1]){
-			//append number, don't change state
-			textField.setText(textField.getText() + String.valueOf(number));				
-		}else if(state == states[2]){
-			//change state to state 0, remove memory, add number
-			state = states[0];
-			numb1 = 0.0;
-			numb2 = 0.0;
-			textField.setText("");
-			textField.setText(textField.getText() + String.valueOf(number));	
+		
+		if (!mode) {
+			if (state == states[0]) {
+				//append number, don't change state
+				textField.setText(textField.getText() + String.valueOf(number));
+			} else if (state == states[1]) {
+				//append number, don't change state
+				textField.setText(textField.getText() + String.valueOf(number));
+			} else if (state == states[2]) {
+				//change state to state 0, remove memory, add number
+				state = states[0];
+				numb1 = 0.0;
+				numb2 = 0.0;
+				textField.setText("");
+				textField.setText(textField.getText() + String.valueOf(number));
+			}
+		}
+		else
+		{
+			String inputValue = String.valueOf(number);
+			
+			stack.push(inputValue);
+			textField.setText(inputValue);
 		}
 	}
 	public void handleOperator(String operator){
 		
-		if(operator.equals("=")){ handleEquals(); return; }
-		if(operator.equals(".")){ handleDecimal(); return; }
-		
-		//Handle states
-		if(state == states[0]){
-			//store number as number 1, change state to state 1, store operator
-			numb1 = Double.valueOf(textField.getText());
-			
-			state = states[1];
-			
-			operand = operator;
+		if (!mode) {
+			if (operator.equals("=")) {
+				handleEquals();
+				return;
+			}
+			if (operator.equals(".")) {
+				handleDecimal();
+				return;
+			}
+			//Handle states
+			if (state == states[0]) {
+				//store number as number 1, change state to state 1, store operator
+				numb1 = Double.valueOf(textField.getText());
+
+				state = states[1];
+
+				operand = operator;
+			} else if (state == states[1]) {
+				//store result as number 1, change state to state 1, store operator
+				numb2 = Double.valueOf(textField.getText());
+
+				numb1 = doOperation(numb1, numb2, operand);
+
+				operand = operator;
+			} else if (state == states[2]) {
+				//store result as number 1, change to state 1, store operator
+				numb1 = Double.valueOf(textField.getText());
+
+				state = states[1];
+
+				operand = operator;
+			}
+			textField.setText("");
 		}
-		else if(state == states[1]){
-			//store result as number 1, change state to state 1, store operator
-			numb2 = Double.valueOf(textField.getText());
+		else
+		{
+			double topNumber = Double.parseDouble(stack.pop());
+			double botNumber = Double.parseDouble(stack.pop());
 			
-			numb1 = doOperation(numb1, numb2, operand);
+			double result = this.doOperation(botNumber, topNumber, operator);
 			
-			operand = operator;			
+			stack.push(String.valueOf(result));
+			
+			textField.setText(String.valueOf(result));
 		}
-		else if(state == states[2]){
-			//store result as number 1, change to state 1, store operator
-			numb1 = Double.valueOf(textField.getText());
-			
-			state = states[1];
-			
-			operand = operator;
-		}
-		textField.setText("");
 	}
 	
 	public void handleEquals(){
