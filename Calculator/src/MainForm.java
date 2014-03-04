@@ -20,7 +20,7 @@ public class MainForm extends JFrame implements ActionListener{
 	
 	//Stuff
 	static ArrayList<Button> buttons;
-	TextField textField;
+	static TextField textField;
 	String[] states = {"numb1", "numb2", "result"};
 	String state;
 	Double numb1;
@@ -30,7 +30,7 @@ public class MainForm extends JFrame implements ActionListener{
 	Boolean mode;
 	
 	//RPN Stack
-	Stack<String> stack;
+	static Stack<String> stack;
 	
 	MainForm(){
 		super();
@@ -100,14 +100,14 @@ public class MainForm extends JFrame implements ActionListener{
 				tempButton.setLabel("0");
 				break;
 			default:
-				tempButton.setLabel("RPN");
+				tempButton.setLabel("Switch to RPN");
 				
 			}
 			
 
 			
 			//RPN Button
-			if(tempButton.getLabel() == "RPN")
+			if(tempButton.getLabel() == "Switch to RPN")
 			{
 				tempButton.addActionListener(new RPNAction());
 				
@@ -150,17 +150,23 @@ public class MainForm extends JFrame implements ActionListener{
 	}
 	public class RPNAction implements ActionListener{
 		public void actionPerformed(ActionEvent arg){
+			
+			//Switching to INFIX
 			if(mode)
 			{
 				mode=false;
-				MainForm.buttons.get(16).setLabel("RPN");
+				MainForm.buttons.get(16).setLabel("Switch to RPN");
 				MainForm.buttons.get(14).setEnabled(true);
+				MainForm.textField.setText("");
+				MainForm.stack.removeAllElements();
 			}
+			//Switching to RPN
 			else
 			{
 				mode=true;
-				MainForm.buttons.get(16).setLabel("INFIX");
+				MainForm.buttons.get(16).setLabel("Switch to INFIX");
 				MainForm.buttons.get(14).setEnabled(false);
+				MainForm.textField.setText("");
 			}
 		}
 	}
