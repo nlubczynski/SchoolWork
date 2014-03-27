@@ -15,9 +15,12 @@ State::State(int name)
 State::~State()
 {
 	// Delete pointers
-	delete trasitionTable;
-	delete outputTable;
-	delete directionTable;
+	if (trasitionTable != NULL)
+		delete trasitionTable;
+	if (outputTable != NULL)
+		delete outputTable;
+	if (directionTable != NULL)
+		delete directionTable;
 }
 
 void State::addTransition(char input, State *state, char output, State::Direction direction){

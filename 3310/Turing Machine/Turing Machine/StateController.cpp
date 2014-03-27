@@ -17,8 +17,10 @@ StateController::StateController()
 
 StateController::~StateController()
 {
-	delete _currentState;
-	delete []_allStates;
+	if (_currentState != NULL)
+		delete _currentState;
+	if (_allStates != NULL)
+		delete _allStates;
 }
 
 State* StateController::getCurrentState(){
@@ -84,8 +86,6 @@ bool StateController::isFinalState(State* state){
 }
 
 char StateController::getLastOutput(){
-	if (_output == 'Z')
-		_output = ' ';
 	return _output;
 }
 
