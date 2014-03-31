@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.colorButton = new System.Windows.Forms.Button();
-            this.colourLabel = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
@@ -77,10 +76,9 @@
             this.flowLayoutPanel1.Controls.Add(this.undoButton);
             this.flowLayoutPanel1.Controls.Add(this.redoButton);
             this.flowLayoutPanel1.Controls.Add(this.colorButton);
-            this.flowLayoutPanel1.Controls.Add(this.colourLabel);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 27);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 30);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(103, 442);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(103, 446);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // colorButton
@@ -93,15 +91,6 @@
             this.colorButton.TabIndex = 12;
             this.colorButton.UseVisualStyleBackColor = false;
             this.colorButton.Click += new System.EventHandler(this.colorButton_Click);
-            // 
-            // colourLabel
-            // 
-            this.colourLabel.Location = new System.Drawing.Point(54, 357);
-            this.colourLabel.Name = "colourLabel";
-            this.colourLabel.Size = new System.Drawing.Size(45, 48);
-            this.colourLabel.TabIndex = 13;
-            this.colourLabel.Text = "Colour";
-            this.colourLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // menuStrip1
             // 
@@ -270,7 +259,7 @@
             this.selectButton.Location = new System.Drawing.Point(3, 3);
             this.selectButton.Name = "selectButton";
             this.selectButton.Size = new System.Drawing.Size(96, 45);
-            this.selectButton.TabIndex = 14;
+            this.selectButton.TabIndex = 0;
             this.selectButton.UseVisualStyleBackColor = true;
             // 
             // saveToolStripMenuItem
@@ -296,9 +285,9 @@
             // Canvas
             // 
             this.Canvas.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.Canvas.Location = new System.Drawing.Point(121, 27);
+            this.Canvas.Location = new System.Drawing.Point(105, 30);
             this.Canvas.Name = "Canvas";
-            this.Canvas.Size = new System.Drawing.Size(754, 442);
+            this.Canvas.Size = new System.Drawing.Size(782, 446);
             this.Canvas.TabIndex = 2;
             // 
             // MainForm
@@ -340,7 +329,6 @@
         private System.Windows.Forms.Button undoButton;
         private System.Windows.Forms.Button redoButton;
         private System.Windows.Forms.Button colorButton;
-        private System.Windows.Forms.Label colourLabel;
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.Button selectButton;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
