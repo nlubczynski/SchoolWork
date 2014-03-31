@@ -93,6 +93,13 @@ namespace SimpleShapeSketch
                     _selected = _objects.ElementAt(_objects.Count - 1);
                     break;
 
+                case State.Circle:
+                    _anchorPoint = point;
+                    _objects.Add(new Circle(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
+                    _selected = _objects.ElementAt(_objects.Count - 1);
+                    break;
+
+
             }
 
             // Repaint
@@ -159,6 +166,14 @@ namespace SimpleShapeSketch
                         break;
                     // Resize
                     _selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y,quadrant);
+                    break;
+
+                case State.Circle:
+                    if (_selected == null)
+                        break;
+
+                    // Resize
+                    _selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y, quadrant);
                     break;
             }
 
