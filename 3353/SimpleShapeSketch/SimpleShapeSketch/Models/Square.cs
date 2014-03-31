@@ -15,13 +15,13 @@ namespace SimpleShapeSketch
             // do stuff??
         }
 
-        public override void resize(int x1, int y1, int x2, int y2)
+        public override void resize(int x1, int y1, int x2, int y2, DrawQuadrant quadrant)
         {
             // Contrain it (square)
             int min = (x2 - x1) < (y2 - y1) ? (x2 - x1) : (y2 - y1);
 
             // Resize it
-            base.resize(x1, y1, x1 + min, y1 + min);
+            base.resize(x1, y1, x1 + min, y1 + min, quadrant);
         }
     }
 }

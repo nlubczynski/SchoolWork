@@ -73,25 +73,30 @@ namespace SimpleShapeSketch
         {
             // Find the true points
             System.Drawing.Point topLeft, bottomRight;
+            GraphicalObject.DrawQuadrant quadrant;
             if (_anchorPoint.X <= point.X && _anchorPoint.Y <= point.Y)
             {
                 topLeft = _anchorPoint;
                 bottomRight = point;
+                quadrant = GraphicalObject.DrawQuadrant.BottomRight;
             }
             else if (_anchorPoint.X <= point.X && _anchorPoint.Y > point.Y)
             {
                 topLeft = new System.Drawing.Point(_anchorPoint.X, point.Y);
                 bottomRight = new System.Drawing.Point(point.X, _anchorPoint.Y);
+                quadrant = GraphicalObject.DrawQuadrant.TopRight;
             }
             else if (_anchorPoint.X > point.X && _anchorPoint.Y > point.Y)
             {
                 topLeft = point;
                 bottomRight = _anchorPoint;
+                quadrant = GraphicalObject.DrawQuadrant.TopLeft;
             }
             else
             {
                 topLeft = new System.Drawing.Point(point.X, _anchorPoint.Y);
                 bottomRight = new System.Drawing.Point(_anchorPoint.X, point.Y);
+                quadrant = GraphicalObject.DrawQuadrant.BottomLeft;
             }
 
             switch (_state)
@@ -101,14 +106,15 @@ namespace SimpleShapeSketch
                         break;
 
                     // Resize
-                    _selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y);
+                    _selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y, quadrant);
                     break;
+
                 case State.Rectangle:
                     if (_selected == null)
                         break;
 
                     // Resize
-                    _selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y);
+                    _selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y, quadrant);
                     break;
             }
 

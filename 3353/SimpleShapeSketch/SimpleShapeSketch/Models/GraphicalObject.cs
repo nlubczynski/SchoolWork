@@ -13,6 +13,10 @@ namespace SimpleShapeSketch
         protected Color _color;
         protected Point _topLeft, _topRight, _bottomLeft, _bottomRight;
         protected Graphics _graphics;
+        public enum DrawQuadrant
+        {
+            BottomRight, TopRight, TopLeft, BottomLeft
+        }
 
         // Get / Set
         public Color Color
@@ -53,7 +57,7 @@ namespace SimpleShapeSketch
         // Virtual Functions
         public virtual void paint(){ }
         public virtual void move(int dx, int dy) { }
-        public virtual void resize(int x1, int y1, int x2, int y2) { }
+        public virtual void resize(int x1, int y1, int x2, int y2, DrawQuadrant quadrant) { }
 
     }
 }
