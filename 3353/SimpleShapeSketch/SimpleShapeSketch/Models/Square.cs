@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace SimpleShapeSketch.Models
+namespace SimpleShapeSketch
 {
     class Square : GraphicalObject
     {
@@ -14,15 +14,12 @@ namespace SimpleShapeSketch.Models
         {
             // do stuff??
         }
-        public void paint()
+        public override void paint()
         {
             _graphics.FillRectangle(new SolidBrush(_color), new Rectangle(_topLeft, new Size(_topRight.X - _topLeft.X, _bottomLeft.Y - _topLeft.Y)));
         }
-        public void delete()
-        {
-            this.delete();
-        }
-        public void move(int dx, int dy)
+
+        public override void move(int dx, int dy)
         {
             // Move x
             _topLeft.X += dx;
@@ -36,7 +33,7 @@ namespace SimpleShapeSketch.Models
             _bottomLeft.Y += dy;
             _bottomRight.Y += dy;
         }
-        public void resize(int x1, int y1, int x2, int y2)
+        public override void resize(int x1, int y1, int x2, int y2)
         {
             _topLeft = new Point(x1, y1);
             _topRight = new Point(x2, y1);

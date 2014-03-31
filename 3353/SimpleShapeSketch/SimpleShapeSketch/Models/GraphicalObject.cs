@@ -52,7 +52,6 @@ namespace SimpleShapeSketch
 
         // Virtual Functions
         public virtual void paint(){ }
-        public virtual void delete() { }
         public virtual void move(int dx, int dy) { }
         public virtual void resize(int x1, int y1, int x2, int y2) { }
 
