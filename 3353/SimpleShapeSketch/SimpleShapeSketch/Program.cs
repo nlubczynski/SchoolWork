@@ -36,6 +36,11 @@ namespace SimpleShapeSketch
             get { return _state; }
             set { _state = value; }
         }
+        public static System.Drawing.Color Color
+        {
+            get { return _color; }
+            set { _color = value; }
+        }
 
         /// <summary>
         /// The main entry point for the application.

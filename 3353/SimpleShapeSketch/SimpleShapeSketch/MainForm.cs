@@ -26,10 +26,9 @@ namespace SimpleShapeSketch
             Program._selected = null;
             // Create and show dialog
             if (colorDialog == null)
-            {
                 colorDialog = new System.Windows.Forms.ColorDialog();
-                colorDialog.Color = Program._color;
-            }
+
+            colorDialog.Color = Program.Color;
             colorDialog.ShowDialog();
 
             // Get the color
@@ -138,6 +137,11 @@ namespace SimpleShapeSketch
         private void redoButton_Click(object sender, EventArgs e)
         {
             Program.redo();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
