@@ -41,6 +41,19 @@ namespace SimpleShapeSketch
             get { return _color; }
             set { _color = value; }
         }
+        public static GraphicalObject Selected
+        {
+            get { return _selected; }
+            set 
+            {
+                // Clear the selected alpha
+                clearSelected();
+                // Set selected, and set it's alpha
+                _selected = value; 
+                if(_selected != null)
+                    _selected.Color = Color.FromArgb(150, _selected.Color.R, _selected.Color.G, _selected.Color.B);
+            }
+        }
 
         /// <summary>
         /// The main entry point for the application.
@@ -63,24 +76,26 @@ namespace SimpleShapeSketch
         }
         public static void mouseDown(System.Drawing.Point point)
         {
+
             switch (_state)
             {
                 case State.Square:
                     _anchorPoint = point;
                     _objects.Add(new Square(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                    _selected = _objects.ElementAt(_objects.Count - 1);
+                    Program.Selected = _objects.ElementAt(_objects.Count - 1);
+
                     break;
 
                 case State.Ellipse:
                     _anchorPoint = point;
                     _objects.Add(new Ellipse(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                    _selected = _objects.ElementAt(_objects.Count - 1);
+                    Program.Selected = _objects.ElementAt(_objects.Count - 1);
                     break;
 
                 case State.StraighLine:
                     _anchorPoint = point;
                     _objects.Add(new Line(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                    _selected = _objects.ElementAt(_objects.Count - 1);
+                    Program.Selected = _objects.ElementAt(_objects.Count - 1);
                     break;
 
                 case State.Polygon:
@@ -89,14 +104,14 @@ namespace SimpleShapeSketch
                         if (_selected == null)
                         {
                             _objects.Add(new Line(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                            _selected = _objects.ElementAt(_objects.Count - 1);
+                            Program.Selected = _objects.ElementAt(_objects.Count - 1);
                             previousPoint = point;
                             break;
                         }
                         else
                         {
                             _objects.Add(new Line(previousPoint.X, previousPoint.Y, point.X, point.Y, _form.getCanvas(), _color));
-                            _selected = _objects.ElementAt(_objects.Count - 1);
+                            Program.Selected = _objects.ElementAt(_objects.Count - 1);
                             previousPoint = point;
                             break;
 
@@ -105,7 +120,7 @@ namespace SimpleShapeSketch
                 case State.FreeDraw:
                     _anchorPoint = point;
                     _objects.Add(new FreeFormLine(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                    _selected = _objects.ElementAt(_objects.Count - 1);
+                    Program.Selected = _objects.ElementAt(_objects.Count - 1);
                     previousPoint = point;
                     break;
 
@@ -115,32 +130,38 @@ namespace SimpleShapeSketch
                         if (_selected == null)
                         {
                             _objects.Add(new Polygon(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                            _selected = _objects.ElementAt(_objects.Count - 1);
+                            Program.Selected = _objects.ElementAt(_objects.Count - 1);
                             break;
                         }
                         else
                         {
-                            ((Polygon)_selected).addPoint(point);
+                            ((Polygon)Program.Selected).addPoint(point);
                             break;
                         }
                     }
                 case State.Rectangle:
                     _anchorPoint = point;
                     _objects.Add(new Rectangle(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                    _selected = _objects.ElementAt(_objects.Count - 1);
+                    Program.Selected = _objects.ElementAt(_objects.Count - 1);
                     break;
 
                 case State.Circle:
                     _anchorPoint = point;
                     _objects.Add(new Circle(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                    _selected = _objects.ElementAt(_objects.Count - 1);
+                    Program.Selected = _objects.ElementAt(_objects.Count - 1);
                     break;
 
                 case State.Pointer:
                     _anchorPoint = point;
                     foreach(GraphicalObject go in _objects)
                         if(go.contains(point))
-                            _selected = go;
+                            Program.Selected = go;
+
+                    // show the user what they selected
+                    if (_selected != null)
+                    {
+                        Program.Selected.Color = Color.FromArgb(150, _selected.Color.R, _selected.Color.G, _selected.Color.B);
+                    }
 
                     break;
 
@@ -280,6 +301,14 @@ namespace SimpleShapeSketch
             bool redo = _undoneObjects.Count > 0 ? true : false;
             _form.setRedo(redo);
             _form.setUndo(undo);
+        }
+        static private void clearSelected()
+        {
+            // Undo prev tranparency
+            if (_selected != null)
+            {
+                _selected.Color = Color.FromArgb(255, _selected.Color.R, _selected.Color.G, _selected.Color.B);
+            }
         }
     }
 }
