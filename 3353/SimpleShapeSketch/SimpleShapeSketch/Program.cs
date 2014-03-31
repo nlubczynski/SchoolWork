@@ -59,6 +59,11 @@ namespace SimpleShapeSketch
                     _objects.Add(new Square(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
                     _selected = _objects.ElementAt(_objects.Count - 1);
                     break;
+                case State.Rectangle:
+                    _anchorPoint = point;
+                    _objects.Add(new Rectangle(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
+                    _selected = _objects.ElementAt(_objects.Count - 1);
+                    break;
             }
 
             // Repaint
@@ -92,6 +97,13 @@ namespace SimpleShapeSketch
             switch (_state)
             {
                 case State.Square:
+                    if (_selected == null)
+                        break;
+
+                    // Resize
+                    _selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y);
+                    break;
+                case State.Rectangle:
                     if (_selected == null)
                         break;
 
