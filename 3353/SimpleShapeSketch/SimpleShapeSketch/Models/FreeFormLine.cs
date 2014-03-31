@@ -29,5 +29,14 @@ namespace SimpleShapeSketch
                 line.paint();
             }
         }
+        public override bool contains(Point p)
+        {
+            foreach (Line line in lineArray)
+            {
+                if (line.contains(p))
+                    return true;
+            }
+            return false;
+        }
     }
 }
