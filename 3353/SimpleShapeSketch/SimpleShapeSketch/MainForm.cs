@@ -23,6 +23,7 @@ namespace SimpleShapeSketch
 
         private void colorButton_Click(object sender, EventArgs e)
         {
+            Program._selected = null;
             // Create and show dialog
             if (colorDialog == null)
             {
