@@ -33,7 +33,7 @@ namespace SimpleShapeSketch
             _bottomLeft.Y += dy;
             _bottomRight.Y += dy;
         }
-        public override void resize(int x1, int y1, int x2, int y2)
+        public override void resize(int x1, int y1, int x2, int y2, DrawQuadrant quadrant)
         {
             _topLeft = new Point(x1, y1);
             _topRight = new Point(x2 , y1);
