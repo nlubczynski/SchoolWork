@@ -8,6 +8,10 @@ namespace SimpleShapeSketch
 {
     static class Program
     {
+
+        public static GraphicalObject _state;
+        public static System.Drawing.Color _color;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +20,10 @@ namespace SimpleShapeSketch
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            // Create the main window
+            _color = System.Drawing.Color.Red;
+            Application.Run(new MainForm(_color));
         }
     }
 }

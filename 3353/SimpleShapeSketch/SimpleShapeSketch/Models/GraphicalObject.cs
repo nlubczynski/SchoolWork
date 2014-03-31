@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace SimpleShapeSketch
 {
-    public virtual class GraphicalObject
+    public class GraphicalObject
     {
         // Member Variables
         protected Color _color;
@@ -37,7 +37,7 @@ namespace SimpleShapeSketch
             get { return _bottomRight; }
         }
 
-        public virtual GraphicalObject(Graphics graphics, Color color, Point topLeft, Point topRight, Point bottomLeft, Point bottomRight)
+        public GraphicalObject(Graphics graphics, Color color, Point topLeft, Point topRight, Point bottomLeft, Point bottomRight)
         {
             // Graphics
             _graphics = graphics;
@@ -53,7 +53,7 @@ namespace SimpleShapeSketch
         // Virtual Functions
         public virtual void paint(){ }
         public virtual void delete() { }
-        public virtual void move(int x, int y) { }
+        public virtual void move(int dx, int dy) { }
         public virtual void resize(int x1, int y1, int x2, int y2) { }
 
     }
