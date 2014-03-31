@@ -83,6 +83,7 @@ namespace SimpleShapeSketch
                     _anchorPoint = point;
                     _objects.Add(new Line(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
                     _selected = _objects.ElementAt(_objects.Count - 1);
+                    previousPoint = point;
                     break;
 
                 case State.ClosedPolygon:
@@ -186,7 +187,6 @@ namespace SimpleShapeSketch
                     break;
 
                 case State.FreeDraw:
-                    _anchorPoint = point;
                     if (_selected == null)
                         break;
                     //Resize
