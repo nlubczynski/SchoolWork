@@ -96,10 +96,10 @@ namespace SimpleShapeSketch
             Program.CurrentState = Program.State.Polygon;
         }
 
-        private void moveButton_Click(object sender, EventArgs e)
+        private void closedPolygonButton_Click(object sender, EventArgs e)
         {
             Program._selected = null;
-            Program.CurrentState = Program.State.Move;
+            Program.CurrentState = Program.State.ClosedPolygon;
         }
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
@@ -119,5 +119,25 @@ namespace SimpleShapeSketch
             _mouseDown = false;
         }
 
+
+        internal void setUndo(bool p)
+        {
+            undoButton.Enabled = p;
+        }
+
+        internal void setRedo(bool p)
+        {
+            redoButton.Enabled = p;
+        }
+
+        private void undoButton_Click(object sender, EventArgs e)
+        {
+            Program.undo();
+        }
+
+        private void redoButton_Click(object sender, EventArgs e)
+        {
+            Program.redo();
+        }
     }
 }

@@ -38,7 +38,7 @@
             this.circleButton = new System.Windows.Forms.Button();
             this.ellipseButton = new System.Windows.Forms.Button();
             this.polygonButton = new System.Windows.Forms.Button();
-            this.moveButton = new System.Windows.Forms.Button();
+            this.closedPolygonButton = new System.Windows.Forms.Button();
             this.groupButton = new System.Windows.Forms.Button();
             this.ungroupButton = new System.Windows.Forms.Button();
             this.undoButton = new System.Windows.Forms.Button();
@@ -70,7 +70,7 @@
             this.flowLayoutPanel1.Controls.Add(this.circleButton);
             this.flowLayoutPanel1.Controls.Add(this.ellipseButton);
             this.flowLayoutPanel1.Controls.Add(this.polygonButton);
-            this.flowLayoutPanel1.Controls.Add(this.moveButton);
+            this.flowLayoutPanel1.Controls.Add(this.closedPolygonButton);
             this.flowLayoutPanel1.Controls.Add(this.groupButton);
             this.flowLayoutPanel1.Controls.Add(this.ungroupButton);
             this.flowLayoutPanel1.Controls.Add(this.undoButton);
@@ -161,15 +161,15 @@
             this.polygonButton.UseVisualStyleBackColor = true;
             this.polygonButton.Click += new System.EventHandler(this.polygonButton_Click);
             // 
-            // moveButton
+            // closedPolygonButton
             // 
-            this.moveButton.Image = global::SimpleShapeSketch.Properties.Resources.move;
-            this.moveButton.Location = new System.Drawing.Point(54, 207);
-            this.moveButton.Name = "moveButton";
-            this.moveButton.Size = new System.Drawing.Size(45, 45);
-            this.moveButton.TabIndex = 7;
-            this.moveButton.UseVisualStyleBackColor = true;
-            this.moveButton.Click += new System.EventHandler(this.moveButton_Click);
+            this.closedPolygonButton.Image = global::SimpleShapeSketch.Properties.Resources.closedPolygon;
+            this.closedPolygonButton.Location = new System.Drawing.Point(54, 207);
+            this.closedPolygonButton.Name = "closedPolygonButton";
+            this.closedPolygonButton.Size = new System.Drawing.Size(45, 45);
+            this.closedPolygonButton.TabIndex = 7;
+            this.closedPolygonButton.UseVisualStyleBackColor = true;
+            this.closedPolygonButton.Click += new System.EventHandler(this.closedPolygonButton_Click);
             // 
             // groupButton
             // 
@@ -191,21 +191,25 @@
             // 
             // undoButton
             // 
+            this.undoButton.Enabled = false;
             this.undoButton.Image = global::SimpleShapeSketch.Properties.Resources.undo;
             this.undoButton.Location = new System.Drawing.Point(3, 309);
             this.undoButton.Name = "undoButton";
             this.undoButton.Size = new System.Drawing.Size(45, 45);
             this.undoButton.TabIndex = 10;
             this.undoButton.UseVisualStyleBackColor = true;
+            this.undoButton.Click += new System.EventHandler(this.undoButton_Click);
             // 
             // redoButton
             // 
+            this.redoButton.Enabled = false;
             this.redoButton.Image = global::SimpleShapeSketch.Properties.Resources.redo;
             this.redoButton.Location = new System.Drawing.Point(54, 309);
             this.redoButton.Name = "redoButton";
             this.redoButton.Size = new System.Drawing.Size(45, 45);
             this.redoButton.TabIndex = 11;
             this.redoButton.UseVisualStyleBackColor = true;
+            this.redoButton.Click += new System.EventHandler(this.redoButton_Click);
             // 
             // colorButton
             // 
@@ -334,7 +338,7 @@
         private System.Windows.Forms.Button circleButton;
         private System.Windows.Forms.Button ellipseButton;
         private System.Windows.Forms.Button polygonButton;
-        private System.Windows.Forms.Button moveButton;
+        private System.Windows.Forms.Button closedPolygonButton;
         private System.Windows.Forms.Button groupButton;
         private System.Windows.Forms.Button ungroupButton;
         private System.Windows.Forms.Button undoButton;

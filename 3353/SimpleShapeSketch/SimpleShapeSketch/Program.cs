@@ -16,6 +16,8 @@ namespace SimpleShapeSketch
         public static System.Drawing.Color _color;
         //List of all the objects
         public static List<GraphicalObject> _objects;
+        //List of undone objects
+        public static List<GraphicalObject> _undoneObjects;
         //The currently selected object
         public static GraphicalObject _selected;
         //The point at which the newest item was created at
@@ -27,7 +29,7 @@ namespace SimpleShapeSketch
 
         public enum State
         {
-            Pointer, FreeDraw, StraighLine, Square, Rectangle, Circle, Ellipse, Polygon, Move
+            Pointer, FreeDraw, StraighLine, Square, Rectangle, Circle, Ellipse, Polygon, ClosedPolygon
         }
         public static State CurrentState
         {
@@ -48,6 +50,7 @@ namespace SimpleShapeSketch
             _state = State.Pointer;
             _color = System.Drawing.Color.Red;
             _objects = new List<GraphicalObject>();
+            _undoneObjects = new List<GraphicalObject>();
             _form = new MainForm(_color);
 
             // Create the main window
@@ -75,13 +78,14 @@ namespace SimpleShapeSketch
                     _selected = _objects.ElementAt(_objects.Count - 1);
                     break;
 
+                case State.Polygon:
                 case State.FreeDraw:
                     _anchorPoint = point;
                     _objects.Add(new Line(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
                     _selected = _objects.ElementAt(_objects.Count - 1);
                     break;
 
-                case State.Polygon:
+                case State.ClosedPolygon:
                     {
                         _anchorPoint = point;
                         if (_selected == null)
@@ -110,6 +114,10 @@ namespace SimpleShapeSketch
 
 
             }
+
+            //Check for undo / redo
+            _undoneObjects.Clear();
+            redoUndoCheck();
 
             // Repaint
             repaint();
@@ -208,6 +216,39 @@ namespace SimpleShapeSketch
             // Draw
             foreach (GraphicalObject go in _objects)
                 go.paint();
+        }
+
+        internal static void undo()
+        {
+            // Pop last object into undone objects
+            _undoneObjects.Add(_objects.ElementAt(_objects.Count - 1));
+            _objects.RemoveAt(_objects.Count - 1);
+
+            //Check for redo undo
+            redoUndoCheck();
+
+            // Repaint
+            repaint();
+        }
+
+        internal static void redo()
+        {
+            // Pop last undone object into objects
+            _objects.Add(_undoneObjects.ElementAt(_undoneObjects.Count - 1));
+            _undoneObjects.RemoveAt(_undoneObjects.Count - 1);
+
+            //Check for redo undo
+            redoUndoCheck();
+            
+            // Repaint
+            repaint();
+        }
+        static internal void redoUndoCheck()
+        {
+            bool undo = _objects.Count > 0 ? true : false;
+            bool redo = _undoneObjects.Count > 0 ? true : false;
+            _form.setRedo(redo);
+            _form.setUndo(undo);
         }
     }
 }
