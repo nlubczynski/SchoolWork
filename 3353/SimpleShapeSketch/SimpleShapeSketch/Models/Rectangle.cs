@@ -1,31 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace SimpleShapeSketch
 {
-    public class Polygon : GraphicalObject
+    class Rectangle : GraphicalObject
     {
-        private List<Point> points;
-
-        public Polygon(int x1, int y1, int x2, int y2, Graphics graphics, Color color)
-            : base(graphics, color, new Point(x1, y1), new Point(x2, y1), new Point(x1, y2), new Point(x2, y2))
+        public Rectangle(int x1, int y1, int x2, int y2, Graphics graphics, Color colour)
+            : base(graphics, colour, new Point(x1, y1), new Point(x2, y1), new Point(x1, y2), new Point(x2, y2))
         {
-            points = new List<Point>();
-            addPoint(new Point(x1, y1));
+            // do stuff??
         }
-
-        public void addPoint(Point point)
-        {
-            points.Add(point);
-        }
-
         public override void paint()
         {
-            _graphics.FillPolygon(new SolidBrush(_color), points.ToArray());
+            _graphics.FillRectangle(new SolidBrush(_color), new System.Drawing.Rectangle(_topLeft, new Size(_topRight.X - _topLeft.X, _bottomLeft.Y - _topLeft.Y)));
         }
 
         public override void move(int dx, int dy)
@@ -42,10 +33,12 @@ namespace SimpleShapeSketch
             _bottomLeft.Y += dy;
             _bottomRight.Y += dy;
         }
-
         public override void resize(int x1, int y1, int x2, int y2)
         {
-            //do nothing
+            _topLeft = new Point(x1, y1);
+            _topRight = new Point(x2 , y1);
+            _bottomLeft = new Point(x1, y2);
+            _bottomRight = new Point(x2, y1);
         }
     }
 }

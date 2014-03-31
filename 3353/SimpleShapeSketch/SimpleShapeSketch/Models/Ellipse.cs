@@ -17,7 +17,7 @@ namespace SimpleShapeSketch
 
         public override void paint()
         {
-            _graphics.FillEllipse(new SolidBrush(_color), new Rectangle(_topLeft, new Size(_topRight.X - _topLeft.X, _bottomLeft.Y - _topLeft.Y)));
+            _graphics.FillEllipse(new SolidBrush(_color), new System.Drawing.Rectangle(_topLeft, new Size(_topRight.X - _topLeft.X, _bottomLeft.Y - _topLeft.Y)));
         }
 
         public override void move(int dx, int dy)
