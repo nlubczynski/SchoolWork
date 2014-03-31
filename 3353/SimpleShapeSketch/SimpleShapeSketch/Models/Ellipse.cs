@@ -49,7 +49,7 @@ namespace SimpleShapeSketch
                   (_topLeft.Y + _bottomLeft.Y)/2);
 
             double _xRadius = (_topRight.X - _topLeft.X) / 2;
-            double _yRadius = (_topLeft.Y - _bottomLeft.Y) / 2;
+            double _yRadius = (_bottomLeft.Y - _topLeft.Y) / 2;
 
 
             if (_xRadius <= 0.0 || _yRadius <= 0.0)
