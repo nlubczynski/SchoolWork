@@ -91,5 +91,9 @@ namespace SimpleShapeSketch
 
             return inside;
         }
+        public override GraphicalObject Clone()
+        {
+            return new Polygon(_topLeft.X, _topLeft.Y, _bottomRight.X, _bottomRight.Y, Program.getCanvas(), _color);
+        }
     }
 }

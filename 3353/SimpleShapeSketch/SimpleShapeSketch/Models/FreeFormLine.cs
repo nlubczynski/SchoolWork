@@ -26,12 +26,24 @@ namespace SimpleShapeSketch
         {
             foreach(Line line in lineArray)
             {
-                line.paint();
+                    line.paint();
             }
         }
 
         public override void move(int dx, int dy)
         {
+            // Move x
+            _topLeft.X += dx;
+            _topRight.X += dx;
+            _bottomLeft.X += dx;
+            _bottomRight.X += dx;
+
+            // Move y
+            _topLeft.Y += dy;
+            _topRight.Y += dy;
+            _bottomLeft.Y += dy;
+            _bottomRight.Y += dy;
+
             foreach (Line line in lineArray)
             {
                 line.move(dx, dy);
@@ -45,6 +57,14 @@ namespace SimpleShapeSketch
                     return true;
             }
             return false;
+        }
+        public override void resize(int x1, int y1, int x2, int y2, DrawQuadrant quadrant)
+        {
+            // do nothing
+        }
+        public override GraphicalObject Clone()
+        {
+            return new FreeFormLine(_topLeft.X, _topLeft.Y, _bottomRight.X, _bottomRight.Y, Program.getCanvas(), _color);
         }
     }
 }

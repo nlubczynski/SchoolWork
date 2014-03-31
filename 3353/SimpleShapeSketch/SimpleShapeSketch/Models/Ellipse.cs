@@ -66,5 +66,9 @@ namespace SimpleShapeSketch
                      / (_xRadius * _xRadius)) + ((double)(normalized.Y * normalized.Y) / (_yRadius * _yRadius))
                 <= 1.0;
         }
+        public override GraphicalObject Clone()
+        {
+            return new Ellipse(_topLeft.X, _topLeft.Y, _bottomRight.X, _bottomRight.Y, Program.getCanvas(), _color);
+        }
     }
 }

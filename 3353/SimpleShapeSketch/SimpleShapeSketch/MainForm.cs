@@ -17,7 +17,9 @@ namespace SimpleShapeSketch
         public MainForm(System.Drawing.Color color)
         {
             InitializeComponent();
+            //Default colour
             colorButton.BackColor = color;
+            // Default mouse state
             _mouseDown = false;
         }
 
@@ -154,6 +156,43 @@ namespace SimpleShapeSketch
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Program.redo();
+        }
+
+        private void moveButton_Click(object sender, EventArgs e)
+        {
+            Program.CurrentState = Program.State.Move;
+            Cursor = Cursors.SizeAll;
+            Cursor.Position = Canvas.PointToScreen(Program.Selected.TopLeft);
+            _mouseDown = true;
+        }
+
+        internal void setMove(bool p)
+        {
+            moveButton.Enabled = p;
+        }
+
+        internal void setCutCopy(bool p)
+        {
+            copyToolStripMenuItem.Enabled = p;
+            cutToolStripMenuItem.Enabled = p;
+        }
+        internal void setPaste(bool p)
+        {
+            pasteToolStripMenuItem.Enabled = p;
+        }
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.copy();
+        }
+
+        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.cut();
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.paste();
         }
     }
 }

@@ -26,15 +26,23 @@ namespace SimpleShapeSketch
         public static MainForm _form;
         //previous point
         public static Point previousPoint;
+        // Cut/copy memory
+        public static GraphicalObject _cutCopyMemory;
 
         public enum State
         {
-            Pointer, FreeDraw, StraighLine, Square, Rectangle, Circle, Ellipse, Polygon, ClosedPolygon, Select
+            Pointer, FreeDraw, StraighLine, Square, Rectangle, Circle, Ellipse, Polygon, ClosedPolygon, Move
         }
         public static State CurrentState
         {
             get { return _state; }
-            set { _state = value; }
+            set 
+            { 
+                // Reset cursor
+                _form.Cursor = Cursors.Arrow;
+                // Store value
+                _state = value; 
+            }
         }
         public static System.Drawing.Color Color
         {
@@ -49,9 +57,38 @@ namespace SimpleShapeSketch
                 // Clear the selected alpha
                 clearSelected();
                 // Set selected, and set it's alpha
-                _selected = value; 
-                if(_selected != null)
+                _selected = value;
+                if (_selected != null)
+                {
+                    // Set selected alpha
                     _selected.Color = Color.FromArgb(150, _selected.Color.R, _selected.Color.G, _selected.Color.B);
+                    // Enable move button
+                    _form.setMove(true);
+                    // Enable copy / cut
+                    _form.setCutCopy(true);
+                }
+                else
+                {
+                    // Disable move
+                    _form.setMove(false);
+                    // Disable copy / cut
+                    _form.setCutCopy(false);
+                }
+            }
+        }
+        public static GraphicalObject CutCopyMemory
+        {
+            get { return _cutCopyMemory; }
+            set
+            {
+                // Store value
+                _cutCopyMemory = value;
+
+                //Enable paste
+                if (value != null)
+                    _form.setPaste(true);
+                else
+                    _form.setPaste(false);                
             }
         }
 
@@ -82,20 +119,19 @@ namespace SimpleShapeSketch
                 case State.Square:
                     _anchorPoint = point;
                     _objects.Add(new Square(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                    Program.Selected = _objects.ElementAt(_objects.Count - 1);
-
+                    Program.Selected = _objects.Last();
                     break;
 
                 case State.Ellipse:
                     _anchorPoint = point;
                     _objects.Add(new Ellipse(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                    Program.Selected = _objects.ElementAt(_objects.Count - 1);
+                    Program.Selected = _objects.Last();
                     break;
 
                 case State.StraighLine:
                     _anchorPoint = point;
                     _objects.Add(new Line(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                    Program.Selected = _objects.ElementAt(_objects.Count - 1);
+                    Program.Selected = _objects.Last();
                     break;
 
                 case State.Polygon:
@@ -104,14 +140,14 @@ namespace SimpleShapeSketch
                         if (_selected == null)
                         {
                             _objects.Add(new Line(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                            Program.Selected = _objects.ElementAt(_objects.Count - 1);
+                            Program.Selected = _objects.Last();
                             previousPoint = point;
                             break;
                         }
                         else
                         {
                             _objects.Add(new Line(previousPoint.X, previousPoint.Y, point.X, point.Y, _form.getCanvas(), _color));
-                            Program.Selected = _objects.ElementAt(_objects.Count - 1);
+                            Program.Selected = _objects.Last();
                             previousPoint = point;
                             break;
 
@@ -120,7 +156,7 @@ namespace SimpleShapeSketch
                 case State.FreeDraw:
                     _anchorPoint = point;
                     _objects.Add(new FreeFormLine(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                    Program.Selected = _objects.ElementAt(_objects.Count - 1);
+                    Program.Selected = _objects.Last();
                     previousPoint = point;
                     break;
 
@@ -130,7 +166,7 @@ namespace SimpleShapeSketch
                         if (_selected == null)
                         {
                             _objects.Add(new Polygon(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                            Program.Selected = _objects.ElementAt(_objects.Count - 1);
+                            Program.Selected = _objects.Last();
                             break;
                         }
                         else
@@ -142,13 +178,13 @@ namespace SimpleShapeSketch
                 case State.Rectangle:
                     _anchorPoint = point;
                     _objects.Add(new Rectangle(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                    Program.Selected = _objects.ElementAt(_objects.Count - 1);
+                    Program.Selected = _objects.Last();
                     break;
 
                 case State.Circle:
                     _anchorPoint = point;
                     _objects.Add(new Circle(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
-                    Program.Selected = _objects.ElementAt(_objects.Count - 1);
+                    Program.Selected = _objects.Last();
                     break;
 
                 case State.Pointer:
@@ -163,6 +199,10 @@ namespace SimpleShapeSketch
                         Program.Selected.Color = Color.FromArgb(150, _selected.Color.R, _selected.Color.G, _selected.Color.B);
                     }
 
+                    break;
+                case State.Move:
+                    // Reset the cursor
+                    _form.Cursor = Cursors.Arrow;
                     break;
 
             }
@@ -238,12 +278,10 @@ namespace SimpleShapeSketch
                     break;
 
                 case State.FreeDraw:
-                    if (_selected == null)
+                    if (Program.Selected == null)
                         break;
                     //Resize
-                    ((FreeFormLine)_selected).addLine(new Line(previousPoint.X, previousPoint.Y, point.X, point.Y, _form.getCanvas(), _color));
-                    //_objects.Add(new Line(previousPoint.X, previousPoint.Y, point.X, point.Y, _form.getCanvas(), _color));
-                    //_selected = _objects.ElementAt(_objects.Count - 1);
+                    ((FreeFormLine)Program.Selected).addLine(new Line(previousPoint.X, previousPoint.Y, point.X, point.Y, _form.getCanvas(), _color));
                     previousPoint = point;
                     break;
 
@@ -251,9 +289,12 @@ namespace SimpleShapeSketch
                 case State.Circle:
                     if (_selected == null)
                         break;
-
                     // Resize
-                    _selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y, quadrant);
+                    Selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y, quadrant);
+                    break;
+
+                case State.Move:
+                    Selected.move(point.X - Selected.TopLeft.X, point.Y - Selected.TopLeft.Y);
                     break;
             }
 
@@ -265,7 +306,7 @@ namespace SimpleShapeSketch
             // Refresh
             _form.refreshCanvas();
 
-            // Draw
+            // Draw last change
             foreach (GraphicalObject go in _objects)
                 go.paint();
         }
@@ -309,6 +350,37 @@ namespace SimpleShapeSketch
             {
                 _selected.Color = Color.FromArgb(255, _selected.Color.R, _selected.Color.G, _selected.Color.B);
             }
+        }
+
+        internal static void copy()
+        {
+            // Store to memory
+            CutCopyMemory = Selected;
+        }
+
+        internal static void cut()
+        {
+            // Store to memory
+            CutCopyMemory = Selected;
+
+            // Remove from screen
+            _objects.Remove(Selected);
+            _objects.TrimExcess();
+            repaint();
+        }
+
+        internal static void paste()
+        {
+            // Add a copy
+            _objects.Add(CutCopyMemory.Clone());
+            // Set it as selected
+            Selected = _objects.Last();
+            //Repaint
+            repaint();
+        }
+        public static System.Drawing.Graphics getCanvas()
+        {
+            return _form.getCanvas();
         }
     }
 }

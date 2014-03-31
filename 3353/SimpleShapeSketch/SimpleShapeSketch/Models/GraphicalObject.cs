@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace SimpleShapeSketch
 {
-    public class GraphicalObject
+    public abstract class GraphicalObject
     {
         // Member Variables
         protected Color _color;
@@ -53,12 +53,14 @@ namespace SimpleShapeSketch
             _bottomLeft = bottomLeft;
             _bottomRight = bottomRight;
         }
+        public GraphicalObject(GraphicalObject g) : this(g._graphics, g.Color, g._topLeft, g._topRight, g._bottomLeft, g._bottomRight) { }
 
         // Virtual Functions
-        public virtual void paint(){ }
-        public virtual void move(int dx, int dy) { }
-        public virtual void resize(int x1, int y1, int x2, int y2, DrawQuadrant quadrant) { }
-        public virtual bool contains(Point p) { return false; }
+        public abstract void paint();
+        public abstract void move(int dx, int dy);
+        public abstract void resize(int x1, int y1, int x2, int y2, DrawQuadrant quadrant);
+        public abstract bool contains(Point p);
+        public abstract GraphicalObject Clone();
 
     }
 }

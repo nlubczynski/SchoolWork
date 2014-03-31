@@ -49,5 +49,9 @@ namespace SimpleShapeSketch
 
             return true;
         }
+        public override GraphicalObject Clone()
+        {
+            return new Rectangle(_topLeft.X, _topLeft.Y, _bottomRight.X, _bottomRight.Y, Program.getCanvas(), _color);
+        }
     }
 }
