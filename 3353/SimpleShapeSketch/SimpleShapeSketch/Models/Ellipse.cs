@@ -42,5 +42,29 @@ namespace SimpleShapeSketch
             _bottomLeft = new Point(x1, y2);
             _bottomRight = new Point(x2, y2);
         }
+        public override bool contains(Point location)
+        {
+            Point center = new Point(
+                  (_topLeft.X + _topRight.X)/2,
+                  (_topLeft.Y + _bottomLeft.Y)/2);
+
+            double _xRadius = (_topRight.X - _topLeft.X) / 2;
+            double _yRadius = (_topLeft.Y - _bottomLeft.Y) / 2;
+
+
+            if (_xRadius <= 0.0 || _yRadius <= 0.0)
+                return false;
+            /* This is a more general form of the circle equation
+             *
+             * X^2/a^2 + Y^2/b^2 <= 1
+             */
+
+            Point normalized = new Point(location.X - center.X,
+                                         location.Y - center.Y);
+
+            return ((double)(normalized.X * normalized.X)
+                     / (_xRadius * _xRadius)) + ((double)(normalized.Y * normalized.Y) / (_yRadius * _yRadius))
+                <= 1.0;
+        }
     }
 }

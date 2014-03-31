@@ -29,7 +29,7 @@ namespace SimpleShapeSketch
 
         public enum State
         {
-            Pointer, FreeDraw, StraighLine, Square, Rectangle, Circle, Ellipse, Polygon, ClosedPolygon
+            Pointer, FreeDraw, StraighLine, Square, Rectangle, Circle, Ellipse, Polygon, ClosedPolygon, Select
         }
         public static State CurrentState
         {
@@ -118,6 +118,13 @@ namespace SimpleShapeSketch
                     _selected = _objects.ElementAt(_objects.Count - 1);
                     break;
 
+                case State.Select:
+                    _anchorPoint = point;
+                    foreach(GraphicalObject go in _objects)
+                        if(go.contains(point))
+                            _selected = go;
+
+                    break;
 
             }
 

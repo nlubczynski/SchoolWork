@@ -122,11 +122,13 @@ namespace SimpleShapeSketch
         internal void setUndo(bool p)
         {
             undoButton.Enabled = p;
+            undoToolStripMenuItem.Enabled = p;
         }
 
         internal void setRedo(bool p)
         {
             redoButton.Enabled = p;
+            redoToolStripMenuItem.Enabled = p;
         }
 
         private void undoButton_Click(object sender, EventArgs e)
@@ -142,6 +144,16 @@ namespace SimpleShapeSketch
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.undo();
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.redo();
         }
     }
 }

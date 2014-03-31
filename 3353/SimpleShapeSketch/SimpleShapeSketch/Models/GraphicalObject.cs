@@ -58,6 +58,7 @@ namespace SimpleShapeSketch
         public virtual void paint(){ }
         public virtual void move(int dx, int dy) { }
         public virtual void resize(int x1, int y1, int x2, int y2, DrawQuadrant quadrant) { }
+        public virtual bool contains(Point p) { }
 
     }
 }

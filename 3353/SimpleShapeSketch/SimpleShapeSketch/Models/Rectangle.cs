@@ -40,5 +40,14 @@ namespace SimpleShapeSketch
             _bottomLeft = new Point(x1, y2);
             _bottomRight = new Point(x2, y1);
         }
+        public override bool contains(Point p)
+        {
+            if (p.X <= _topLeft.X || p.X >= _topRight.X)
+                return false;
+            if (p.Y <= _topLeft.Y || p.Y >= _topRight.Y)
+                return false;
+
+            return true;
+        }
     }
 }
