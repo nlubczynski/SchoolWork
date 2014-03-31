@@ -51,6 +51,32 @@ namespace SimpleShapeSketch
                     _objects.Add(new Square(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
                     _selected = _objects.ElementAt(_objects.Count - 1);
                     break;
+
+                case State.Ellipse:
+                    _objects.Add(new Ellipse(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
+                    _selected = _objects.ElementAt(_objects.Count - 1);
+                    break;
+
+                case State.StraighLine:
+                    _objects.Add(new Line(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
+                    _selected = _objects.ElementAt(_objects.Count - 1);
+                    break;
+
+                case State.Polygon:
+                    {
+                        if (_selected == null)
+                        {
+                            _objects.Add(new Line(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
+                            _selected = _objects.ElementAt(_objects.Count - 1);
+                            break;
+                        }
+                        else
+                        {
+                            ((Polygon)_selected).addPoint(point);
+                            break;
+                        }
+                    }
+                    
             }
 
             // Repaint
@@ -58,6 +84,8 @@ namespace SimpleShapeSketch
         }
         public static void mouseDrag(System.Drawing.Point point)
         {
+
+            //buggy coordinate points
             switch (_state)
             {
                 case State.Square:
@@ -69,6 +97,34 @@ namespace SimpleShapeSketch
                     int topLeft_y = _selected.TopLeft.Y < point.Y ? _selected.TopLeft.Y : point.Y;
                     int bottomRight_x = _selected.BottomRight.X > point.X ? _selected.BottomRight.X : point.X;
                     int bottomRight_y = _selected.BottomRight.Y > point.Y ? _selected.BottomRight.Y : point.Y;
+
+                    // Resize
+                    _selected.resize(topLeft_x, topLeft_y, bottomRight_x, bottomRight_y);
+                    break;
+
+                case State.Ellipse:
+                    if (_selected == null)
+                        break;
+
+                    // Find the true points
+                    topLeft_x = _selected.TopLeft.X < point.X ? _selected.TopLeft.X : point.X;
+                    topLeft_y = _selected.TopLeft.Y < point.Y ? _selected.TopLeft.Y : point.Y;
+                    bottomRight_x = _selected.BottomRight.X > point.X ? _selected.BottomRight.X : point.X;
+                    bottomRight_y = _selected.BottomRight.Y > point.Y ? _selected.BottomRight.Y : point.Y;
+
+                    // Resize
+                    _selected.resize(topLeft_x, topLeft_y, bottomRight_x, bottomRight_y);
+                    break;
+
+                case State.StraighLine:
+                    if (_selected == null)
+                        break;
+
+                    // Find the true points
+                    topLeft_x = _selected.TopLeft.X < point.X ? _selected.TopLeft.X : point.X;
+                    topLeft_y = _selected.TopLeft.Y < point.Y ? _selected.TopLeft.Y : point.Y;
+                    bottomRight_x = _selected.BottomRight.X > point.X ? _selected.BottomRight.X : point.X;
+                    bottomRight_y = _selected.BottomRight.Y > point.Y ? _selected.BottomRight.Y : point.Y;
 
                     // Resize
                     _selected.resize(topLeft_x, topLeft_y, bottomRight_x, bottomRight_y);
