@@ -151,14 +151,14 @@ namespace SimpleShapeSketch
                         break;
 
                     // Resize
-                    _selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y);
+                    _selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y, quadrant);
                     break;
 
                 case State.StraighLine:
                     if (_selected == null)
                         break;
                     // Resize
-                    _selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y);
+                    _selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y,quadrant);
                     break;
             }
 

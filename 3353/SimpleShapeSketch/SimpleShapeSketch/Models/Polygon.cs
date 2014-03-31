@@ -43,7 +43,7 @@ namespace SimpleShapeSketch
             _bottomRight.Y += dy;
         }
 
-        public override void resize(int x1, int y1, int x2, int y2)
+        public override void resize(int x1, int y1, int x2, int y2, DrawQuadrant quadrant)
         {
             //do nothing
         }

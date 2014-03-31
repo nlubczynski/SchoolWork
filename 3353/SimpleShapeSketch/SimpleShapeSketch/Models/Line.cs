@@ -36,12 +36,28 @@ namespace SimpleShapeSketch
             _bottomRight.Y += dy;
         }
 
-        public override void resize(int x1, int y1, int x2, int y2)
+        public override void resize(int x1, int y1, int x2, int y2, DrawQuadrant quadrant)
         {
-            _topLeft = new Point(x1, y1);
-           // _topRight = new Point(x2, y1);
-           // _bottomLeft = new Point(x1, y2);
-            _bottomRight = new Point(x2, y2);
+            if (quadrant == DrawQuadrant.BottomRight)
+            {
+                _topLeft = new Point(x1,y1);
+                _bottomRight = new Point(x2,y2);
+            }
+            else if (quadrant == DrawQuadrant.BottomLeft)
+            {
+                _topLeft = new Point(x2,y1);
+                _bottomRight = new Point(x1,y2);
+            }
+            else if (quadrant == DrawQuadrant.TopLeft)
+            {
+                _topLeft = new Point(x2,y2);
+                _bottomRight = new Point(x1,y1);
+            }
+            else if (quadrant == DrawQuadrant.TopRight)
+            {
+                _topLeft = new Point(x1,y2);
+                _bottomRight = new Point(x2,y1);
+            }
         }
     }
 }
