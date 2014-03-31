@@ -44,7 +44,7 @@ namespace SimpleShapeSketch
         {
             if (p.X <= _topLeft.X || p.X >= _topRight.X)
                 return false;
-            if (p.Y <= _topLeft.Y || p.Y >= _topRight.Y)
+            if (p.Y <= _topLeft.Y || p.Y >= _bottomLeft.Y)
                 return false;
 
             return true;
