@@ -29,6 +29,14 @@ namespace SimpleShapeSketch
                 line.paint();
             }
         }
+
+        public override void move(int dx, int dy)
+        {
+            foreach (Line line in lineArray)
+            {
+                line.move(dx, dy);
+            }
+        }
         public override bool contains(Point p)
         {
             foreach (Line line in lineArray)
