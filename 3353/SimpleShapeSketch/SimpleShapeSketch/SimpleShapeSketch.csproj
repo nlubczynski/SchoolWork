@@ -95,6 +95,7 @@
     <None Include="Resources\polygon.ico" />
     <None Include="Resources\ellipse.ico" />
     <None Include="Resources\circle.ico" />
+    <None Include="Resources\closedPolygon.ico" />
     <Content Include="Resources\freeDraw.ico" />
     <None Include="Resources\rectangle.ico" />
     <None Include="Resources\square.ico" />
