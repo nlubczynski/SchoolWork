@@ -47,5 +47,49 @@ namespace SimpleShapeSketch
         {
             //do nothing
         }
+
+        public override bool contains(Point p)
+        {
+
+            Point p1, p2;
+
+            bool inside = false;
+            Point[] poly = points.ToArray();
+
+            if (poly.Length < 3)
+            {
+                return inside;
+            }
+
+            Point oldPoint = new Point(
+            poly[poly.Length - 1].X, poly[poly.Length - 1].Y);
+
+            for (int i = 0; i < poly.Length; i++)
+            {
+                Point newPoint = new Point(poly[i].X, poly[i].Y);
+
+                if (newPoint.X > oldPoint.X)
+                {
+                    p1 = oldPoint;
+                    p2 = newPoint;
+                }
+                else
+                {
+                    p1 = newPoint;
+                    p2 = oldPoint;
+                }
+
+                if ((newPoint.X < p.X) == (p.X <= oldPoint.X)
+                && ((long)p.Y - (long)p1.Y) * (long)(p2.X - p1.X)
+                 < ((long)p2.Y - (long)p1.Y) * (long)(p.X - p1.X))
+                {
+                    inside = !inside;
+                }
+
+                oldPoint = newPoint;
+            }
+
+            return inside;
+        }
     }
 }
