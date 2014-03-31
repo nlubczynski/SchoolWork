@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Circle.cs" />
+    <Compile Include="Models\FreeFormLine.cs" />
     <Compile Include="Models\Line.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
