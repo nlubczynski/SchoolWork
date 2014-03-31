@@ -21,7 +21,21 @@ namespace SimpleShapeSketch
             int min = (x2 - x1) < (y2 - y1) ? (x2 - x1) : (y2 - y1);
 
             // Resize it
-            base.resize(x1, y1, x1 + min, y1 + min, quadrant);
+            switch (quadrant)
+            {
+                case DrawQuadrant.BottomRight:
+                    base.resize(x1, y1, x1 + min, y1 + min, quadrant);
+                    break;
+                case DrawQuadrant.TopRight:
+                    base.resize(x1 , y2 - min, x1 + min, y2, quadrant);
+                    break;
+                case DrawQuadrant.TopLeft:
+                    base.resize(x2 - min, y2 - min, x2, y2, quadrant);
+                    break;
+                case DrawQuadrant.BottomLeft:
+                    base.resize(x2 - min, y1, x2, y1 + min, quadrant);
+                    break;
+            }            
         }
     }
 }
