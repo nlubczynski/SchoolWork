@@ -9,6 +9,8 @@ namespace SimpleShapeSketch
 {
     public class Line : GraphicalObject
     {
+        Point _pointOne, _pointTwo;
+
         public Line(int x1, int y1, int x2, int y2, Graphics graphics, Color color)
             : base(graphics, color, new Point(x1, y1), new Point(x2, y1), new Point(x1, y2), new Point(x2, y2))
         {
@@ -17,8 +19,7 @@ namespace SimpleShapeSketch
 
         public override void paint()
         {
-         //   _graphics.FillEllipse(new SolidBrush(_color), new Rectangle(_topLeft, new Size(_topRight.X - _topLeft.X, _bottomLeft.Y - _topLeft.Y)));
-            _graphics.DrawLine(new Pen(new SolidBrush( (_color))), _topLeft, _bottomRight);
+            _graphics.DrawLine(new Pen(new SolidBrush((_color))), _pointOne, _pointTwo);
         }
 
         public override void move(int dx, int dy)
@@ -38,26 +39,42 @@ namespace SimpleShapeSketch
 
         public override void resize(int x1, int y1, int x2, int y2, DrawQuadrant quadrant)
         {
+
+            _topLeft = new Point(x1, y1);
+            _topRight = new Point(x2, y1);
+            _bottomLeft = new Point(x1, y2);
+            _bottomRight = new Point(x2, y1);
+
             if (quadrant == DrawQuadrant.BottomRight)
             {
-                _topLeft = new Point(x1,y1);
-                _bottomRight = new Point(x2,y2);
+                _pointOne = new Point(x1, y1);
+                _pointTwo = new Point(x2, y2);
             }
             else if (quadrant == DrawQuadrant.BottomLeft)
             {
-                _topLeft = new Point(x2,y1);
-                _bottomRight = new Point(x1,y2);
+                _pointOne = new Point(x2, y1);
+                _pointTwo = new Point(x1, y2);
             }
             else if (quadrant == DrawQuadrant.TopLeft)
             {
-                _topLeft = new Point(x2,y2);
-                _bottomRight = new Point(x1,y1);
+                _pointOne = new Point(x2, y2);
+                _pointTwo = new Point(x1, y1);
             }
             else if (quadrant == DrawQuadrant.TopRight)
             {
-                _topLeft = new Point(x1,y2);
-                _bottomRight = new Point(x2,y1);
+                _pointOne = new Point(x1, y2);
+                _pointTwo = new Point(x2, y1);
             }
+        }
+        public override bool contains(Point p)
+        {
+            int m = (_pointTwo.Y - _pointOne.Y) / (_pointTwo.X - _pointOne.X);
+            int b = _pointOne.Y -  m * _pointOne.X;
+
+            if (p.Y == m * p.X + b)
+                return true;
+
+            return false;   
         }
     }
 }
