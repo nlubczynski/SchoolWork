@@ -86,7 +86,7 @@ namespace SimpleShapeSketch
                 case State.Polygon:
                 case State.FreeDraw:
                     _anchorPoint = point;
-                    _objects.Add(new Line(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
+                    _objects.Add(new FreeFormLine(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
                     _selected = _objects.ElementAt(_objects.Count - 1);
                     previousPoint = point;
                     break;
@@ -195,8 +195,9 @@ namespace SimpleShapeSketch
                     if (_selected == null)
                         break;
                     //Resize
-                    _objects.Add(new Line(previousPoint.X, previousPoint.Y, point.X, point.Y, _form.getCanvas(), _color));
-                    _selected = _objects.ElementAt(_objects.Count - 1);
+                    ((FreeFormLine)_selected).addLine(new Line(previousPoint.X, previousPoint.Y, point.X, point.Y, _form.getCanvas(), _color));
+                    //_objects.Add(new Line(previousPoint.X, previousPoint.Y, point.X, point.Y, _form.getCanvas(), _color));
+                    //_selected = _objects.ElementAt(_objects.Count - 1);
                     previousPoint = point;
                     break;
 
