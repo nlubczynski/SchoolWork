@@ -30,17 +30,17 @@ namespace SimpleShapeSketch
 
         public override void move(int dx, int dy)
         {
-            // Move x
-            _topLeft.X += dx;
-            _topRight.X += dx;
-            _bottomLeft.X += dx;
-            _bottomRight.X += dx;
+            for (int i = 0; i < points.Count; i++)
+            {
+                int x = points[i].X;
+                int y = points[i].Y;
 
-            // Move y
-            _topLeft.Y += dy;
-            _topRight.Y += dy;
-            _bottomLeft.Y += dy;
-            _bottomRight.Y += dy;
+                x += dx;
+                y += dy;
+
+                points[i] = new Point(x, y);
+            }
+
         }
 
         public override void resize(int x1, int y1, int x2, int y2, DrawQuadrant quadrant)
