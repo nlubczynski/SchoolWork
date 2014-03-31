@@ -136,7 +136,7 @@ namespace SimpleShapeSketch
                     _selected = _objects.ElementAt(_objects.Count - 1);
                     break;
 
-                case State.Select:
+                case State.Pointer:
                     _anchorPoint = point;
                     foreach(GraphicalObject go in _objects)
                         if(go.contains(point))
