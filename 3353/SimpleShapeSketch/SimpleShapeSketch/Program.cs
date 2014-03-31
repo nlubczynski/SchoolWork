@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,6 +22,8 @@ namespace SimpleShapeSketch
         public static System.Drawing.Point _anchorPoint;
         //Our main form
         public static MainForm _form;
+        //previous point
+        public static Point previousPoint;
 
         public enum State
         {
@@ -67,6 +70,12 @@ namespace SimpleShapeSketch
                     break;
 
                 case State.StraighLine:
+                    _anchorPoint = point;
+                    _objects.Add(new Line(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
+                    _selected = _objects.ElementAt(_objects.Count - 1);
+                    break;
+
+                case State.FreeDraw:
                     _anchorPoint = point;
                     _objects.Add(new Line(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
                     _selected = _objects.ElementAt(_objects.Count - 1);
@@ -167,6 +176,17 @@ namespace SimpleShapeSketch
                     // Resize
                     _selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y,quadrant);
                     break;
+
+                case State.FreeDraw:
+                    _anchorPoint = point;
+                    if (_selected == null)
+                        break;
+                    //Resize
+                    _objects.Add(new Line(previousPoint.X, previousPoint.Y, point.X, point.Y, _form.getCanvas(), _color));
+                    _selected = _objects.ElementAt(_objects.Count - 1);
+                    previousPoint = point;
+                    break;
+
 
                 case State.Circle:
                     if (_selected == null)
