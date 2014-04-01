@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SimpleShapeSketch.MainForm">
+    <Position X="25.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RUCAMAFgiGAQABCJBCKBgiuCrYhAAABgB9IEDjAkwQA=</HashCode>
+      <FileName>MainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.Caretaker">
+    <Position X="16.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAEAAAAAAAAAAUAAAAAAAAAAAACAQAAAAACAAI=</HashCode>
+      <FileName>Models\Caretaker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.Circle">
+    <Position X="7.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Circle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.Ellipse">
+    <Position X="7.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABgAAAAAAAAAAACAAAAAAAAAAAAAAAAAAQAAAAAAABA=</HashCode>
+      <FileName>Models\Ellipse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.FreeFormLine">
+    <Position X="11.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBgAAAAAAAAAAACAAAAAAAAAAAAAAAAAAQAAAAAIABA=</HashCode>
+      <FileName>Models\FreeFormLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.GraphicalObject">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="SimpleShapeSketch.GraphicalObject.DrawQuadrant" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\GraphicalObject.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AhgAAhAIAAAIABCAEIAAAAAACAAAAAACAQAAgAAAAFA=</HashCode>
+      <FileName>Models\GraphicalObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.GroupedObject">
+    <Position X="2.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABgAAIAAAAAAAgCAAAAEACAAAAAAAAAAAQAAAAAAABA=</HashCode>
+      <FileName>Models\GroupedObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.Line">
+    <Position X="5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABgAAAAAAAAgAACAAAAAAAAAAAAIAAAAAQAAAAAAABA=</HashCode>
+      <FileName>Models\Line.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.Memento">
+    <Position X="18" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Memento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.Polygon">
+    <Position X="14" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABgAABCAAAAAAACAAAAAAAAAAAAAAAAAAQAAAAAAABA=</HashCode>
+      <FileName>Models\Polygon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.Rectangle">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABgAAAAAAAAAAACAAAAAAAAAAAAAAAAAAQAAAAAAABA=</HashCode>
+      <FileName>Models\Rectangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.XmlTools">
+    <Position X="18" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAACAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SaveToXML.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.Square">
+    <Position X="0.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAABA=</HashCode>
+      <FileName>Models\Square.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.UnClosedPolygon">
+    <Position X="9.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBgAAAAAAAAAAACAAAAAAAAAAAAAAAAAAQAAAAAIABA=</HashCode>
+      <FileName>Models\UnClosedPolygon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.Program">
+    <Position X="22.25" Y="1.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="SimpleShapeSketch.Program.State" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Program.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ADAAEAAEQYCIAACEgAECCCAQAAAAAAMAAAIChAAABCY=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.Models.DoubleBufferedPanel">
+    <Position X="19.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DoubleBufferedPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.Properties.Resources">
+    <Position X="24" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAIAIAAEAAAAAACAAAEBGCAAAQxAAABAAQAAAAAAIIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleShapeSketch.Properties.Settings">
+    <Position X="19.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
