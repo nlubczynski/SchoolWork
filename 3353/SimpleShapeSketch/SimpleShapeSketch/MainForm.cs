@@ -223,5 +223,10 @@ namespace SimpleShapeSketch
         {
             Program.reset();
         }
+
+        internal void setPointerButtonSelected()
+        {
+            selectButton.Focus();
+        }
     }
 }

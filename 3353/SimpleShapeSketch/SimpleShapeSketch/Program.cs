@@ -290,6 +290,8 @@ namespace SimpleShapeSketch
                 case State.Move:
                     // Reset the cursor
                     _form.Cursor = Cursors.Arrow;
+                    CurrentState = State.Pointer;
+                    _form.setPointerButtonSelected();
                     break;
 
             }
