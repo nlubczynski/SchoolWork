@@ -31,6 +31,18 @@ namespace SimpleShapeSketch
 
         public override void move(int dx, int dy)
         {
+            // Move x
+            _topLeft.X += dx;
+            _topRight.X += dx;
+            _bottomLeft.X += dx;
+            _bottomRight.X += dx;
+
+            // Move y
+            _topLeft.Y += dy;
+            _topRight.Y += dy;
+            _bottomLeft.Y += dy;
+            _bottomRight.Y += dy;
+
             for (int i = 0; i < points.Count; i++)
             {
                 int x = points[i].X;
