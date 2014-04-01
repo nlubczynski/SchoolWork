@@ -161,14 +161,18 @@ namespace SimpleShapeSketch
                         _anchorPoint = point;
                         if (_selected == null)
                         {
-                            _objects.Add(new Line(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
+                            UnClosedPolygon polygon = new UnClosedPolygon(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color);
+
+                            polygon.addLine(new Line(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
+                            _objects.Add(polygon);
+
                             Program.Selected = _objects.Last();
                             previousPoint = point;
                             break;
                         }
                         else
                         {
-                            _objects.Add(new Line(previousPoint.X, previousPoint.Y, point.X, point.Y, _form.getCanvas(), _color));
+                            ((UnClosedPolygon)_objects.Last()).addLine(new Line(previousPoint.X, previousPoint.Y, point.X, point.Y, _form.getCanvas(), _color));
                             Program.Selected = _objects.Last();
                             previousPoint = point;
                             break;
