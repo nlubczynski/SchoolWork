@@ -31,7 +31,8 @@ namespace SimpleShapeSketch
 
         public enum State
         {
-            Pointer, FreeDraw, StraighLine, Square, Rectangle, Circle, Ellipse, Polygon, ClosedPolygon, Move, Group
+            Pointer, FreeDraw, StraighLine, Square, Rectangle, Circle, Ellipse, Polygon, ClosedPolygon, Move, Group,
+            UnGroup
         }
         public static State CurrentState
         {
@@ -224,7 +225,6 @@ namespace SimpleShapeSketch
                 case State.Group:
                      _anchorPoint = point;
   
-
                     foreach(GraphicalObject go in _objects)
                     {
                         if (go.contains(point))
@@ -240,6 +240,39 @@ namespace SimpleShapeSketch
                             Program.Selected = groupedObject;
 
                             _objects.Remove(go);
+
+                            break;
+                        }
+                    }
+
+                    // show the user what they selected
+                    if (_selected != null)
+                    {
+                        Program.Selected.Color = Color.FromArgb(150, _selected.Color.R, _selected.Color.G, _selected.Color.B);
+                    }
+
+                    break;
+
+                case State.UnGroup:
+                    _anchorPoint = point;
+
+                    foreach (GraphicalObject go in _objects)
+                    {
+                        if (go.contains(point))
+                        {
+                            if (!(go.GetType().Name == "GroupedObject"))
+                                break;
+
+                            GraphicalObject rmved = ((GroupedObject)go).removeObject(point);
+                            _objects.Add(rmved);
+
+                            Program.Selected = _objects.Last();
+
+                            // if grouped object doesn't exist anymore with objects
+                            if (((GroupedObject)go).getGroupedObjectList().Count == 0)
+                            {
+                                _objects.Remove(go);
+                            }
 
                             break;
                         }

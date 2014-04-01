@@ -204,7 +204,8 @@ namespace SimpleShapeSketch
 
         private void ungroupButton_Click(object sender, EventArgs e)
         {
-
+            Program.Selected = null;
+            Program.CurrentState = Program.State.UnGroup;
         }
     }
 }

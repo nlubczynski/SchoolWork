@@ -86,7 +86,7 @@ namespace SimpleShapeSketch
                 {
                     _bottomRight.X = graphicsObject.BottomRight.X;
                 }
-                if (_bottomRight.Y > graphicsObject.BottomRight.Y)
+                if (_bottomRight.Y < graphicsObject.BottomRight.Y)
                 {
                     _bottomRight.Y = graphicsObject.BottomRight.Y;
                 }
@@ -95,11 +95,28 @@ namespace SimpleShapeSketch
                 {
                     _bottomLeft.X = graphicsObject.BottomLeft.X;
                 }
-                if (_bottomLeft.Y > graphicsObject.BottomLeft.Y)
+                if (_bottomLeft.Y < graphicsObject.BottomLeft.Y)
                 {
                     _bottomLeft.Y = graphicsObject.BottomLeft.Y;
                 }
             }
+        }
+
+        public GraphicalObject removeObject(Point p)
+        {
+            //get object point is in
+            foreach (GraphicalObject go in groupedObjectList)
+            {
+                if (go.contains(p))
+                {
+                    GraphicalObject rmv = groupedObjectList.Find(g => g == go);
+                    groupedObjectList.Remove(rmv);
+                    return rmv;
+                }
+            }
+
+            return null;
+
         }
 
         public override void resize(int x1, int y1, int x2, int y2, DrawQuadrant quadrant)
@@ -117,6 +134,11 @@ namespace SimpleShapeSketch
             }
 
             return clone;
+        }
+
+        public List<GraphicalObject> getGroupedObjectList()
+        {
+            return groupedObjectList;
         }
     }
 }
