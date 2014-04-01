@@ -32,17 +32,17 @@ namespace SimpleShapeSketch
 
         public enum State
         {
-            Pointer, FreeDraw, StraighLine, Square, Rectangle, Circle, Ellipse, Polygon, ClosedPolygon, Move
+            Pointer, FreeDraw, StraighLine, Square, Rectangle, Circle, Ellipse, Polygon, ClosedPolygon, Move, Group
         }
         public static State CurrentState
         {
             get { return _state; }
-            set 
-            { 
+            set
+            {
                 // Reset cursor
                 _form.Cursor = Cursors.Arrow;
                 // Store value
-                _state = value; 
+                _state = value;
             }
         }
         public static System.Drawing.Color Color
@@ -53,7 +53,7 @@ namespace SimpleShapeSketch
         public static GraphicalObject Selected
         {
             get { return _selected; }
-            set 
+            set
             {
                 // Clear the selected alpha
                 clearSelected();
@@ -89,7 +89,7 @@ namespace SimpleShapeSketch
                 if (value != null)
                     _form.setPaste(true);
                 else
-                    _form.setPaste(false);                
+                    _form.setPaste(false);
             }
         }
 
@@ -221,6 +221,39 @@ namespace SimpleShapeSketch
                     }
 
                     break;
+
+                case State.Group:
+                     _anchorPoint = point;
+  
+
+                    foreach(GraphicalObject go in _objects)
+                    {
+                        if (go.contains(point))
+                        {
+                            if (_selected == null)
+                            {
+                                _objects.Add(new GroupedObject(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
+                                Program.Selected = _objects.Last();
+                            }
+
+                            GroupedObject groupedObject = ((GroupedObject)_objects.Last());
+                            groupedObject.addObject(go);
+                            Program.Selected = groupedObject;
+
+                            _objects.Remove(go);
+
+                            break;
+                        }
+                    }
+
+                    // show the user what they selected
+                    if (_selected != null)
+                    {
+                        Program.Selected.Color = Color.FromArgb(150, _selected.Color.R, _selected.Color.G, _selected.Color.B);
+                    }
+
+                    break;
+
                 case State.Move:
                     // Reset the cursor
                     _form.Cursor = Cursors.Arrow;
@@ -294,7 +327,7 @@ namespace SimpleShapeSketch
                     if (_selected == null)
                         break;
                     // Resize
-                    _selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y,quadrant);
+                    _selected.resize(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y, quadrant);
                     break;
 
                 case State.FreeDraw:
@@ -356,7 +389,7 @@ namespace SimpleShapeSketch
 
             //Check for redo undo
             redoUndoCheck();
-            
+
             // Repaint
             repaint();
         }
