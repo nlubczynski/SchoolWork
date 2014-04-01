@@ -1,6 +1,7 @@
 #pragma once
 #include "State.h"
 #include <vector>
+#include <algorithm>
 #include <string>
 using namespace std;
 

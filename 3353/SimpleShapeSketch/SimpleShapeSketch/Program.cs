@@ -16,9 +16,6 @@ namespace SimpleShapeSketch
         public static System.Drawing.Color _color;
         //List of all the objects
         public static List<GraphicalObject> _objects;
-        //List of of mementos
-        public static List<Memento> _actions;
-        public static int _actionsIndex;
         //The currently selected object
         public static GraphicalObject _selected;
         //The point at which the newest item was created at
@@ -29,6 +26,8 @@ namespace SimpleShapeSketch
         public static Point previousPoint;
         // Cut/copy memory
         public static GraphicalObject _cutCopyMemory;
+        // Caretaker
+        public static Caretaker _caretaker;
 
         public enum State
         {
@@ -106,13 +105,9 @@ namespace SimpleShapeSketch
             _state = State.Pointer;
             _color = System.Drawing.Color.Red;
             _objects = new List<GraphicalObject>();
-            _actionsIndex = -1;
-            _actions = new List<Memento>();
             _form = new MainForm(_color);
-
-            // Add base action
-            addAction();
-
+            _caretaker = new Caretaker();
+            _caretaker.add(new Memento(_objects));
             // Create the main window
             Application.Run(_form);
         }
@@ -121,22 +116,13 @@ namespace SimpleShapeSketch
         {
             // Backup
             Memento memento = new Memento(_objects);
-            // If we're at the end
-            if (_actionsIndex + 1 == _actions.Count)
-            {
-                _actions.Add(memento);
-                _actionsIndex++;
-            }
-            else
-            {
-                resetRedo();
-                _actions.Add(memento);
-                _actionsIndex = _actions.Count - 1;
-            }
+            _caretaker.add(memento);
+            redoUndoCheck();
         }
         public static void mouseDown(System.Drawing.Point point)
         {
 
+            // Handle create
             switch (_state)
             {
                 case State.Square:
@@ -334,12 +320,8 @@ namespace SimpleShapeSketch
 
         internal static void undo()
         {
-            // Reset _objects while rolling back actions index
-            _objects = _actions.ElementAt(--_actionsIndex).Backup;
-
-            // Change select
-            if(_objects.Count > 0 )
-                Selected = _objects.Last();
+            //Undo
+            _objects = _caretaker.undo().restore();
 
             //Check for redo undo
             redoUndoCheck();
@@ -350,11 +332,8 @@ namespace SimpleShapeSketch
 
         internal static void redo()
         {
-            // Pop last undone object into objects
-            _objects = _actions.ElementAt(++_actionsIndex).Backup;
-
-            // Change selected
-            Selected = _objects.Last();
+            //Redo
+            _objects = _caretaker.redo().restore();
 
             //Check for redo undo
             redoUndoCheck();
@@ -364,8 +343,8 @@ namespace SimpleShapeSketch
         }
         static internal void redoUndoCheck()
         {
-            bool undo = _actionsIndex > 0 ? true : false;
-            bool redo = _actionsIndex + 1 < _actions.Count ? true : false;
+            bool undo = _caretaker.canUndo();
+            bool redo = _caretaker.canRedo();
             _form.setRedo(redo);
             _form.setUndo(undo);
         }
@@ -409,8 +388,9 @@ namespace SimpleShapeSketch
             return _form.getCanvas();
         }
 
-        internal static void mouseUp(Point point)
+        internal static void mouseUp(MouseEventArgs e)
         {
+            // Back up
             switch (_state)
             {
                 case State.Pointer:
@@ -420,14 +400,6 @@ namespace SimpleShapeSketch
                     addAction();
                     break;
             }
-        }
-        static private void resetRedo()
-        {
-            List<Memento> temp = new List<Memento>();
-            for (int i = 0; i < _actionsIndex; i++)
-                temp.Add(_actions.ElementAt(i));
-
-            _actions = temp;
         }
     }
 }

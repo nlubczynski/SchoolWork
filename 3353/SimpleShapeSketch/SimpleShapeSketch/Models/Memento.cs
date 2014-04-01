@@ -16,9 +16,14 @@ namespace SimpleShapeSketch
                 _backup.Add(go.Clone());
         }
 
-        public List<GraphicalObject> Backup
+        public List<GraphicalObject> restore()
         {
-            get { return _backup; }
+            List<GraphicalObject> returnVal = new List<GraphicalObject>();
+
+            foreach (GraphicalObject go in _backup)
+                returnVal.Add(go.Clone());
+
+            return returnVal;
         }
     }
 }

@@ -2,7 +2,9 @@
 #include <string>
 #include <sstream>
 #include <iterator>
-#include "StateController.h";
+#include <stdio.h>
+#include <cstdlib>
+#include "StateController.h"
 using namespace std;
 
 #define MAX_INPUTS 100

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Caretaker.cs" />
     <Compile Include="Models\Circle.cs" />
     <Compile Include="Models\DoubleBufferedPanel.cs">
       <SubType>Component</SubType>
