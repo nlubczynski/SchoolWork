@@ -118,6 +118,7 @@ namespace SimpleShapeSketch
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
             _mouseDown = false;
+            Program.mouseUp(e.Location);
         }
 
 

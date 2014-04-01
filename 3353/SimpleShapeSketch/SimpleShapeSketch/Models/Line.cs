@@ -17,6 +17,12 @@ namespace SimpleShapeSketch
             _pointOne = new Point(x1, y1);
             _pointTwo = new Point(x2, y2);
         }
+        public Line(int x1, int y1, int x2, int y2, Graphics graphics, Color color, Point pointOne, Point pointTwo)
+            : base(graphics, color, new Point(x1, y1), new Point(x2, y1), new Point(x1, y2), new Point(x2, y2))
+        {
+            _pointOne = pointOne;
+            _pointTwo = pointTwo;
+        }
 
         public override void paint()
         {
@@ -93,7 +99,7 @@ namespace SimpleShapeSketch
         }
         public override GraphicalObject Clone()
         {
-            return new Line(_topLeft.X, _topLeft.Y, _bottomRight.X, _bottomRight.Y, Program.getCanvas(), _color);
+            return new Line(_topLeft.X, _topLeft.Y, _bottomRight.X, _bottomRight.Y, Program.getCanvas(), _color, _pointOne, _pointTwo);
         }
     }
 }

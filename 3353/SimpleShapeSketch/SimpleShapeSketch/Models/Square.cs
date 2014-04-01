@@ -37,5 +37,9 @@ namespace SimpleShapeSketch
                     break;
             }            
         }
+        public override GraphicalObject Clone()
+        {
+            return new Square(_topLeft.X, _topLeft.Y, _bottomRight.X, _bottomRight.Y, Program.getCanvas(), _color);
+        }
     }
 }

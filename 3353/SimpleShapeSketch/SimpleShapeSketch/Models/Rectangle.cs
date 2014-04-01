@@ -38,7 +38,7 @@ namespace SimpleShapeSketch
             _topLeft = new Point(x1, y1);
             _topRight = new Point(x2 , y1);
             _bottomLeft = new Point(x1, y2);
-            _bottomRight = new Point(x2, y1);
+            _bottomRight = new Point(x2, y2);
         }
         public override bool contains(Point p)
         {

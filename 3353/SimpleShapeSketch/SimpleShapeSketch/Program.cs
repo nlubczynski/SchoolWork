@@ -16,8 +16,9 @@ namespace SimpleShapeSketch
         public static System.Drawing.Color _color;
         //List of all the objects
         public static List<GraphicalObject> _objects;
-        //List of undone objects
-        public static List<GraphicalObject> _undoneObjects;
+        //List of of mementos
+        public static List<Memento> _actions;
+        public static int _actionsIndex;
         //The currently selected object
         public static GraphicalObject _selected;
         //The point at which the newest item was created at
@@ -105,11 +106,33 @@ namespace SimpleShapeSketch
             _state = State.Pointer;
             _color = System.Drawing.Color.Red;
             _objects = new List<GraphicalObject>();
-            _undoneObjects = new List<GraphicalObject>();
+            _actionsIndex = -1;
+            _actions = new List<Memento>();
             _form = new MainForm(_color);
+
+            // Add base action
+            addAction();
 
             // Create the main window
             Application.Run(_form);
+        }
+
+        private static void addAction()
+        {
+            // Backup
+            Memento memento = new Memento(_objects);
+            // If we're at the end
+            if (_actionsIndex + 1 == _actions.Count)
+            {
+                _actions.Add(memento);
+                _actionsIndex++;
+            }
+            else
+            {
+                resetRedo();
+                _actions.Add(memento);
+                _actionsIndex++;
+            }
         }
         public static void mouseDown(System.Drawing.Point point)
         {
@@ -208,7 +231,6 @@ namespace SimpleShapeSketch
             }
 
             //Check for undo / redo
-            _undoneObjects.Clear();
             redoUndoCheck();
 
             // Repaint
@@ -285,7 +307,6 @@ namespace SimpleShapeSketch
                     previousPoint = point;
                     break;
 
-
                 case State.Circle:
                     if (_selected == null)
                         break;
@@ -313,9 +334,12 @@ namespace SimpleShapeSketch
 
         internal static void undo()
         {
-            // Pop last object into undone objects
-            _undoneObjects.Add(_objects.ElementAt(_objects.Count - 1));
-            _objects.RemoveAt(_objects.Count - 1);
+            // Reset _objects while rolling back actions index
+            _objects = _actions.ElementAt(--_actionsIndex).Backup;
+
+            // Change select
+            if(_objects.Count > 0 )
+                Selected = _objects.Last();
 
             //Check for redo undo
             redoUndoCheck();
@@ -327,8 +351,10 @@ namespace SimpleShapeSketch
         internal static void redo()
         {
             // Pop last undone object into objects
-            _objects.Add(_undoneObjects.ElementAt(_undoneObjects.Count - 1));
-            _undoneObjects.RemoveAt(_undoneObjects.Count - 1);
+            _objects = _actions.ElementAt(++_actionsIndex).Backup;
+
+            // Change selected
+            Selected = _objects.Last();
 
             //Check for redo undo
             redoUndoCheck();
@@ -338,8 +364,8 @@ namespace SimpleShapeSketch
         }
         static internal void redoUndoCheck()
         {
-            bool undo = _objects.Count > 0 ? true : false;
-            bool redo = _undoneObjects.Count > 0 ? true : false;
+            bool undo = _actionsIndex > 0 ? true : false;
+            bool redo = _actionsIndex + 1 < _actions.Count ? true : false;
             _form.setRedo(redo);
             _form.setUndo(undo);
         }
@@ -381,6 +407,27 @@ namespace SimpleShapeSketch
         public static System.Drawing.Graphics getCanvas()
         {
             return _form.getCanvas();
+        }
+
+        internal static void mouseUp(Point point)
+        {
+            switch (_state)
+            {
+                case State.Pointer:
+                    break;
+
+                default:
+                    addAction();
+                    break;
+            }
+        }
+        static private void resetRedo()
+        {
+            List<Memento> temp = new List<Memento>();
+            for (int i = 0; i < _actionsIndex; i++)
+                temp.Add(_actions.ElementAt(i));
+
+            _actions = temp;
         }
     }
 }
