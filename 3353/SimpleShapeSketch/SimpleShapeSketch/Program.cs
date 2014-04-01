@@ -107,7 +107,7 @@ namespace SimpleShapeSketch
             _objects = new List<GraphicalObject>();
             _form = new MainForm(_color);
             _caretaker = new Caretaker();
-            _caretaker.add(new Memento(_objects));
+            //_caretaker.add(new Memento(_objects));
             // Create the main window
             Application.Run(_form);
         }
@@ -121,6 +121,17 @@ namespace SimpleShapeSketch
         }
         public static void mouseDown(System.Drawing.Point point)
         {
+
+            // Back up prev state
+            switch (_state)
+            {
+                case State.Pointer:
+                    break;
+
+                default:
+                    addAction();
+                    break;
+            }
 
             // Handle create
             switch (_state)
@@ -321,7 +332,7 @@ namespace SimpleShapeSketch
         internal static void undo()
         {
             //Undo
-            _objects = _caretaker.undo().restore();
+            _objects = _caretaker.undo(new Memento(_objects)).restore();
 
             //Check for redo undo
             redoUndoCheck();
@@ -333,7 +344,7 @@ namespace SimpleShapeSketch
         internal static void redo()
         {
             //Redo
-            _objects = _caretaker.redo().restore();
+            _objects = _caretaker.redo(new Memento(_objects)).restore();
 
             //Check for redo undo
             redoUndoCheck();
@@ -390,16 +401,6 @@ namespace SimpleShapeSketch
 
         internal static void mouseUp(MouseEventArgs e)
         {
-            // Back up
-            switch (_state)
-            {
-                case State.Pointer:
-                    break;
-
-                default:
-                    addAction();
-                    break;
-            }
         }
     }
 }

@@ -35,22 +35,18 @@ namespace SimpleShapeSketch
             return _redo.Count > 0;
         }
 
-        internal Memento undo()
+        internal Memento undo( Memento currentState)
         {
-            if (_redo.Count == 0)
-                _redo.Push(_undo.Pop());
+            _redo.Push(currentState);
 
-            _redo.Push(_undo.Pop());
-            return _redo.Peek();
+            return _undo.Pop();
         }
 
-        internal Memento redo()
+        internal Memento redo(Memento currentState)
         {
-            if (_undo.Count == 0)
-                _undo.Push(_redo.Pop());
+            _undo.Push(currentState);
 
-            _undo.Push(_redo.Pop());
-            return _undo.Peek();
+            return _redo.Pop();
         }
         internal void resetRedo()
         {
