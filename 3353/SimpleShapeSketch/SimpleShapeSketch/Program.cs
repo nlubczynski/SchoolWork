@@ -131,7 +131,7 @@ namespace SimpleShapeSketch
             {
                 resetRedo();
                 _actions.Add(memento);
-                _actionsIndex++;
+                _actionsIndex = _actions.Count - 1;
             }
         }
         public static void mouseDown(System.Drawing.Point point)
