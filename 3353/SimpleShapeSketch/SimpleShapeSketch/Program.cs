@@ -128,6 +128,7 @@ namespace SimpleShapeSketch
             switch (_state)
             {
                 case State.Pointer:
+                case State.Polygon:
                     break;
 
                 default:
@@ -161,6 +162,9 @@ namespace SimpleShapeSketch
                         _anchorPoint = point;
                         if (_selected == null)
                         {
+                            //backup
+                            addAction();
+
                             UnClosedPolygon polygon = new UnClosedPolygon(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color);
 
                             polygon.addLine(new Line(point.X, point.Y, point.X, point.Y, _form.getCanvas(), _color));
@@ -294,6 +298,8 @@ namespace SimpleShapeSketch
                 case State.Move:
                     // Reset the cursor
                     _form.Cursor = Cursors.Arrow;
+                    CurrentState = State.Pointer;
+                    _form.setPointerButtonSelected();
                     break;
 
             }
