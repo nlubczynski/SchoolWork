@@ -331,8 +331,12 @@ namespace SimpleShapeSketch
 
         internal static void undo()
         {
-            //Undo
+            // Undo
             _objects = _caretaker.undo(new Memento(_objects)).restore();
+
+            // Change selected
+            if(_objects.Count() > 0)
+                Selected = _objects.Last();
 
             //Check for redo undo
             redoUndoCheck();
@@ -343,8 +347,11 @@ namespace SimpleShapeSketch
 
         internal static void redo()
         {
-            //Redo
+            // Redo
             _objects = _caretaker.redo(new Memento(_objects)).restore();
+
+            // Change selected
+            Selected = _objects.Last();
 
             //Check for redo undo
             redoUndoCheck();
