@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleShapeSketch
 {
+    [Serializable]
     public class Line : GraphicalObject
     {
         Point _pointOne, _pointTwo;
@@ -23,7 +24,7 @@ namespace SimpleShapeSketch
             _pointOne = pointOne;
             _pointTwo = pointTwo;
         }
-
+        private Line(){}
         public override void paint()
         {
             _graphics.DrawLine(new Pen(new SolidBrush((_color))), _pointOne, _pointTwo);

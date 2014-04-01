@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleShapeSketch
 {
+    [Serializable]
     public class Circle : Ellipse
     {
         public Circle(int x1, int y1, int x2, int y2, Graphics graphics, Color color)
@@ -14,6 +15,7 @@ namespace SimpleShapeSketch
         {
             //do something
         }
+        private Circle(){}
 
         public override void resize(int x1, int y1, int x2, int y2, DrawQuadrant quadrant)
         {

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleShapeSketch
 {
+    [Serializable]
     public class FreeFormLine : GraphicalObject
     {
         private List<Line> lineArray;
@@ -16,7 +17,7 @@ namespace SimpleShapeSketch
         {
             lineArray = new List<Line>();
         }
-
+        private FreeFormLine(){}
         public void addLine(Line line)
         {
             lineArray.Add(line);

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleShapeSketch
 {
+    [Serializable]
     public class Polygon : GraphicalObject
     {
         private List<Point> points;
@@ -22,7 +23,7 @@ namespace SimpleShapeSketch
         {
             points.Add(point);
         }
-
+        private Polygon(){}
         public override void paint()
         {
             _graphics.FillPolygon(new SolidBrush(_color), points.ToArray());

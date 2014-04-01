@@ -4,16 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Xml.Serialization;
 
 namespace SimpleShapeSketch
 {
-    class Square : Rectangle
+    [Serializable]
+    public class Square : Rectangle
     {
         public Square(int x1, int y1, int x2, int y2, Graphics graphics, Color colour)
             : base(x1, y1, x2, y2, graphics, colour)
         {
             // do stuff??
         }
+        private Square(){}
 
         public override void resize(int x1, int y1, int x2, int y2, DrawQuadrant quadrant)
         {

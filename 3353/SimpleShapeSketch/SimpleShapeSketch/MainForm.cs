@@ -195,5 +195,15 @@ namespace SimpleShapeSketch
         {
             Program.paste();
         }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.save();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.load();
+        }
     }
 }
