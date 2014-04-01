@@ -195,5 +195,16 @@ namespace SimpleShapeSketch
         {
             Program.paste();
         }
+
+        private void groupButton_Click(object sender, EventArgs e)
+        {
+            Program.Selected = null;
+            Program.CurrentState = Program.State.Group;
+        }
+
+        private void ungroupButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
