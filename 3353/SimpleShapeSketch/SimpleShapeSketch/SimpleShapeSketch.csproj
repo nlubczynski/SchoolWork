@@ -63,6 +63,7 @@
     <Compile Include="Models\Memento.cs" />
     <Compile Include="Models\Polygon.cs" />
     <Compile Include="Models\Rectangle.cs" />
+    <Compile Include="Models\SaveToXML.cs" />
     <Compile Include="Models\Square.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

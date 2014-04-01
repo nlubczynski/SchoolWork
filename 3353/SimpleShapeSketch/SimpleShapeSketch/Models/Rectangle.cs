@@ -7,7 +7,8 @@ using System.Drawing;
 
 namespace SimpleShapeSketch
 {
-    class Rectangle : GraphicalObject
+    [Serializable]
+    public class Rectangle : GraphicalObject
     {
         public Rectangle(int x1, int y1, int x2, int y2, Graphics graphics, Color colour)
             : base(graphics, colour, new Point(x1, y1), new Point(x2, y1), new Point(x1, y2), new Point(x2, y2))
@@ -18,6 +19,7 @@ namespace SimpleShapeSketch
         {
             _graphics.FillRectangle(new SolidBrush(_color), new System.Drawing.Rectangle(_topLeft, new Size(_topRight.X - _topLeft.X, _bottomLeft.Y - _topLeft.Y)));
         }
+        protected Rectangle() { }
 
         public override void move(int dx, int dy)
         {

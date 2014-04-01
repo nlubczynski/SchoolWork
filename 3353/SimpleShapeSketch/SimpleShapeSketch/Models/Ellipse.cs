@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleShapeSketch
 {
+    [Serializable]
     public class Ellipse : GraphicalObject
     {
         public Ellipse(int x1, int y1, int x2, int y2, Graphics graphics, Color color)
@@ -19,7 +20,7 @@ namespace SimpleShapeSketch
         {
             _graphics.FillEllipse(new SolidBrush(_color), new System.Drawing.Rectangle(_topLeft, new Size(_topRight.X - _topLeft.X, _bottomLeft.Y - _topLeft.Y)));
         }
-
+        protected Ellipse(){}
         public override void move(int dx, int dy)
         {
             // Move x

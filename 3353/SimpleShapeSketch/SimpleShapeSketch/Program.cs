@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -113,7 +114,7 @@ namespace SimpleShapeSketch
             Application.Run(_form);
         }
 
-        private static void addAction()
+        public static void addAction()
         {
             // Backup
             Memento memento = new Memento(_objects);
@@ -449,6 +450,9 @@ namespace SimpleShapeSketch
 
         internal static void cut()
         {
+            // Store
+            addAction();
+
             // Store to memory
             CutCopyMemory = Selected;
 
@@ -460,6 +464,9 @@ namespace SimpleShapeSketch
 
         internal static void paste()
         {
+            // Backup
+            addAction();
+
             // Add a copy
             _objects.Add(CutCopyMemory.Clone());
             // Set it as selected
@@ -474,6 +481,77 @@ namespace SimpleShapeSketch
 
         internal static void mouseUp(MouseEventArgs e)
         {
+        }
+        internal static void save()
+        {
+            //Make none selected
+            Selected = null;
+
+            //Save as string
+            string saveData = _objects.ToXmlString();
+
+            //Create save dialog
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Sketcher Format | *.PAINT";
+            saveDialog.AddExtension = true;
+            saveDialog.DefaultExt = "PAINT";
+
+            // Get user saved location
+            string file;
+
+            // Run the save
+            if (DialogResult.OK == saveDialog.ShowDialog())
+            {
+                file = saveDialog.FileName;
+                File.WriteAllText(file, saveData);
+            }
+            else
+            {
+                MessageBox.Show("Error", "File was not saved", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
+        }
+        internal static void load()
+        {
+            // Create dialog
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.Filter = "Sketcher Format | *.PAINT";
+            openDialog.DefaultExt = "PAINT";
+
+            // Show it
+            if (DialogResult.OK == openDialog.ShowDialog()) 
+            {
+                string file = openDialog.FileName;
+
+                string saveData = File.ReadAllText(file);
+
+                //Load objects and reinject graphics
+                List<GraphicalObject> savedObjects = XmlTools.FromXmlString<List<GraphicalObject>>(saveData);
+                foreach (GraphicalObject go in savedObjects)
+                    go.Graphics = getCanvas();
+
+                //Display
+                _objects = savedObjects;
+
+                //Selected
+                Selected = null;
+
+                //repaint
+                repaint();
+            }
+            else
+            {
+                MessageBox.Show("Error", "File was not opened", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+        }
+
+        internal static void reset()
+        {
+            _objects = new List<GraphicalObject>();
+            _caretaker = new Caretaker();
+            redoUndoCheck();
+            repaint();
         }
     }
 }

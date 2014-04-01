@@ -4,14 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Xml.Serialization;
 
 namespace SimpleShapeSketch
 {
+    [Serializable]
     public abstract class GraphicalObject
     {
         // Member Variables
         protected Color _color;
         protected Point _topLeft, _topRight, _bottomLeft, _bottomRight;
+        [NonSerialized]
         protected Graphics _graphics;
         public enum DrawQuadrant
         {
@@ -40,6 +43,11 @@ namespace SimpleShapeSketch
         {
             get { return _bottomRight; }
         }
+        public Graphics Graphics
+        {
+            get { return _graphics; }
+            set { _graphics = value; }
+        }
 
         public GraphicalObject(Graphics graphics, Color color, Point topLeft, Point topRight, Point bottomLeft, Point bottomRight)
         {
@@ -54,6 +62,7 @@ namespace SimpleShapeSketch
             _bottomRight = bottomRight;
         }
         public GraphicalObject(GraphicalObject g) : this(g._graphics, g.Color, g._topLeft, g._topRight, g._bottomLeft, g._bottomRight) { }
+        protected GraphicalObject(){}
 
         // Virtual Functions
         public abstract void paint();
