@@ -17,6 +17,11 @@ namespace SimpleShapeSketch
         {
             lineArray = new List<Line>();
         }
+        public FreeFormLine(int x1, int y1, int x2, int y2, Graphics graphics, Color color, List<Line> newLineArray)
+            : base(graphics, color, new Point(x1, y1), new Point(x2, y1), new Point(x1, y2), new Point(x2, y2))
+        {
+            lineArray = newLineArray;
+        }
         private FreeFormLine(){}
         public void addLine(Line line)
         {
@@ -65,7 +70,7 @@ namespace SimpleShapeSketch
         }
         public override GraphicalObject Clone()
         {
-            return new FreeFormLine(_topLeft.X, _topLeft.Y, _bottomRight.X, _bottomRight.Y, Program.getCanvas(), _color);
+            return new FreeFormLine(_topLeft.X, _topLeft.Y, _bottomRight.X, _bottomRight.Y, Program.getCanvas(), _color, lineArray);
         }
     }
 }
