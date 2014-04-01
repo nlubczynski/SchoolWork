@@ -113,7 +113,7 @@ namespace SimpleShapeSketch
             Application.Run(_form);
         }
 
-        private static void addAction()
+        public static void addAction()
         {
             // Backup
             Memento memento = new Memento(_objects);
@@ -451,12 +451,15 @@ namespace SimpleShapeSketch
         }
         internal static void save()
         {
+            //Make none selected
+            Selected = null;
+
             //Save as string
             string saveData = _objects.ToXmlString();
 
             //Create save dialog
             SaveFileDialog saveDialog = new SaveFileDialog();
-            saveDialog.Filter = "Sketcher Format | PAINT";
+            saveDialog.Filter = "Sketcher Format | *.PAINT";
             saveDialog.AddExtension = true;
             saveDialog.DefaultExt = "PAINT";
 
@@ -497,6 +500,9 @@ namespace SimpleShapeSketch
                 //Display
                 _objects = savedObjects;
 
+                //Selected
+                Selected = null;
+
                 //repaint
                 repaint();
             }
@@ -505,6 +511,14 @@ namespace SimpleShapeSketch
                 MessageBox.Show("Error", "File was not opened", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
+        }
+
+        internal static void reset()
+        {
+            _objects = new List<GraphicalObject>();
+            _caretaker = new Caretaker();
+            redoUndoCheck();
+            repaint();
         }
     }
 }

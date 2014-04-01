@@ -165,6 +165,7 @@ namespace SimpleShapeSketch
             Cursor = Cursors.SizeAll;
             Cursor.Position = Canvas.PointToScreen(Program.Selected.TopLeft);
             _mouseDown = true;
+            Program.addAction();
         }
 
         internal void setMove(bool p)
@@ -215,6 +216,11 @@ namespace SimpleShapeSketch
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Program.load();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.reset();
         }
     }
 }
